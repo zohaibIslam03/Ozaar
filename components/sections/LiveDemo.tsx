@@ -1,11 +1,16 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Tab = "compressor" | "qr" | "password";
 
-// ── SVG Icons ──────────────────────────────────────────────────────────────
+function fullToolHref(tab: Tab): string {
+  if (tab === "compressor") return "/tools/image-compressor";
+  if (tab === "qr") return "/tools/qr-generator";
+  return "/tools/password-generator";
+}
 
 function ImgIcon({ color = "#555" }: { color?: string }) {
   return (
@@ -113,84 +118,101 @@ function CompressorPanel() {
     setTimeout(() => setDownloading(false), 1800);
   };
 
+  const boxStyle = { background: "#1A1A1A", border: "1px solid #222", borderRadius: 14 } as const;
+
   return (
     <div className="flex flex-col gap-5">
-      {/* Two boxes + arrow */}
-      <div className="flex items-center gap-3">
-        {/* Original */}
-        <div className="flex-1" style={{ background: "#1A1A1A", border: "1px solid #222", borderRadius: 14, padding: 20 }}>
-          <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 12 }}>
+      {/* Mobile: stacked panels + desktop: side‑by‑side */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-3">
+        <div className="flex-1 px-4 py-4 sm:px-5 sm:py-5" style={boxStyle}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
             Original
           </p>
-          <div style={{ height: 120, background: "#222", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div
+            className="flex h-[92px] items-center justify-center sm:h-[120px]"
+            style={{ background: "#222", borderRadius: 10 }}
+          >
             <PhotoBigIcon />
           </div>
-          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: 28, fontWeight: 900, color: "#fff", marginTop: 12 }}>
+          <p
+            className="mt-3 text-[clamp(1.35rem,7vw,1.75rem)] leading-none"
+            style={{ fontFamily: "var(--font-jakarta)", fontWeight: 900, color: "#fff" }}
+          >
             {originalMB} MB
           </p>
-          <p style={{ fontSize: 12, color: "#444", marginTop: 2 }}>PNG · Original</p>
+          <p style={{ fontSize: 12, color: "#444", marginTop: 4 }}>PNG · Original</p>
         </div>
 
-        {/* Center arrow */}
-        <div className="flex flex-col items-center gap-2 shrink-0" style={{ padding: "0 8px" }}>
-          <span style={{ fontSize: 22, color: "#DF0A09", fontWeight: 900 }}>→</span>
+        <div className="flex shrink-0 flex-row items-center justify-center gap-3 py-1 sm:flex-col sm:px-2 sm:py-0">
+          <span className="select-none text-[22px] font-black leading-none text-[#DF0A09] rotate-90 sm:rotate-0" aria-hidden>
+            →
+          </span>
           <motion.span
             key={reduction}
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
-            style={{
-              background: "#DF0A09", color: "#fff", fontSize: 12, fontWeight: 800,
-              padding: "5px 12px", borderRadius: 999,
-            }}
+            className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-extrabold text-white sm:text-[12px]"
+            style={{ background: "#DF0A09" }}
           >
             {reduction}% off
           </motion.span>
         </div>
 
-        {/* Compressed */}
-        <div className="flex-1" style={{ background: "#1A1A1A", border: "1px solid #222", borderRadius: 14, padding: 20 }}>
-          <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 12 }}>
+        <div className="flex-1 px-4 py-4 sm:px-5 sm:py-5" style={boxStyle}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
             Compressed
           </p>
-          <div style={{ height: 120, background: "#2A2A2A", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div
+            className="flex h-[92px] items-center justify-center sm:h-[120px]"
+            style={{ background: "#2A2A2A", borderRadius: 10 }}
+          >
             <PhotoBigIcon />
           </div>
           <motion.p
             key={compressedMB}
             initial={{ opacity: 0.5 }}
             animate={{ opacity: 1 }}
-            style={{ fontFamily: "var(--font-jakarta)", fontSize: 28, fontWeight: 900, color: "#DF0A09", marginTop: 12 }}
+            className="mt-3 text-[clamp(1.35rem,7vw,1.75rem)] leading-none"
+            style={{ fontFamily: "var(--font-jakarta)", fontWeight: 900, color: "#DF0A09" }}
           >
             {compressedMB} MB
           </motion.p>
-          <p style={{ fontSize: 12, color: "#444", marginTop: 2 }}>WebP · Compressed</p>
+          <p style={{ fontSize: 12, color: "#444", marginTop: 4 }}>WebP · Compressed</p>
         </div>
       </div>
 
-      {/* Quality slider */}
-      <div className="flex items-center gap-4">
-        <span style={{ fontSize: 13, color: "#555", flexShrink: 0 }}>Quality</span>
-        <input
-          type="range" min={10} max={100} value={quality}
-          onChange={(e) => setQuality(Number(e.target.value))}
-          className="flex-1 accent-[#DF0A09]"
-          style={{ accentColor: "#DF0A09" }}
-        />
-        <span style={{ fontSize: 14, fontWeight: 700, color: "#fff", minWidth: 36, textAlign: "right" }}>{quality}%</span>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+        <span className="shrink-0 text-[13px] text-[#555]">Quality</span>
+        <div className="flex min-h-[44px] flex-1 items-center gap-3">
+          <input
+            type="range"
+            min={10}
+            max={100}
+            value={quality}
+            onChange={(e) => setQuality(Number(e.target.value))}
+            className="h-11 w-full flex-1 cursor-pointer touch-manipulation accent-[#DF0A09]"
+            style={{ accentColor: "#DF0A09" }}
+            aria-valuemin={10}
+            aria-valuemax={100}
+            aria-valuenow={quality}
+            aria-label="Compression quality"
+          />
+          <span className="w-11 shrink-0 text-right text-sm font-bold text-white tabular-nums">{quality}%</span>
+        </div>
       </div>
 
-      {/* Download */}
       <motion.button
+        type="button"
         onClick={handleDownload}
         whileHover={{ backgroundColor: "#B30807", y: -2 }}
-        whileTap={{ scale: 0.97 }}
+        whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
+        className="min-h-[52px] w-full touch-manipulation rounded-xl px-4 py-3.5 text-[15px] font-bold text-white transition-colors"
         style={{
-          width: "100%", background: downloading ? "#22c55e" : "#DF0A09",
-          color: "#fff", border: "none", borderRadius: 12,
-          padding: "15px", fontSize: 15, fontWeight: 700, cursor: "pointer",
-          transition: "background 0.3s",
+          background: downloading ? "#22c55e" : "#DF0A09",
+          border: "none",
+          cursor: "pointer",
         }}
       >
         {downloading ? "✓ Downloaded!" : "Download Compressed Image"}
@@ -211,16 +233,16 @@ function QrPanel() {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Enter URL or text…"
+        className="min-h-[52px] w-full touch-manipulation rounded-xl px-4 py-3.5 text-[15px] text-white outline-none"
         style={{
-          width: "100%", background: "#1A1A1A", border: "1px solid #333",
-          borderRadius: 12, padding: "14px 18px", fontSize: 14,
-          color: "#fff", outline: "none",
+          background: "#1A1A1A",
+          border: "1px solid #333",
         }}
       />
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ background: "#fff", borderRadius: 16, padding: 24, display: "inline-block" }}>
-          <svg width="140" height="140" viewBox="0 0 80 80" fill="none">
+      <div className="flex justify-center px-1">
+        <div className="inline-block rounded-2xl bg-white p-4 sm:p-6">
+          <svg className="h-auto w-[min(140px,72vw)]" viewBox="0 0 80 80" fill="none" aria-hidden>
             <rect x="5" y="5" width="22" height="22" rx="3" fill="#111"/>
             <rect x="9" y="9" width="14" height="14" rx="1.5" fill="white"/>
             <rect x="12" y="12" width="8" height="8" rx="1" fill="#111"/>
@@ -246,24 +268,28 @@ function QrPanel() {
         </div>
       </div>
 
-      <p style={{ fontSize: 13, color: "#555", textAlign: "center" }}>Scan to test ↑</p>
+      <p className="text-center text-[13px] text-[#555]">Scan to test ↑</p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))", gap: 10 }}>
+      <div className="grid grid-cols-2 gap-3">
         <button
+          type="button"
           onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+          className="min-h-[48px] touch-manipulation rounded-xl py-3.5 text-[14px] font-bold text-white"
           style={{
-            background: "#DF0A09", color: "#fff", border: "none",
-            borderRadius: 10, padding: "12px", fontSize: 13,
-            fontWeight: 700, cursor: "pointer",
+            background: "#DF0A09",
+            border: "none",
+            cursor: "pointer",
           }}
         >
           {copied ? "✓ Copied!" : "Download PNG"}
         </button>
         <button
+          type="button"
+          className="min-h-[48px] touch-manipulation rounded-xl py-3.5 text-[14px] font-bold text-white"
           style={{
-            background: "#DF0A09", color: "#fff", border: "none",
-            borderRadius: 10, padding: "12px", fontSize: 13,
-            fontWeight: 700, cursor: "pointer",
+            background: "#DF0A09",
+            border: "none",
+            cursor: "pointer",
           }}
         >
           Download SVG
@@ -283,8 +309,8 @@ function StrengthArc({ strength }: { strength: string }) {
   const offset = HALF_CIRC * (1 - pct);
 
   return (
-    <div style={{ position: "relative", width: 180, height: 100, margin: "0 auto" }}>
-      <svg width="180" height="100" viewBox="0 0 180 100">
+    <div className="relative mx-auto h-[100px] w-full max-w-[180px]">
+      <svg className="h-full w-full" viewBox="0 0 180 100" aria-hidden>
         <path d={`M 18 92 A ${ARC_R} ${ARC_R} 0 0 1 162 92`} fill="none" stroke="#222" strokeWidth="10" strokeLinecap="round"/>
         <motion.path
           d={`M 18 92 A ${ARC_R} ${ARC_R} 0 0 1 162 92`}
@@ -328,19 +354,22 @@ function PasswordPanel() {
   return (
     <div className="flex flex-col gap-4">
       {/* Password display */}
-      <div style={{ background: "#111", border: "1px solid #222", borderRadius: 14, padding: "20px 24px", position: "relative" }}>
-        <p style={{ fontFamily: "monospace", fontSize: 18, letterSpacing: "2px", lineHeight: 1.6, wordBreak: "break-all" }}>
+      <div className="relative rounded-2xl border border-[#222] bg-[#111] p-4 sm:p-5">
+        <p
+          className="pr-24 font-mono text-[clamp(13px,3.8vw,18px)] leading-relaxed tracking-wide [word-break:break-all] sm:pr-28"
+        >
           {password.slice(0, length).split("").map((ch, i) => (
             <span key={i} style={{ color: charColor(ch) }}>{ch}</span>
           ))}
         </p>
         <button
+          type="button"
           onClick={handleCopy}
+          className="absolute right-3 top-3 min-h-[44px] min-w-[44px] touch-manipulation rounded-lg px-3 text-xs font-bold text-white sm:right-4 sm:top-4"
           style={{
-            position: "absolute", top: 12, right: 12,
             background: copied ? "#22c55e" : "#222",
-            border: "none", borderRadius: 6, padding: "5px 10px",
-            fontSize: 11, fontWeight: 700, color: "#fff", cursor: "pointer",
+            border: "none",
+            cursor: "pointer",
           }}
         >
           {copied ? "Copied!" : "Copy"}
@@ -352,14 +381,19 @@ function PasswordPanel() {
 
       {/* Length slider */}
       <div className="flex flex-col gap-1">
-        <div className="flex justify-between" style={{ fontSize: 12 }}>
+        <div className="flex justify-between text-xs">
           <span style={{ color: "#555" }}>Length: {length} characters</span>
           <span style={{ color: "#DF0A09", fontWeight: 700 }}>{strength}</span>
         </div>
         <input
-          type="range" min={6} max={32} value={length}
+          type="range"
+          min={6}
+          max={32}
+          value={length}
           onChange={(e) => setLength(Number(e.target.value))}
-          style={{ width: "100%", accentColor: "#DF0A09" }}
+          className="h-11 w-full touch-manipulation"
+          style={{ accentColor: "#DF0A09" }}
+          aria-label="Password length"
         />
       </div>
 
@@ -372,14 +406,14 @@ function PasswordPanel() {
         ].map(({ label, val, set }) => (
           <button
             key={label}
+            type="button"
             onClick={() => set(!val)}
+            className="flex min-h-[44px] items-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-semibold touch-manipulation"
             style={{
-              display: "flex", alignItems: "center", gap: 6,
-              fontSize: 12, padding: "7px 12px", borderRadius: 8,
               background: val ? "#DF0A09" : "#1A1A1A",
               color: val ? "#fff" : "#555",
               border: `1px solid ${val ? "#DF0A09" : "#2A2A2A"}`,
-              cursor: "pointer", fontWeight: 600,
+              cursor: "pointer",
             }}
           >
             {val && (
@@ -394,13 +428,15 @@ function PasswordPanel() {
 
       {/* Generate */}
       <motion.button
+        type="button"
         onClick={regenerate}
         whileHover={{ backgroundColor: "#B30807", y: -2 }}
-        whileTap={{ scale: 0.97 }}
+        whileTap={{ scale: 0.98 }}
+        className="min-h-[52px] w-full touch-manipulation rounded-xl py-3.5 text-[15px] font-bold text-white"
         style={{
-          width: "100%", background: "#DF0A09", color: "#fff",
-          border: "none", borderRadius: 12, padding: "15px",
-          fontSize: 15, fontWeight: 700, cursor: "pointer",
+          background: "#DF0A09",
+          border: "none",
+          cursor: "pointer",
         }}
       >
         Generate New Password
@@ -442,32 +478,63 @@ export default function LiveDemo() {
   return (
     <section style={{ background: "#0A0A0A" }}>
       {/* ── Mobile layout ── */}
-      <div className="lg:hidden">
-        {/* Tab strip */}
-        <div style={{ background: "#111111", borderBottom: "1px solid #1E1E1E", display: "flex", overflowX: "auto" }}>
-          {TOOLS.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setActive(t.id)}
-              style={{
-                padding: "16px 24px",
-                color: active === t.id ? "#DF0A09" : "#444",
-                borderTop: "none", borderLeft: "none", borderRight: "none",
-                borderBottom: active === t.id ? "2px solid #DF0A09" : "2px solid transparent",
-                fontWeight: 700, fontSize: 13, whiteSpace: "nowrap",
-                background: "none",
-                cursor: "pointer",
-              }}
-            >
-              {t.name}
-            </button>
-          ))}
+      <div className="lg:hidden pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+        <header className="px-4 pb-5 pt-10 sm:px-5 sm:pt-12">
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#DF0A09]">Try it live</p>
+          <h2 className="mt-2 font-heading text-[clamp(1.35rem,5vw,1.75rem)] font-black leading-tight tracking-tight text-white">
+            Interact with the tools.
+          </h2>
+          <p className="mt-3 max-w-lg text-[14px] leading-relaxed text-[#666]">
+            No signup — these previews run in your browser. Pick a tab, try the controls, then open the full tool when you want more.
+          </p>
+        </header>
+
+        <div
+          role="tablist"
+          aria-label="Choose a demo"
+          className="flex snap-x snap-mandatory gap-1 overflow-x-auto border-b border-[#1E1E1E] bg-[#111] px-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:px-3"
+        >
+          {TOOLS.map((t) => {
+            const isOn = active === t.id;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                aria-selected={isOn}
+                onClick={() => setActive(t.id)}
+                className={`min-h-[52px] shrink-0 snap-start touch-manipulation rounded-t-lg px-4 py-3.5 text-left text-[13px] font-bold transition-colors sm:min-h-[56px] sm:px-6 ${
+                  isOn ? "text-[#DF0A09]" : "text-[#555] active:bg-[#161616]"
+                }`}
+                style={{
+                  borderBottom: isOn ? "2px solid #DF0A09" : "2px solid transparent",
+                  background: "transparent",
+                  borderTop: "none",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {t.name}
+              </button>
+            );
+          })}
         </div>
-        {/* Panel */}
-        <div style={{ padding: "clamp(32px, 8vw, 40px) clamp(16px, 5vw, 20px)" }}>
-          <div style={{ background: "#161616", border: "1px solid #222", borderRadius: 20, padding: "clamp(20px, 5vw, 28px)" }}>
+
+        <div className="px-4 py-8 sm:px-5 sm:py-10">
+          <div className="rounded-[22px] border border-[#222] bg-[#161616] p-5 shadow-[0_28px_56px_-32px_rgba(0,0,0,0.75)] sm:p-7">
             <PanelBody active={active} />
           </div>
+          <Link
+            href={fullToolHref(active)}
+            className="mt-5 flex min-h-[52px] w-full items-center justify-center rounded-xl border border-[#2a2a2a] bg-[#141414] text-[15px] font-bold text-white transition-colors active:bg-[#1a1a1a] touch-manipulation"
+          >
+            Open full tool →
+          </Link>
+          <p className="mt-3 text-center text-[12px] leading-snug text-[#444]">
+            Full tools add batch actions, exports, and anything you need for real workflows.
+          </p>
         </div>
       </div>
 
@@ -608,12 +675,12 @@ export default function LiveDemo() {
           </div>
 
           {/* Open full tool link */}
-          <a
-            href={`/tools/${active === "compressor" ? "image-compressor" : active === "qr" ? "qr-generator" : "password-generator"}`}
-            style={{ fontSize: 13, color: "#444", marginTop: 20, display: "inline-flex", alignItems: "center", gap: 6, width: "100%", maxWidth: 680 }}
+          <Link
+            href={fullToolHref(active)}
+            className="mt-5 inline-flex w-full max-w-[680px] items-center gap-2 text-[13px] text-[#888] transition-colors hover:text-white"
           >
             Open full tool →
-          </a>
+          </Link>
         </div>
       </div>
     </section>
