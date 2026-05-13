@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -135,105 +135,131 @@ export default function ToolSpotlight() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(i);
-        },
-        {
-          rootMargin: "-42% 0px -42% 0px",
-          threshold: 0,
+  /** Pick the card whose vertical center is closest to the viewport “focus” line (stable with Lenis; avoids racing IntersectionObservers). */
+  useLayoutEffect(() => {
+    let raf = 0;
+
+    const pickActiveFromScroll = () => {
+      const els = itemRefs.current.filter((n): n is HTMLDivElement => n !== null);
+      if (els.length === 0) return;
+
+      const focusY = window.innerHeight * 0.42;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      for (let i = 0; i < els.length; i++) {
+        const r = els[i].getBoundingClientRect();
+        const midY = r.top + r.height / 2;
+        const dist = Math.abs(midY - focusY);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
         }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+      }
+
+      setActive((prev) => (prev === bestIdx ? prev : bestIdx));
+    };
+
+    const schedule = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(pickActiveFromScroll);
+    };
+
+    pickActiveFromScroll();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   const tool = spotlights[active];
 
   return (
-    <section ref={sectionRef} className="relative bg-[#0A0A0A]" style={{ padding: "clamp(72px, 10vw, 120px) 0" }}>
+    <section
+      ref={sectionRef}
+      className="relative overflow-visible bg-[#0A0A0A]"
+      style={{ padding: "clamp(72px, 10vw, 120px) 0" }}
+    >
       <div className="container">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-          {/* Sticky left panel */}
-          <div className="hidden lg:flex flex-col gap-2 w-4 shrink-0 sticky top-32 self-start">
-            {dots.map((i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  itemRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
-                }}
-                className="w-2 rounded-full transition-all duration-300 mx-auto"
-                style={{
-                  height: active === i ? 24 : 8,
-                  background: active === i ? "#DF0A09" : "#333",
-                }}
-                aria-label={`Go to ${spotlights[i].eyebrow}`}
-              />
-            ))}
-          </div>
-
-          {/* Sticky content left */}
-          <div className="hidden lg:block w-[380px] shrink-0 sticky top-32 self-start">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col gap-5"
-              >
-                <span
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest"
-                  style={{ color: "#DF0A09" }}
-                >
-                  {tool.eyebrow}
-                </span>
-                <h2
-                  style={{
-                    fontFamily: "var(--font-jakarta)",
-                    fontSize: "clamp(32px, 3vw, 44px)",
-                    fontWeight: 900,
-                    color: "#fff",
-                    letterSpacing: "-0.03em",
-                    lineHeight: 1.08,
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start lg:gap-16">
+          <aside className="hidden lg:flex lg:flex-row lg:items-start lg:gap-6 lg:shrink-0 lg:sticky lg:top-32 lg:z-10 lg:self-start">
+            <div className="flex flex-col gap-2 w-4 shrink-0 pt-1">
+              {dots.map((i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => {
+                    itemRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
+                  className="w-2 rounded-full transition-all duration-300 mx-auto"
+                  style={{
+                    height: active === i ? 24 : 8,
+                    background: active === i ? "#DF0A09" : "#333",
+                  }}
+                  aria-label={`Go to ${spotlights[i].eyebrow}`}
+                  aria-current={active === i ? "true" : undefined}
+                />
+              ))}
+            </div>
+            <div className="w-full max-w-[380px] min-w-0 shrink-0">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col gap-5"
                 >
-                  {tool.headline}
-                </h2>
-                <p style={{ fontSize: "15px", color: "#888", lineHeight: 1.65 }}>
-                  {tool.desc}
-                </p>
-                <ul className="flex flex-col gap-2.5">
-                  {tool.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-2.5">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="7" fill="#DF0A09" fillOpacity="0.15" />
-                        <path d="M5 8l2 2 4-4" stroke="#DF0A09" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span style={{ fontSize: "14px", color: "#aaa" }}>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/tools/${tool.slug}`}
-                  className="inline-flex items-center gap-2 text-[14px] font-bold mt-2"
-                  style={{ color: "#DF0A09" }}
-                >
-                  Try it free →
-                </Link>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest"
+                    style={{ color: "#DF0A09" }}
+                  >
+                    {tool.eyebrow}
+                  </span>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-jakarta)",
+                      fontSize: "clamp(32px, 3vw, 44px)",
+                      fontWeight: 900,
+                      color: "#fff",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1.08,
+                    }}
+                  >
+                    {tool.headline}
+                  </h2>
+                  <p style={{ fontSize: "15px", color: "#888", lineHeight: 1.65 }}>
+                    {tool.desc}
+                  </p>
+                  <ul className="flex flex-col gap-2.5">
+                    {tool.bullets.map((b) => (
+                      <li key={b} className="flex items-center gap-2.5">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="8" r="7" fill="#DF0A09" fillOpacity="0.15" />
+                          <path d="M5 8l2 2 4-4" stroke="#DF0A09" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span style={{ fontSize: "14px", color: "#aaa" }}>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={`/tools/${tool.slug}`}
+                    className="inline-flex items-center gap-2 text-[14px] font-bold mt-2"
+                    style={{ color: "#DF0A09" }}
+                  >
+                    Try it free →
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </aside>
 
-          {/* Scrollable items */}
-          <div className="flex-1 flex flex-col gap-8 lg:gap-0">
+          <div className="flex min-w-0 flex-col gap-8 lg:gap-0">
             {spotlights.map((s, i) => (
               <div
                 key={s.slug}
