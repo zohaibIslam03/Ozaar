@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: #FFFFFF;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+main,
+section,
+div {
+  min-width: 0;
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Selection */
+::selection {
+  background: #DF0A09;
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F0F0F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #DF0A09;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B30807;
+}
+* {
+  scrollbar-color: #DF0A09 #F0F0F0;
+  scrollbar-width: thin;
+}
+
+/* Typography scale */
+h1 { font-size: clamp(2.25rem, 8vw, 4.5rem); font-weight: 900; }
+h2 { font-size: clamp(1.75rem, 6vw, 2.5rem); font-weight: 800; }
+h3 { font-size: clamp(1.25rem, 4vw, 1.5rem); font-weight: 700; }
+
+/* Input focus ring */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #DF0A09 !important;
+  box-shadow: 0 0 0 3px rgba(223, 10, 9, 0.1) !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* Button press */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Checkerboard for transparent bg preview */
+.checkerboard {
+  background-image: repeating-conic-gradient(#e0e0e0 0% 25%, white 0% 50%);
+  background-size: 20px 20px;
+}
+
+/* Global container */
+.container {
+  width: min(100% - 32px, 1360px);
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .container {
+    width: min(88%, 1360px);
+  }
+}

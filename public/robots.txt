@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://tools.theinnovations.tech
+
+# Sitemaps
+Sitemap: https://tools.theinnovations.tech/sitemap.xml
