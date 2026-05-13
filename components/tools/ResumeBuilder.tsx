@@ -8,7 +8,6 @@ import {
   Download,
   RotateCcw,
   GripVertical,
-  CheckCircle2,
   Loader2,
   FileText,
   User,
@@ -18,6 +17,8 @@ import {
   GraduationCap,
   Award,
   Briefcase,
+  Lightbulb,
+  Clock,
 } from "lucide-react";
 import {
   DndContext,
@@ -94,24 +95,34 @@ function FInput({
 
   const base: React.CSSProperties = {
     width: "100%",
-    background: "#fff",
-    border: `1.5px solid ${focused ? "#DF0A09" : "#E2E2E2"}`,
-    borderRadius: 8,
-    padding: textarea ? "10px 12px" : "9px 12px",
+    background: focused ? "#fff" : "#FAFAFA",
+    border: `1.5px solid ${focused ? "#DF0A09" : "#EBEBEB"}`,
+    borderRadius: 10,
+    padding: textarea ? "11px 14px" : "11px 14px",
     fontSize: 13,
     color: "#111",
     boxSizing: "border-box",
     outline: "none",
-    transition: "border-color 0.15s, box-shadow 0.15s",
-    boxShadow: focused ? "0 0 0 3px rgba(223,10,9,0.07)" : "none",
+    transition: "all 0.2s ease",
+    boxShadow: focused ? "0 0 0 3px rgba(223,10,9,0.08)" : "none",
     resize: textarea ? ("vertical" as const) : undefined,
     lineHeight: textarea ? 1.55 : undefined,
     fontFamily: "inherit",
   };
 
   return (
-    <div style={{ marginBottom: 10 }}>
-      <label style={{ fontSize: 11, fontWeight: 700, color: "#666", display: "block", marginBottom: 4, letterSpacing: "0.03em", textTransform: "uppercase" }}>
+    <div className="rb-field" style={{ marginBottom: 10 }}>
+      <label
+        style={{
+          fontSize: 11,
+          fontWeight: 700,
+          color: "#888",
+          display: "block",
+          marginBottom: 6,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
+        }}
+      >
         {label}
       </label>
       {textarea ? (
@@ -150,7 +161,7 @@ function FInput({
 
 function FieldRow({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
       {children}
     </div>
   );
@@ -192,8 +203,7 @@ function EntryCard({ onRemove, children }: { onRemove: () => void; children: Rea
       style={{
         background: "#fff",
         border: "1.5px solid #EBEBEB",
-        borderLeft: "3px solid #DF0A09",
-        borderRadius: 8,
+        borderRadius: 10,
         padding: "14px 14px 4px 14px",
         marginBottom: 10,
         position: "relative",
@@ -231,6 +241,16 @@ function calcProgress(d: ResumeData): number {
 
 const SECTION_ICONS = [User, AlignLeft, Code2, FolderOpen, GraduationCap, Award, Briefcase];
 
+const SECTION_TIPS = [
+  "Fill your name and email first — they appear at the top of your resume.",
+  "Keep it under 3 sentences. Focus on your biggest strengths.",
+  "Group skills by category for better ATS readability.",
+  "Include GitHub links — recruiters always check.",
+  "List most recent education first.",
+  "Add relevant certs to stand out from applicants.",
+  "Use action verbs: Built, Led, Improved, Reduced.",
+];
+
 function Section({
   index,
   title,
@@ -250,63 +270,69 @@ function Section({
 }) {
   const [hovered, setHovered] = useState(false);
   const Icon = SECTION_ICONS[index];
+  const tip = SECTION_TIPS[index];
+  const iconOpen = open;
 
   return (
-    <div
-      style={{
-        borderBottom: "1px solid #EBEBEB",
-        borderLeft: open ? "2px solid #DF0A09" : "2px solid transparent",
-        marginLeft: -1,
-        paddingLeft: open ? 10 : 0,
-        transition: "border-color 0.2s, padding-left 0.2s",
-      }}
-    >
+    <div style={{ borderBottom: "1px solid #F0F0F0" }}>
       <div
         onClick={onToggle}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
-          padding: "12px 0",
+          gap: 12,
+          padding: "16px 20px",
+          margin: "2px 8px",
           cursor: "pointer",
           userSelect: "none",
-          background: hovered && !open ? "rgba(0,0,0,0.01)" : "transparent",
-          transition: "background 0.15s",
-          borderRadius: 6,
+          borderRadius: 10,
+          background: open ? "#F8F8F8" : hovered ? "#F5F5F5" : "transparent",
+          transition: "background 0.15s ease",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-          <div
-            style={{
-              width: 26,
-              height: 26,
-              borderRadius: 6,
-              background: open ? "#DF0A09" : complete ? "#f0fdf4" : "#F5F5F5",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-              transition: "background 0.2s",
-            }}
-          >
-            {complete && !open ? (
-              <CheckCircle2 size={13} color="#22c55e" />
-            ) : (
-              <Icon size={13} color={open ? "#fff" : "#888"} />
-            )}
-          </div>
-          <span style={{ fontSize: 13, fontWeight: 700, color: open ? "#111" : "#333" }}>{title}</span>
-          {badge && !open && (
+        <div
+          style={{
+            width: 28,
+            height: 28,
+            borderRadius: 6,
+            background: iconOpen ? "#111" : "#F0F0F0",
+            border: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            transition: "all 0.2s ease",
+          }}
+        >
+          <Icon size={14} strokeWidth={1.75} color={iconOpen ? "#fff" : "#888"} />
+        </div>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#111", flex: 1, minWidth: 0 }}>{title}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: "auto", flexShrink: 0 }}>
+          {complete && (
+            <span
+              style={{
+                background: "#DCFCE7",
+                color: "#166534",
+                fontSize: 10,
+                fontWeight: 700,
+                padding: "2px 8px",
+                borderRadius: 99,
+              }}
+            >
+              ✓ Done
+            </span>
+          )}
+          {!complete && badge && !open && (
             <span style={{ fontSize: 10, color: "#999", background: "#F0F0F0", borderRadius: 99, padding: "2px 7px", fontWeight: 600 }}>
               {badge}
             </span>
           )}
+          <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ display: "flex" }}>
+            <ChevronDown size={16} color="#CCC" />
+          </motion.div>
         </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown size={15} color={open ? "#DF0A09" : "#aaa"} />
-        </motion.div>
       </div>
 
       <AnimatePresence initial={false}>
@@ -318,7 +344,15 @@ function Section({
             transition={{ duration: 0.22, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div style={{ paddingBottom: 16 }}>{children}</div>
+            <div className="border-t border-neutral-100 px-5 pb-5 pt-1">
+              <div className="mb-4 flex items-center gap-1.5 rounded-lg bg-neutral-100 px-3 py-2 text-xs text-gray-500">
+                <span className="flex shrink-0 text-red-600">
+                  <Lightbulb className="h-3 w-3" strokeWidth={2} aria-hidden />
+                </span>
+                <span>{tip}</span>
+              </div>
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -351,8 +385,7 @@ function SortableProject({
         ...style,
         background: "#fff",
         border: "1.5px solid #EBEBEB",
-        borderLeft: "3px solid #DF0A09",
-        borderRadius: 8,
+        borderRadius: 10,
         padding: "14px 14px 4px 10px",
         marginBottom: 10,
         position: "relative",
@@ -392,15 +425,58 @@ function SortableProject({
 
 // ── Empty state ───────────────────────────────────────────────────────────────
 
-function EmptyState({ message }: { message: string }) {
+function EmptyState({
+  message,
+  hint,
+  icon: Icon,
+}: {
+  message: string;
+  hint?: string;
+  icon: typeof FolderOpen;
+}) {
   return (
-    <div style={{ textAlign: "center", padding: "16px 0 8px", color: "#bbb", fontSize: 12 }}>
-      {message}
+    <div
+      style={{
+        background: "#F7F7F7",
+        border: "1.5px dashed #E0E0E0",
+        borderRadius: 10,
+        padding: 24,
+        textAlign: "center",
+        marginBottom: 8,
+      }}
+    >
+      <Icon size={28} color="#CCC" strokeWidth={1.5} style={{ display: "block", margin: "0 auto 8px" }} />
+      <p style={{ fontSize: 13, color: "#AAA", fontWeight: 500, margin: 0 }}>{message}</p>
+      {hint && <p style={{ fontSize: 12, color: "#CCC", marginTop: 4, marginBottom: 0 }}>{hint}</p>}
     </div>
   );
 }
 
 // ── Resume preview ────────────────────────────────────────────────────────────
+
+function GhostSection({ label }: { label: string }) {
+  return (
+    <div
+      style={{
+        background: "#F9F9F9",
+        border: "1px dashed #E8E8E8",
+        borderRadius: 4,
+        minHeight: 36,
+        marginBottom: 8,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 11,
+        color: "#CCC",
+        fontStyle: "italic",
+        padding: "0 8px",
+        textAlign: "center",
+      }}
+    >
+      Add {label} to see it here
+    </div>
+  );
+}
 
 const RES: Record<string, React.CSSProperties> = {
   wrap: {
@@ -408,15 +484,18 @@ const RES: Record<string, React.CSSProperties> = {
     maxWidth: 660,
     background: "#ffffff",
     border: "1px solid #E0E0E0",
-    borderRadius: 2,
+    borderRadius: 8,
+    margin: "0 20px 20px",
     padding: "40px 48px",
     fontFamily: "'Times New Roman', Georgia, serif",
     fontSize: "11pt",
     lineHeight: 1.45,
     color: "#000000",
-    boxShadow: "0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05)",
-    minHeight: 860,
+    boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+    minHeight: 400,
     boxSizing: "border-box",
+    position: "relative",
+    overflow: "hidden",
   },
   name: { fontSize: "24pt", fontWeight: "bold", textAlign: "center", color: "#000", marginBottom: 5 },
   jobTitle: { fontSize: "11pt", textAlign: "center", color: "#444", marginBottom: 6, fontStyle: "italic" },
@@ -465,11 +544,18 @@ function ResumePreview({ data }: { data: ResumeData }) {
 
   if (isEmpty) {
     return (
-      <div style={{ ...RES.wrap, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12 }}>
-        <FileText size={40} color="#E0E0E0" />
-        <p style={{ fontSize: 13, color: "#ccc", textAlign: "center", maxWidth: 220, lineHeight: 1.6 }}>
+      <div style={{ ...RES.wrap, display: "flex", flexDirection: "column" }}>
+        <FileText size={40} color="#E0E0E0" style={{ alignSelf: "center", marginBottom: 12 }} />
+        <p style={{ fontSize: 13, color: "#ccc", textAlign: "center", maxWidth: 280, lineHeight: 1.6, alignSelf: "center", marginBottom: 20 }}>
           Start filling in the form on the left — your resume will appear here instantly.
         </p>
+        <GhostSection label="your name and headline" />
+        <GhostSection label="a professional summary" />
+        <GhostSection label="skills" />
+        <GhostSection label="experience" />
+        <GhostSection label="projects" />
+        <GhostSection label="education" />
+        <GhostSection label="certifications" />
       </div>
     );
   }
@@ -477,9 +563,9 @@ function ResumePreview({ data }: { data: ResumeData }) {
   return (
     <div style={RES.wrap}>
       <div style={RES.name}>{data.fullName || "Your Name"}</div>
-      {data.jobTitle && <div style={RES.jobTitle}>{data.jobTitle}</div>}
+      {data.jobTitle ? <div style={RES.jobTitle}>{data.jobTitle}</div> : <GhostSection label="your job title" />}
 
-      {contactParts.length > 0 && (
+      {contactParts.length > 0 ? (
         <div style={RES.contactLine}>
           {contactParts.map((p, i) => (
             <span key={i}>
@@ -494,17 +580,25 @@ function ResumePreview({ data }: { data: ResumeData }) {
             </span>
           ))}
         </div>
+      ) : (
+        <GhostSection label="contact details" />
       )}
 
-      {data.summary && (
+      {data.summary ? (
         <>
           <div style={RES.sectionTitle}>Professional Summary</div>
           <SectionRule />
           <p style={RES.body}>{data.summary}</p>
         </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Professional Summary</div>
+          <SectionRule />
+          <GhostSection label="a professional summary" />
+        </>
       )}
 
-      {filledSkills.length > 0 && (
+      {filledSkills.length > 0 ? (
         <>
           <div style={RES.sectionTitle}>Technical Skills</div>
           <SectionRule />
@@ -514,9 +608,15 @@ function ResumePreview({ data }: { data: ResumeData }) {
             </p>
           ))}
         </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Technical Skills</div>
+          <SectionRule />
+          <GhostSection label="skills" />
+        </>
       )}
 
-      {filledExp.length > 0 && (
+      {filledExp.length > 0 ? (
         <>
           <div style={RES.sectionTitle}>Experience</div>
           <SectionRule />
@@ -534,9 +634,15 @@ function ResumePreview({ data }: { data: ResumeData }) {
             </div>
           ))}
         </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Experience</div>
+          <SectionRule />
+          <GhostSection label="experience" />
+        </>
       )}
 
-      {filledProjects.length > 0 && (
+      {filledProjects.length > 0 ? (
         <>
           <div style={RES.sectionTitle}>Projects</div>
           <SectionRule />
@@ -556,9 +662,15 @@ function ResumePreview({ data }: { data: ResumeData }) {
             </div>
           ))}
         </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Projects</div>
+          <SectionRule />
+          <GhostSection label="projects" />
+        </>
       )}
 
-      {filledEdu.length > 0 && (
+      {filledEdu.length > 0 ? (
         <>
           <div style={RES.sectionTitle}>Education</div>
           <SectionRule />
@@ -574,9 +686,15 @@ function ResumePreview({ data }: { data: ResumeData }) {
             </div>
           ))}
         </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Education</div>
+          <SectionRule />
+          <GhostSection label="education" />
+        </>
       )}
 
-      {filledCerts.length > 0 && (
+      {filledCerts.length > 0 ? (
         <>
           <div style={RES.sectionTitle}>Certifications</div>
           <SectionRule />
@@ -588,6 +706,12 @@ function ResumePreview({ data }: { data: ResumeData }) {
               <span style={{ fontSize: "9.5pt", color: "#444" }}>{cert.year}</span>
             </div>
           ))}
+        </>
+      ) : (
+        <>
+          <div style={RES.sectionTitle}>Certifications</div>
+          <SectionRule />
+          <GhostSection label="certifications" />
         </>
       )}
     </div>
@@ -611,15 +735,7 @@ export default function ResumeBuilder() {
   const [openSections, setOpenSections] = useState<boolean[]>([true, false, false, false, false, false, false]);
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const [pdfBusy, setPdfBusy] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   useEffect(() => {
     try {
@@ -740,80 +856,74 @@ export default function ResumeBuilder() {
 
   return (
     <motion.div
+      className="resume-builder-root w-full max-w-full"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      style={{
-        width: isMobile ? "100%" : "80vw",
-        marginLeft: isMobile ? 0 : "calc(50% - 40vw)",
-      }}
     >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "38% 62%",
-          minHeight: "82vh",
-          border: "1.5px solid #E2E2E2",
-          borderRadius: 16,
-          overflow: "hidden",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.06)",
-        }}
-      >
+      <div className="grid w-full max-w-full grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:grid-cols-[42%_58%]">
         {/* ── LEFT PANEL ───────────────────────────────────────────────────── */}
-        <div
-          style={{
-            background: "#FAFAFA",
-            borderRight: isMobile ? "none" : "1.5px solid #E8E8E8",
-            borderBottom: isMobile ? "1.5px solid #E8E8E8" : "none",
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: isMobile ? "none" : "85vh",
-          }}
-        >
-          {/* Panel header */}
-          <div style={{ padding: "20px 22px 0", flexShrink: 0 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: "#111", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <FileText size={15} color="#fff" />
+        <div className="flex flex-col overflow-hidden border-b border-gray-100 bg-neutral-50 md:border-b-0 md:border-r md:border-gray-100">
+          {/* Header — does not scroll */}
+          <div className="shrink-0 bg-gray-900 px-6 py-5">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-red">
+                  <FileText className="h-5 w-5 text-white" strokeWidth={2} aria-hidden />
                 </div>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 800, color: "#111", lineHeight: 1.2 }}>
+                <div className="min-w-0">
+                  <p className="m-0 text-[15px] font-bold leading-tight text-white">
                     {data.fullName || "Your Resume"}
                   </p>
-                  <p style={{ fontSize: 10.5, color: "#999", lineHeight: 1 }}>
-                    {completedCount} of {SECTIONS.length} sections done
+                  <p className="mt-1 text-[11px] leading-snug text-gray-500">
+                    {completedCount} of {SECTIONS.length} sections · {progress}% done
                   </p>
                 </div>
               </div>
-              {savedAt && (
-                <span style={{ fontSize: 10, color: "#bbb", whiteSpace: "nowrap" }}>
-                  Saved {savedAt}
-                </span>
+              {savedAt ? (
+                <div className="flex shrink-0 items-center gap-1.5 text-[11px] text-gray-500">
+                  <Clock className="h-3 w-3 shrink-0 text-gray-600" strokeWidth={2} aria-hidden />
+                  <span className="whitespace-nowrap">Saved {savedAt}</span>
+                </div>
+              ) : (
+                <div className="flex shrink-0 items-center gap-1.5 text-[11px] text-gray-500 opacity-70">
+                  <Clock className="h-3 w-3 shrink-0 text-gray-600" strokeWidth={2} aria-hidden />
+                  <span className="whitespace-nowrap">Auto-save on</span>
+                </div>
               )}
             </div>
 
-            {/* Progress bar */}
-            <div style={{ marginBottom: 18 }}>
-              <div style={{ background: "#EBEBEB", borderRadius: 99, height: 5, overflow: "hidden" }}>
-                <motion.div
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  style={{
-                    height: "100%",
-                    background: progress === 100 ? "#22c55e" : "linear-gradient(90deg, #DF0A09 0%, #ff4444 100%)",
-                    borderRadius: 99,
-                  }}
-                />
+            <div className="mt-3.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] text-gray-500">Resume progress</span>
+                <span className="text-[11px] font-bold text-brand-red">{progress}%</span>
               </div>
-              <p style={{ fontSize: 10.5, color: "#aaa", marginTop: 4 }}>{progress}% complete</p>
+              <div className="relative mt-1.5">
+                <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                  <motion.div
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="h-full rounded-full bg-brand-red"
+                  />
+                </div>
+                {[
+                  { id: "25", leftClass: "left-[25%]", filled: progress >= 25 },
+                  { id: "50", leftClass: "left-1/2", filled: progress >= 50 },
+                  { id: "75", leftClass: "left-[75%]", filled: progress >= 75 },
+                  { id: "100", leftClass: "left-full", filled: progress >= 100 },
+                ].map(({ id, leftClass, filled }) => (
+                  <span
+                    key={id}
+                    aria-hidden
+                    className={`pointer-events-none absolute top-1/2 box-border h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-gray-900 ${leftClass} ${filled ? "bg-brand-red" : "bg-zinc-800"}`}
+                  />
+                ))}
+              </div>
             </div>
-
-            <div style={{ height: 1, background: "#EBEBEB", marginBottom: 4, marginLeft: -22, marginRight: -22 }} />
           </div>
 
-          {/* Scrollable sections */}
-          <div style={{ flex: 1, overflowY: "auto", padding: "4px 22px 0" }}>
+          {/* Scrollable form */}
+          <div className="space-y-2 px-5 py-4">
             {/* Section 1: Personal */}
             <Section index={0} title={SECTIONS[0]} open={openSections[0]} onToggle={() => toggleSection(0)} complete={isSectionComplete(0)}>
               <FieldRow>
@@ -856,13 +966,39 @@ export default function ResumeBuilder() {
               {data.skills.map((sk) => (
                 <div key={sk.id} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 24px", gap: 6, alignItems: "center", marginBottom: 6 }}>
                   <input
-                    style={{ width: "100%", background: "#fff", border: "1.5px solid #E2E2E2", borderRadius: 7, padding: "8px 10px", fontSize: 12, color: "#111", outline: "none", boxSizing: "border-box", fontFamily: "inherit" }}
+                    className="rb-skill-input"
+                    style={{
+                      width: "100%",
+                      background: "#FAFAFA",
+                      border: "1.5px solid #EBEBEB",
+                      borderRadius: 10,
+                      padding: "11px 14px",
+                      fontSize: 13,
+                      color: "#111",
+                      outline: "none",
+                      boxSizing: "border-box",
+                      fontFamily: "inherit",
+                      transition: "all 0.2s ease",
+                    }}
                     placeholder="Languages"
                     value={sk.category}
                     onChange={(e) => updateSkill(sk.id, "category", e.target.value)}
                   />
                   <input
-                    style={{ width: "100%", background: "#fff", border: "1.5px solid #E2E2E2", borderRadius: 7, padding: "8px 10px", fontSize: 12, color: "#111", outline: "none", boxSizing: "border-box", fontFamily: "inherit" }}
+                    className="rb-skill-input"
+                    style={{
+                      width: "100%",
+                      background: "#FAFAFA",
+                      border: "1.5px solid #EBEBEB",
+                      borderRadius: 10,
+                      padding: "11px 14px",
+                      fontSize: 13,
+                      color: "#111",
+                      outline: "none",
+                      boxSizing: "border-box",
+                      fontFamily: "inherit",
+                      transition: "all 0.2s ease",
+                    }}
                     placeholder="PHP, JavaScript, SQL"
                     value={sk.skills}
                     onChange={(e) => updateSkill(sk.id, "skills", e.target.value)}
@@ -872,7 +1008,13 @@ export default function ResumeBuilder() {
                   </button>
                 </div>
               ))}
-              {data.skills.length === 0 && <EmptyState message="No skill categories yet" />}
+              {data.skills.length === 0 && (
+                <EmptyState
+                  message="No skill categories yet"
+                  hint={`Click '+ Add Category' below to get started`}
+                  icon={Code2}
+                />
+              )}
               <AddButton label="Add Category" onClick={addSkill} />
             </Section>
 
@@ -890,7 +1032,13 @@ export default function ResumeBuilder() {
                   ))}
                 </SortableContext>
               </DndContext>
-              {data.projects.length === 0 && <EmptyState message="No projects yet — drag to reorder once added" />}
+              {data.projects.length === 0 && (
+                <EmptyState
+                  message="No projects added yet"
+                  hint={`Click '+ Add Project' below to get started`}
+                  icon={FolderOpen}
+                />
+              )}
               <AddButton label="Add Project" onClick={addProject} />
             </Section>
 
@@ -906,7 +1054,13 @@ export default function ResumeBuilder() {
                   </FieldRow>
                 </EntryCard>
               ))}
-              {data.education.length === 0 && <EmptyState message="No education entries yet" />}
+              {data.education.length === 0 && (
+                <EmptyState
+                  message="No education added yet"
+                  hint={`Click '+ Add Education' below to get started`}
+                  icon={GraduationCap}
+                />
+              )}
               <AddButton label="Add Education" onClick={addEducation} />
             </Section>
 
@@ -921,7 +1075,13 @@ export default function ResumeBuilder() {
                   <FInput label="Certificate Name *" value={cert.course} onChange={(v) => updateCert(cert.id, "course", v)} placeholder="Back-End Development Professional Certificate" />
                 </EntryCard>
               ))}
-              {data.certifications.length === 0 && <EmptyState message="No certifications yet" />}
+              {data.certifications.length === 0 && (
+                <EmptyState
+                  message="No certifications added yet"
+                  hint={`Click '+ Add Certification' below to get started`}
+                  icon={Award}
+                />
+              )}
               <AddButton label="Add Certification" onClick={addCert} />
             </Section>
 
@@ -945,121 +1105,91 @@ export default function ResumeBuilder() {
                   />
                 </EntryCard>
               ))}
-              {data.experience.length === 0 && <EmptyState message="No experience entries yet" />}
+              {data.experience.length === 0 && (
+                <EmptyState
+                  message="No experience added yet"
+                  hint={`Click '+ Add Experience' below to get started`}
+                  icon={Briefcase}
+                />
+              )}
               <AddButton label="Add Experience" onClick={addExp} />
             </Section>
 
-            <div style={{ height: 20 }} />
+            <div className="h-5 shrink-0" aria-hidden />
           </div>
 
-          {/* Action bar */}
-          <div
-            style={{
-              background: "#fff",
-              borderTop: "1.5px solid #EBEBEB",
-              padding: "14px 22px",
-              display: "flex",
-              gap: 10,
-              flexShrink: 0,
-            }}
-          >
+          {/* Bottom bar — does not scroll */}
+          <div className="flex shrink-0 gap-3 border-t border-gray-100 bg-white p-4">
             <button
+              type="button"
+              className="rb-btn-download flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-brand-red px-6 py-3.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-80"
               onClick={downloadPdf}
               disabled={pdfBusy}
-              style={{
-                flex: 1,
-                background: "#111",
-                color: "#fff",
-                border: "none",
-                borderRadius: 9,
-                padding: "11px 0",
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: pdfBusy ? "not-allowed" : "pointer",
-                opacity: pdfBusy ? 0.7 : 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 7,
-                transition: "opacity 0.15s",
-              }}
             >
-              {pdfBusy ? <Loader2 size={14} style={{ animation: "spin 1s linear infinite" }} /> : <Download size={14} />}
-              {pdfBusy ? "Generating…" : "Download PDF"}
+              {pdfBusy ? <Loader2 className="h-4 w-4 shrink-0 animate-spin text-white" aria-hidden /> : <Download className="h-4 w-4 shrink-0 text-white" strokeWidth={2} aria-hidden />}
+              {pdfBusy ? "Generating..." : "Download PDF"}
             </button>
             <button
+              type="button"
+              className="rb-btn-reset flex shrink-0 items-center gap-2 rounded-[10px] border border-gray-300 bg-neutral-100 px-5 py-3.5 text-sm font-semibold text-gray-600"
               onClick={reset}
               title="Clear all data"
-              style={{
-                background: "transparent",
-                color: "#aaa",
-                border: "1.5px solid #E8E8E8",
-                borderRadius: 9,
-                padding: "11px 14px",
-                fontSize: 13,
-                fontWeight: 600,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                transition: "color 0.15s, border-color 0.15s",
-              }}
             >
-              <RotateCcw size={13} /> Reset
+              <RotateCcw className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden /> Reset
             </button>
           </div>
         </div>
 
         {/* ── RIGHT PANEL ──────────────────────────────────────────────────── */}
-        <div
-          style={{
-            background: "#F4F4F4",
-            backgroundImage: "radial-gradient(circle, #DCDCDC 1px, transparent 1px)",
-            backgroundSize: "20px 20px",
-            padding: "28px 20px",
-            overflowY: isMobile ? "visible" : "auto",
-            maxHeight: isMobile ? "none" : "85vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 12,
-          }}
-        >
-          {/* Header bar */}
-          <div style={{ width: "100%", maxWidth: 660, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", display: "inline-block", boxShadow: "0 0 0 3px rgba(34,197,94,0.2)" }} />
-              <span style={{ fontSize: 12, fontWeight: 700, color: "#666", letterSpacing: "0.02em" }}>Live Preview</span>
+        <div className="flex flex-col bg-gray-100 bg-[radial-gradient(circle,_#DCDCDC_1px,_transparent_1px)] bg-[length:20px_20px]">
+          {/* Live Preview label row + export */}
+          <div className="relative box-border flex w-full max-w-[700px] shrink-0 items-center justify-between self-center px-5 pb-3 pt-4">
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-2 w-2 shrink-0 animate-pulse rounded-full bg-green-500" aria-hidden />
+              <span className="text-[13px] font-semibold text-gray-600">Live Preview</span>
             </div>
             <button
+              type="button"
+              className="rb-btn-export flex shrink-0 items-center gap-1.5 rounded-lg bg-brand-red px-5 py-2 text-[13px] font-bold text-white disabled:cursor-not-allowed disabled:opacity-80"
               onClick={downloadPdf}
               disabled={pdfBusy}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                background: "#DF0A09",
-                color: "#fff",
-                border: "none",
-                borderRadius: 7,
-                padding: "6px 12px",
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: pdfBusy ? "not-allowed" : "pointer",
-                opacity: pdfBusy ? 0.7 : 1,
-              }}
             >
-              {pdfBusy ? <Loader2 size={11} style={{ animation: "spin 1s linear infinite" }} /> : <Download size={11} />}
+              {pdfBusy ? <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-white" aria-hidden /> : <Download className="h-3.5 w-3.5 shrink-0 text-white" strokeWidth={2} aria-hidden />}
               Export PDF
             </button>
           </div>
 
-          <ResumePreview data={data} />
+          <div className="flex w-full justify-center pb-5">
+            <ResumePreview data={data} />
+          </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .resume-builder-root input::placeholder,
+        .resume-builder-root textarea::placeholder {
+          color: #CCC;
+        }
+        .resume-builder-root .rb-skill-input:focus {
+          outline: none;
+          background: #fff;
+          border-color: #DF0A09;
+          box-shadow: 0 0 0 3px rgba(223, 10, 9, 0.08);
+        }
+        .resume-builder-root .rb-btn-download:not(:disabled):hover {
+          background: #B30807 !important;
+          transform: translateY(-1px);
+        }
+        .resume-builder-root .rb-btn-download:active:not(:disabled) {
+          transform: translateY(0);
+        }
+        .resume-builder-root .rb-btn-reset:hover {
+          background: #EBEBEB !important;
+          color: #111 !important;
+        }
+        .resume-builder-root .rb-btn-export:not(:disabled):hover {
+          background: #B30807 !important;
+        }
       `}</style>
     </motion.div>
   );

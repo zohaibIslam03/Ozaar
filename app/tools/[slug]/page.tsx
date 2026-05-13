@@ -154,7 +154,12 @@ export default function ToolPage({ params }: PageProps) {
       {/* Page sections */}
       <ToolHero config={config} />
 
-      <ToolWorkspace accentColor={config.accentColor}>
+      <ToolWorkspace
+        accentColor={config.accentColor}
+        fullBleed={config.slug === "resume-builder"}
+        hideHeader={config.slug === "resume-builder"}
+        toolName={config.slug === "resume-builder" ? "Resume Builder" : undefined}
+      >
         {LiveComponent ? <LiveComponent /> : (
           <div className="text-center py-12 text-[#888]">This tool is coming soon.</div>
         )}
