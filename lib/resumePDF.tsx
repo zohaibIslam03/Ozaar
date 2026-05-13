@@ -12,16 +12,48 @@ import type { ResumeData } from "@/types/resume";
 
 const S = StyleSheet.create({
   page: { padding: "40px 48px", fontFamily: "Times-Roman", fontSize: 11, lineHeight: 1.4, color: "#000000", backgroundColor: "#ffffff" },
-  name: { fontSize: 26, fontFamily: "Times-Bold", textAlign: "center", marginBottom: 6 },
-  contactLine: { fontSize: 10, textAlign: "center", marginBottom: 14, color: "#333333", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 0 },
-  contactPipe: { fontSize: 10, color: "#333333" },
+  headerBlock: { width: "100%", marginBottom: 4 },
+  name: {
+    fontSize: 24,
+    fontFamily: "Times-Bold",
+    textAlign: "center",
+    lineHeight: 1.35,
+    marginBottom: 0,
+    paddingBottom: 10,
+  },
+  jobTitle: {
+    fontSize: 11,
+    textAlign: "center",
+    color: "#444444",
+    fontStyle: "italic",
+    marginBottom: 8,
+    lineHeight: 1.4,
+    paddingHorizontal: 8,
+  },
+  contactLine: {
+    width: "100%",
+    fontSize: 10,
+    textAlign: "center",
+    marginTop: 4,
+    marginBottom: 14,
+    paddingTop: 2,
+    color: "#333333",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+    gap: 0,
+    lineHeight: 1.5,
+  },
+  contactPipe: { fontSize: 10, color: "#333333", lineHeight: 1.5 },
   sectionTitle: { fontSize: 11, fontFamily: "Times-Bold", textTransform: "uppercase", letterSpacing: 1, marginTop: 14, marginBottom: 2 },
   sectionRule: { borderBottomWidth: 1.5, borderBottomColor: "#000000", marginBottom: 8 },
   bodyText: { fontSize: 10.5, lineHeight: 1.5, color: "#111111" },
   bold: { fontFamily: "Times-Bold" },
   row: { flexDirection: "row", justifyContent: "space-between" },
   bullet: { fontSize: 10.5, lineHeight: 1.5, marginBottom: 2 },
-  link: { color: "#0000EE", textDecoration: "underline", fontSize: 10 },
+  link: { color: "#0000EE", textDecoration: "underline", fontSize: 10, lineHeight: 1.5 },
   entryMargin: { marginBottom: 10 },
   certRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 6 },
 });
@@ -52,24 +84,26 @@ export function ResumeDocument({ data }: { data: ResumeData }) {
   return (
     <Document>
       <Page size="A4" style={S.page}>
-        {/* Name */}
-        {data.fullName && <Text style={S.name}>{data.fullName}</Text>}
-
-        {/* Contact line */}
-        {contactParts.length > 0 && (
-          <View style={S.contactLine}>
-            {contactParts.map((p, i) => (
-              <View key={i} style={{ flexDirection: "row" }}>
-                {i > 0 && <Text style={S.contactPipe}> | </Text>}
-                {p.href ? (
-                  <Link src={p.href} style={S.link}>{p.label}</Link>
-                ) : (
-                  <Text style={{ fontSize: 10, color: "#333333" }}>{p.label}</Text>
-                )}
-              </View>
-            ))}
-          </View>
-        )}
+        <View style={S.headerBlock}>
+          {data.fullName ? <Text style={S.name}>{data.fullName}</Text> : null}
+          {data.jobTitle ? <Text style={S.jobTitle}>{data.jobTitle}</Text> : null}
+          {contactParts.length > 0 ? (
+            <View style={S.contactLine}>
+              {contactParts.map((p, i) => (
+                <View key={`${p.label}-${i}`} style={{ flexDirection: "row", alignItems: "center" }}>
+                  {i > 0 ? <Text style={S.contactPipe}> | </Text> : null}
+                  {p.href ? (
+                    <Link src={p.href} style={S.link}>
+                      {p.label}
+                    </Link>
+                  ) : (
+                    <Text style={{ fontSize: 10, color: "#333333", lineHeight: 1.5 }}>{p.label}</Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          ) : null}
+        </View>
 
         {/* Summary */}
         {data.summary && (
