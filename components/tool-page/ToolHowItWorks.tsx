@@ -57,7 +57,7 @@ export default function ToolHowItWorks({ steps, accentColor }: ToolHowItWorksPro
             >
               {/* Big decorative step number */}
               <span
-                className="absolute -top-5 left-0 select-none pointer-events-none"
+                className="absolute -top-7 -left-5 z-0 select-none pointer-events-none"
                 style={{
                   fontFamily: "var(--font-jakarta)",
                   fontSize: "72px",
@@ -71,7 +71,7 @@ export default function ToolHowItWorks({ steps, accentColor }: ToolHowItWorksPro
 
               {/* Icon box */}
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: "#F5F5F5", border: "1px solid #E8E8E8" }}
               >
                 <StepIcon icon={step.icon} color={accentColor} />
