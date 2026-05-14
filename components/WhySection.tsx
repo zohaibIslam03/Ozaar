@@ -41,7 +41,7 @@ export default function WhySection() {
         className="flex flex-col gap-8"
       >
         <motion.div variants={item} className="flex flex-col gap-1">
-          <h2 className="text-xl font-bold text-brand-text">Why The Innovations?</h2>
+          <h2 className="text-xl font-bold text-brand-text">Why Ozaar?</h2>
           <p className="text-sm text-brand-muted">
             Built on one rule: your tool shouldn&apos;t require your data.
           </p>

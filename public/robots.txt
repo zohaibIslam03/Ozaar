@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://tools.theinnovations.tech
+Host: https://ozaar.theinnovations.tech
 
 # Sitemaps
-Sitemap: https://tools.theinnovations.tech/sitemap.xml
+Sitemap: https://ozaar.theinnovations.tech/sitemap.xml

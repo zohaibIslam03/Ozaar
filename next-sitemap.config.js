@@ -15,7 +15,7 @@ const toolSlugs = [
 ];
 
 module.exports = {
-  siteUrl: "https://tools.theinnovations.tech",
+  siteUrl: "https://ozaar.theinnovations.tech",
   generateRobotsTxt: true,
   outDir: "public",
   changefreq: "weekly",

@@ -17,14 +17,14 @@ import { tools } from "@/lib/tools";
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "The Innovations Tools",
-  url: "https://tools.theinnovations.tech",
+  name: "Ozaar",
+  url: "https://ozaar.theinnovations.tech",
   description: "12 free open-source browser tools. PDF, image, QR, resume, currency and more. No signup required.",
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://tools.theinnovations.tech/?search={search_term_string}",
+      urlTemplate: "https://ozaar.theinnovations.tech/?search={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -40,7 +40,7 @@ const itemListSchema = {
     "@type": "ListItem",
     position: i + 1,
     name: tool.name,
-    url: `https://tools.theinnovations.tech/tools/${tool.slug}`,
+    url: `https://ozaar.theinnovations.tech/tools/${tool.slug}`,
     description: tool.desc,
   })),
 };

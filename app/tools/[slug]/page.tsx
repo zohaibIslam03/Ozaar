@@ -46,10 +46,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const config = getToolConfig(params.slug);
   if (!tool) return { title: "Tool Not Found" };
 
-  const title = config?.metaTitle ?? `${tool.name} — Free Online Tool | The Innovations`;
+  const title = config?.metaTitle ?? `${tool.name} — Free Online Tool | Ozaar`;
   const description = config?.metaDesc ?? tool.desc;
   const keywords = config?.keywords ?? [];
-  const url = `https://tools.theinnovations.tech/tools/${tool.slug}`;
+  const url = `https://ozaar.theinnovations.tech/tools/${tool.slug}`;
 
   return {
     title: { absolute: title },
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "The Innovations Tools",
+      siteName: "Ozaar",
       type: "website",
     },
     twitter: {
@@ -108,7 +108,7 @@ export default function ToolPage({ params }: PageProps) {
     operatingSystem: "Web Browser",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     description: config.description,
-    url: `https://tools.theinnovations.tech/tools/${config.slug}`,
+    url: `https://ozaar.theinnovations.tech/tools/${config.slug}`,
   };
 
   const howToSchema = {
@@ -137,9 +137,9 @@ export default function ToolPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://tools.theinnovations.tech" },
-      { "@type": "ListItem", position: 2, name: "Tools", item: "https://tools.theinnovations.tech/#tools" },
-      { "@type": "ListItem", position: 3, name: config.name, item: `https://tools.theinnovations.tech/tools/${config.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://ozaar.theinnovations.tech" },
+      { "@type": "ListItem", position: 2, name: "Tools", item: "https://ozaar.theinnovations.tech/#tools" },
+      { "@type": "ListItem", position: 3, name: config.name, item: `https://ozaar.theinnovations.tech/tools/${config.slug}` },
     ],
   };
 

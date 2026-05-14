@@ -165,7 +165,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["image-resizer", "bg-remover", "pdf-toolkit"],
     metaTitle:
-      "Free Image Compressor Online — Compress PNG JPG to WebP | The Innovations",
+      "Free Image Compressor Online — Compress PNG JPG to WebP | Ozaar",
     metaDesc:
       "Compress images online for free. Reduce PNG, JPG file sizes by up to 90% and convert to WebP. No upload required — runs entirely in your browser. No account needed.",
     keywords: [
@@ -287,7 +287,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["word-counter", "pdf-toolkit", "color-palette"],
     metaTitle:
-      "Free Resume Builder Online — ATS-Friendly PDF Export | The Innovations",
+      "Free Resume Builder Online — ATS-Friendly PDF Export | Ozaar",
     metaDesc:
       "Build a professional resume online for free. ATS-optimized templates, live preview, and one-click PDF export. No account required. Saves automatically in your browser.",
     keywords: [
@@ -406,7 +406,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
-    metaTitle: "Free PDF Toolkit Online — Merge, Split & Compress PDFs | The Innovations",
+    metaTitle: "Free PDF Toolkit Online — Merge, Split & Compress PDFs | Ozaar",
     metaDesc:
       "Free online PDF toolkit. Merge PDFs, split by page range, and compress file size — all in your browser. No upload, no signup, no limits.",
     keywords: [
@@ -528,7 +528,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "image-resizer", "password-generator"],
-    metaTitle: "Free QR Code Generator Online — PNG & SVG Download | The Innovations",
+    metaTitle: "Free QR Code Generator Online — PNG & SVG Download | Ozaar",
     metaDesc:
       "Generate QR codes instantly from any URL, text, or contact info. Download as PNG or SVG. Free, no watermark, no sign-up. Works entirely in your browser.",
     keywords: [
@@ -651,7 +651,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["qr-generator", "word-counter", "image-compressor"],
     metaTitle:
-      "Free Password Generator Online — Cryptographically Secure | The Innovations",
+      "Free Password Generator Online — Cryptographically Secure | Ozaar",
     metaDesc:
       "Generate cryptographically secure passwords for free. Custom length, character types, strength meter, and bulk mode. Runs in-browser — passwords never sent to any server.",
     keywords: [
@@ -774,7 +774,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
     metaTitle:
-      "Free Color Palette Generator — CSS & Tailwind Export | The Innovations",
+      "Free Color Palette Generator — CSS & Tailwind Export | Ozaar",
     metaDesc:
       "Generate beautiful colour palettes online for free. Analogous, complementary, triadic modes. Export as CSS variables or Tailwind config. No account needed.",
     keywords: [
@@ -897,7 +897,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["resume-builder", "pdf-toolkit", "password-generator"],
     metaTitle:
-      "Free Word Counter Online — Character, Sentence & Reading Time | The Innovations",
+      "Free Word Counter Online — Character, Sentence & Reading Time | Ozaar",
     metaDesc:
       "Count words, characters, sentences, and paragraphs in real time. Get reading and speaking time estimates. Free, no signup, works offline.",
     keywords: [
@@ -1020,7 +1020,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["image-compressor", "bg-remover", "qr-generator"],
     metaTitle:
-      "Free Image Resizer Online — Social Media Presets & Custom Dimensions | The Innovations",
+      "Free Image Resizer Online — Social Media Presets & Custom Dimensions | Ozaar",
     metaDesc:
       "Resize images online for free. 20+ social media presets, exact pixel dimensions, or percentage scale. Export as PNG or JPEG. No upload, runs in your browser.",
     keywords: [
@@ -1143,7 +1143,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["image-compressor", "image-resizer", "color-palette"],
     metaTitle:
-      "Free Background Remover Online — AI-Powered, Private | The Innovations",
+      "Free Background Remover Online — AI-Powered, Private | Ozaar",
     metaDesc:
       "Remove image backgrounds for free using AI that runs in your browser. No upload, no server, completely private. Download transparent PNG. No account required.",
     keywords: [
@@ -1266,7 +1266,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["unit-converter", "currency-converter", "word-counter"],
     metaTitle:
-      "Free Age Calculator Online — Exact Age, Birthday Countdown & Zodiac | The Innovations",
+      "Free Age Calculator Online — Exact Age, Birthday Countdown & Zodiac | Ozaar",
     metaDesc:
       "Calculate your exact age in years, months, and days. See total days lived, your next birthday countdown (live), day of birth, and zodiac sign. Free, no signup.",
     keywords: [
@@ -1389,7 +1389,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["unit-converter", "age-calculator", "word-counter"],
     metaTitle:
-      "Free Currency Converter Online — Live Exchange Rates, 150+ Currencies | The Innovations",
+      "Free Currency Converter Online — Live Exchange Rates, 150+ Currencies | Ozaar",
     metaDesc:
       "Convert currencies with live exchange rates. 150+ currencies, hourly updates from open.er-api.com, multi-currency comparison table. Free, no signup.",
     keywords: [
@@ -1512,7 +1512,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["currency-converter", "age-calculator", "word-counter"],
     metaTitle:
-      "Free Unit Converter Online — Length, Weight, Temperature & More | The Innovations",
+      "Free Unit Converter Online — Length, Weight, Temperature & More | Ozaar",
     metaDesc:
       "Convert between units of length, weight, temperature, speed, area, and volume instantly. Metric and imperial. Free, no signup, works offline.",
     keywords: [

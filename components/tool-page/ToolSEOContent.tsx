@@ -14,7 +14,7 @@ const SEO_CONTENT: Record<
     what: [
       "An image compressor is a tool that reduces the file size of digital images — such as PNG, JPG, and GIF files — to make them faster to load and easier to share. The process works by removing redundant or imperceptible image data, resulting in a smaller file that looks nearly identical to the original at normal viewing sizes.",
       "Image compression is essential for any website, application, or workflow that handles visual content. Large, unoptimised images are the single most common cause of slow page load times. Search engines like Google factor page speed into rankings, meaning that uncompressed images can directly harm your SEO performance and organic traffic.",
-      "The Innovations Image Compressor converts your PNG, JPG, and GIF images to the modern WebP format, which delivers 25–35% better compression than JPEG at equivalent visual quality. The result is dramatically smaller files with no perceptible quality difference — exactly what fast, high-performing websites need.",
+      "Ozaar Image Compressor converts your PNG, JPG, and GIF images to the modern WebP format, which delivers 25–35% better compression than JPEG at equivalent visual quality. The result is dramatically smaller files with no perceptible quality difference — exactly what fast, high-performing websites need.",
     ],
     how: [
       "Our image compressor uses the browser's native Canvas API to re-encode your images at your chosen quality level. When you drop an image onto the tool, it is loaded into an invisible HTML canvas element. The canvas then exports the image data as a WebP blob at your selected quality setting.",
@@ -34,7 +34,7 @@ const SEO_CONTENT: Record<
     what: [
       "A resume builder is an online tool that guides you through creating a professional resume or CV without needing design software or prior formatting experience. Rather than starting from a blank document, you fill in structured fields for your work history, education, skills, and contact information, and the tool formats everything into a polished, print-ready layout.",
       "The most critical feature of any modern resume builder is ATS compatibility. Applicant Tracking Systems are software tools used by over 98% of Fortune 500 companies to automatically scan and filter incoming resumes before a human ever reads them. An ATS-friendly resume uses clean, standard formatting that these systems can parse correctly — avoiding tables, graphics, unusual fonts, or multi-column layouts that confuse the parser.",
-      "The Innovations Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export — all completely free and without any account requirement.",
+      "Ozaar Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export — all completely free and without any account requirement.",
     ],
     how: [
       "Our resume builder uses @react-pdf/renderer to generate PDF documents directly in the browser. As you fill in the form fields, the right-side preview updates in real time using the same rendering engine. When you click 'Download PDF', the PDF is generated client-side and downloaded directly to your device.",
@@ -54,7 +54,7 @@ const SEO_CONTENT: Record<
     what: [
       "A PDF toolkit is a collection of utilities for working with PDF (Portable Document Format) files. The three most commonly needed operations are merging (combining multiple PDFs into one), splitting (dividing a single PDF into multiple files by page range), and compressing (reducing the file size of a PDF for easier sharing or storage).",
       "PDFs are the universal standard for sharing documents that must retain their formatting across devices and operating systems. They are used for contracts, reports, invoices, presentations, academic papers, and countless other document types. Being able to merge, split, and compress PDFs without specialist software is a fundamental productivity need for individuals and businesses alike.",
-      "The Innovations PDF Toolkit provides all three operations in a single, free, browser-based tool. No software installation, no monthly subscription, and no file uploads to external servers.",
+      "Ozaar PDF Toolkit provides all three operations in a single, free, browser-based tool. No software installation, no monthly subscription, and no file uploads to external servers.",
     ],
     how: [
       "Our PDF Toolkit is powered by pdf-lib, a comprehensive JavaScript library for creating and modifying PDF files that runs entirely in the browser. When you merge PDFs, pdf-lib reads each file's page tree and combines them into a new PDF document. When splitting, it copies the specified page ranges into new documents. All operations are performed in memory and downloaded directly to your device.",
@@ -74,7 +74,7 @@ const SEO_CONTENT: Record<
     what: [
       "A QR code (Quick Response code) is a two-dimensional barcode that can be scanned by smartphone cameras to instantly open a URL, display text, share contact information, or trigger other actions. QR codes were invented in 1994 and have seen explosive adoption since smartphones made scanning them trivially easy.",
       "A QR code generator is a tool that takes any input — a web address, plain text, an email, a phone number — and encodes it into a scannable QR image. The output can then be printed, embedded in digital content, or displayed on screens for others to scan. The QR code contains no expiry date and works permanently as long as the destination URL or content remains valid.",
-      "The Innovations QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output — at any scale, at no cost.",
+      "Ozaar QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output — at any scale, at no cost.",
     ],
     how: [
       "QR codes are generated using the qrcode.js library, which implements the QR Code 2005 specification (ISO/IEC 18004) entirely in JavaScript. When you enter your content, the library encodes it using Reed-Solomon error correction, calculates the required version (size) of the QR matrix, and renders the pattern as an SVG or canvas element.",
@@ -94,7 +94,7 @@ const SEO_CONTENT: Record<
     what: [
       "A password generator is a tool that creates random, unpredictable passwords based on your specified requirements. Unlike manually chosen passwords (which tend to be predictable, reused, or too short), a properly generated password uses true randomness to produce a string that is computationally infeasible to guess or crack.",
       "Password security is one of the most consequential and most overlooked aspects of personal and business cybersecurity. The vast majority of account compromises occur because of weak, reused, or breached passwords — not because of sophisticated hacking. A strong, unique password for every account is the single most effective defence against credential-based attacks.",
-      "The Innovations Password Generator uses the browser's built-in cryptographic random number generator to produce passwords that meet the highest security standards — with customisable length, character sets, and bulk generation.",
+      "Ozaar Password Generator uses the browser's built-in cryptographic random number generator to produce passwords that meet the highest security standards — with customisable length, character sets, and bulk generation.",
     ],
     how: [
       "Our generator uses window.crypto.getRandomValues() — the browser's implementation of a Cryptographically Secure Pseudorandom Number Generator (CSPRNG). This is the same source of randomness used in cryptographic applications, TLS certificates, and operating system entropy pools. It is mathematically impossible to predict the next value from previously observed values.",
@@ -114,7 +114,7 @@ const SEO_CONTENT: Record<
     what: [
       "A colour palette generator is a design tool that creates sets of harmonious colours based on colour theory principles. Rather than choosing colours arbitrarily, these tools apply mathematical relationships between hues on the colour wheel to produce palettes that are visually pleasing, cohesive, and suitable for use in branding, UI design, and marketing materials.",
       "Colour harmony is a fundamental principle of design. When colours relate to each other through established geometric relationships on the colour wheel — such as being adjacent (analogous), opposite (complementary), or evenly distributed (triadic) — they tend to feel balanced and intentional rather than random or jarring.",
-      "The Innovations Colour Palette Generator produces 5-colour palettes in four harmony modes — analogous, complementary, triadic, and split-complementary — with one-click export to CSS custom properties or Tailwind CSS configuration.",
+      "Ozaar Colour Palette Generator produces 5-colour palettes in four harmony modes — analogous, complementary, triadic, and split-complementary — with one-click export to CSS custom properties or Tailwind CSS configuration.",
     ],
     how: [
       "Palette generation uses HSL (Hue, Saturation, Lightness) colour space arithmetic. Given a base hex colour, the tool converts it to HSL and then calculates the hue angles of the other palette colours based on the selected harmony mode. Complementary colours are exactly 180° away on the hue wheel; triadic colours are 120° apart; analogous colours are 30° apart.",
@@ -134,7 +134,7 @@ const SEO_CONTENT: Record<
     what: [
       "A word counter is a text analysis tool that counts the number of words in a piece of writing, along with other related statistics such as character count, sentence count, paragraph count, and estimated reading or speaking time. These metrics are useful for writers, students, content marketers, and anyone working with text content.",
       "Word counts matter in many contexts. Academic submissions have strict word limits. Blog posts have SEO-optimal length ranges. Job applications have character limits. Speeches must fit specific time slots. Marketing copy must fit within ad character limits. A word counter makes it trivially easy to verify all of these.",
-      "The Innovations Word Counter provides all six key text metrics in real time as you type, along with keyword frequency analysis — making it one of the most complete free word counting tools available.",
+      "Ozaar Word Counter provides all six key text metrics in real time as you type, along with keyword frequency analysis — making it one of the most complete free word counting tools available.",
     ],
     how: [
       "All text analysis in our word counter happens client-side using JavaScript string manipulation. Word counting splits the text on whitespace boundaries (spaces, tabs, newlines) and counts the resulting non-empty tokens. Sentence counting identifies sentence-ending punctuation (periods, exclamation marks, question marks). Paragraph counting splits on double-newline characters.",
@@ -154,7 +154,7 @@ const SEO_CONTENT: Record<
     what: [
       "An image resizer is a tool that changes the pixel dimensions of a digital image. Resizing can reduce an image to a smaller size (downscaling) or increase it to larger dimensions (upscaling). The former is far more common and preserves image quality well; the latter introduces some pixelation beyond the original resolution.",
       "Image sizing matters enormously for web performance and social media. Every major platform — Instagram, Twitter, LinkedIn, YouTube, Facebook — has specific pixel dimension requirements for different image types: profile photos, cover images, post images, and ad formats. Uploading incorrectly sized images results in unwanted cropping, compression artefacts, or padding.",
-      "The Innovations Image Resizer provides 20+ social media presets alongside free-form custom dimensions, making it a complete solution for content creators, developers, and marketers.",
+      "Ozaar Image Resizer provides 20+ social media presets alongside free-form custom dimensions, making it a complete solution for content creators, developers, and marketers.",
     ],
     how: [
       "Image resizing uses the browser's HTML Canvas API. Your image is loaded into an off-screen canvas element at the target dimensions. The canvas's drawImage() method handles the pixel interpolation (scaling), and the result is exported as a PNG or JPEG blob using toBlob() at your chosen quality level.",
@@ -174,7 +174,7 @@ const SEO_CONTENT: Record<
     what: [
       "A background remover is an image editing tool that automatically separates the main subject of an image from its background, making the background transparent. This is used in product photography, profile photos, marketing design, and any situation where you need to isolate a subject from its surroundings.",
       "Traditional background removal required manual selection tools in software like Photoshop, which is time-consuming and requires skill. Modern AI-powered tools use machine learning models trained on millions of images to identify foreground subjects and separate them from backgrounds automatically and accurately.",
-      "The Innovations Background Remover runs an AI model entirely in your browser using WebAssembly, delivering professional-quality background removal with complete privacy — your images never touch a server.",
+      "Ozaar Background Remover runs an AI model entirely in your browser using WebAssembly, delivering professional-quality background removal with complete privacy — your images never touch a server.",
     ],
     how: [
       "Our background remover uses the @imgly/background-removal library, which bundles a trained neural network (based on the RMBG-1.4 architecture) as a WebAssembly module. When you first load the tool, the WASM model (approximately 150MB) downloads and compiles in your browser. Subsequent uses are instant because the model is cached by the browser.",
@@ -194,7 +194,7 @@ const SEO_CONTENT: Record<
     what: [
       "An age calculator is a tool that computes the exact age of a person or entity given a birth date and compares it to the current date. Beyond a simple year count, a comprehensive age calculator provides the age in years, months, and days; the total count of days, hours, and minutes lived; and the countdown to the next birthday.",
       "Age calculations are more complex than they appear because of irregular month lengths (28, 29, 30, or 31 days) and leap years (February 29 occurs once every four years). A correct implementation must account for all these irregularities to produce accurate results across all possible birth dates.",
-      "The Innovations Age Calculator provides a complete age breakdown including zodiac sign, day of the week you were born on, and a live ticking countdown to your next birthday — accurate to the current second.",
+      "Ozaar Age Calculator provides a complete age breakdown including zodiac sign, day of the week you were born on, and a live ticking countdown to your next birthday — accurate to the current second.",
     ],
     how: [
       "Age calculation is performed using JavaScript's Date object, which represents time as milliseconds since the Unix epoch (January 1, 1970). The tool calculates the difference between the current Date and the birth date, then decomposes this into years, months, and days accounting for the varying lengths of months and the four-year leap year cycle.",
@@ -214,7 +214,7 @@ const SEO_CONTENT: Record<
     what: [
       "A currency converter is a financial tool that translates a monetary amount from one currency to another using the current exchange rate between them. Exchange rates fluctuate constantly based on macroeconomic factors, interest rates, geopolitical events, and market supply and demand. A current exchange rate converter gives you the mid-market rate — the midpoint between buy and sell rates used by currency traders.",
       "Currency conversion is needed in many everyday contexts: international travel, cross-border e-commerce, sending money abroad, freelance invoicing for international clients, importing goods, and monitoring investment exposure to foreign currencies. Having access to live, accurate rates is essential for making informed financial decisions.",
-      "The Innovations Currency Converter supports 150+ world currencies with hourly rate updates from open.er-api.com and a multi-currency comparison table that shows your amount in multiple currencies simultaneously.",
+      "Ozaar Currency Converter supports 150+ world currencies with hourly rate updates from open.er-api.com and a multi-currency comparison table that shows your amount in multiple currencies simultaneously.",
     ],
     how: [
       "Exchange rates are fetched from the open.er-api.com API on page load and then cached in your browser's localStorage for up to one hour. When you request a conversion, the tool looks up the rate from the cached data and performs the calculation instantly — no API call needed for each conversion.",
@@ -234,7 +234,7 @@ const SEO_CONTENT: Record<
     what: [
       "A unit converter is a calculation tool that translates a quantity from one unit of measurement to another. Common conversions include length (metres to feet), weight (kilograms to pounds), temperature (Celsius to Fahrenheit), speed (km/h to mph), area (square metres to square feet), and volume (litres to gallons). These conversions are needed daily in cooking, travel, science, engineering, and everyday life.",
       "The world uses two major measurement systems — the metric system (SI units) and the imperial system (used primarily in the United States and informally in the UK). Converting between them requires precise conversion factors. Temperature is special: it requires a formula rather than a simple multiplication factor, because the scales have different zero points.",
-      "The Innovations Unit Converter covers 6 measurement categories with 50+ unit types, bi-directional input, and exact temperature formulae — all in a clean, instant browser-based interface.",
+      "Ozaar Unit Converter covers 6 measurement categories with 50+ unit types, bi-directional input, and exact temperature formulae — all in a clean, instant browser-based interface.",
     ],
     how: [
       "Most unit conversions use a multiplication factor: for example, 1 kilometre = 0.621371 miles, so multiplying kilometres by 0.621371 gives miles. Our converter stores these factors in a lookup table and applies them when you enter a value.",

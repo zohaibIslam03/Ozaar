@@ -224,7 +224,7 @@ function CompressorPanel() {
 // ── QR Panel ──────────────────────────────────────────────────────────────
 
 function QrPanel() {
-  const [url, setUrl] = useState("https://tools.theinnovations.tech");
+  const [url, setUrl] = useState("https://ozaar.theinnovations.tech");
   const [copied, setCopied] = useState(false);
 
   return (

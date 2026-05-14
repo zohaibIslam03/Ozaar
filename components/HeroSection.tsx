@@ -84,7 +84,7 @@ function QrMockup() {
       </svg>
       <div className="flex flex-col gap-1.5 flex-1">
         <p className="text-[11px] font-semibold text-[#111]">QR Generated</p>
-        <p className="text-[10px] text-[#999] break-all">tools.theinnovations.tech</p>
+        <p className="text-[10px] text-[#999] break-all">ozaar.theinnovations.tech</p>
         <div className="flex gap-1.5 mt-1">
           <span className="text-[9px] bg-[#DF0A09]/10 text-[#DF0A09] font-semibold px-2 py-0.5 rounded-full">PNG</span>
           <span className="text-[9px] bg-[#F7F7F7] text-[#666] font-semibold px-2 py-0.5 rounded-full">SVG</span>
@@ -242,7 +242,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute left-0 top-8 w-[240px] z-10"
             >
-              <BrowserWindow title="tools.theinnovations.tech/tools/image-compressor" delay={0.1}>
+              <BrowserWindow title="ozaar.theinnovations.tech/tools/image-compressor" delay={0.1}>
                 <ImageCompressorMockup />
               </BrowserWindow>
             </motion.div>
@@ -253,7 +253,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
               className="absolute left-1/2 -translate-x-1/2 top-0 w-[220px] z-20"
             >
-              <BrowserWindow title="tools.theinnovations.tech/tools/resume-builder" delay={0.25}>
+              <BrowserWindow title="ozaar.theinnovations.tech/tools/resume-builder" delay={0.25}>
                 <ResumeBuilderMockup />
               </BrowserWindow>
             </motion.div>
@@ -264,7 +264,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
               className="absolute right-0 bottom-16 w-[200px] z-10"
             >
-              <BrowserWindow title="tools.theinnovations.tech/tools/qr-generator" delay={0.4}>
+              <BrowserWindow title="ozaar.theinnovations.tech/tools/qr-generator" delay={0.4}>
                 <QrMockup />
               </BrowserWindow>
             </motion.div>

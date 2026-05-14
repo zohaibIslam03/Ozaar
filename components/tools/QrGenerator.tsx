@@ -18,7 +18,7 @@ const SIZES = [128, 256, 512] as const;
 type QrSize = (typeof SIZES)[number];
 
 export default function QrGenerator() {
-  const [text, setText] = useState("https://tools.theinnovations.tech");
+  const [text, setText] = useState("https://ozaar.theinnovations.tech");
   const [size, setSize] = useState<QrSize>(256);
   const [fgColor, setFgColor] = useState("#FFFFFF");
   const [bgColor, setBgColor] = useState("#000000");

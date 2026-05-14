@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -10,12 +11,6 @@ const navLinks = [
   { label: "Tools", href: "/#tools" },
   { label: "About", href: "/about" },
 ];
-
-const LIGHTNING_SVG = (
-  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden>
-    <path d="M9 2L3 9h5l-1 5 7-8H9l1-4z" fill="#DF0A09" />
-  </svg>
-);
 
 const GITHUB_SVG = (
   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
@@ -66,9 +61,16 @@ export default function Navbar() {
         <div className="container h-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
-            {LIGHTNING_SVG}
+            <Image
+              src="/ozaar-icon.png"
+              alt=""
+              width={20}
+              height={20}
+              className="h-5 w-5 object-contain shrink-0"
+              priority
+            />
             <span className="font-heading font-bold text-brand-text text-[15px] tracking-tight group-hover:text-brand-red transition-colors duration-200">
-              The Innovations
+              Ozaar
             </span>
           </Link>
 

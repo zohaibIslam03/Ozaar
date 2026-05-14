@@ -36,7 +36,7 @@ export default function ToolFeatures({
               marginTop: "8px",
             }}
           >
-            Why use The Innovations {toolName}?
+            Why use Ozaar {toolName}?
           </h2>
         </div>
 

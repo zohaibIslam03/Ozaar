@@ -386,7 +386,7 @@ export default function AboutContent() {
               The best tool is the one that gets out of your way.
             </blockquote>
             <p className="mt-5 text-[14px]" style={{ color: "#999" }}>
-              — The Innovations philosophy
+              — Ozaar philosophy
             </p>
           </div>
         </div>

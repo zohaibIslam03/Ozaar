@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { tools } from "@/lib/tools";
 
@@ -21,9 +22,15 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2 group w-fit">
-              <span className="w-2 h-2 bg-brand-red rounded-[2px] shrink-0" aria-hidden />
+              <Image
+                src="/ozaar-icon.png"
+                alt=""
+                width={18}
+                height={18}
+                className="h-[18px] w-[18px] object-contain shrink-0 opacity-95 group-hover:opacity-100"
+              />
               <span className="font-bold text-white text-sm tracking-tight group-hover:text-brand-red transition-colors duration-200">
-                The Innovations
+                Ozaar
               </span>
             </Link>
             <p className="text-sm text-[#888888] leading-relaxed max-w-[200px]">
@@ -110,7 +117,7 @@ export default function Footer() {
       <div className="border-t border-[#2A2A2A]">
         <div className="max-w-6xl lg:max-w-none lg:w-[80vw] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-[#555555]">
-            © {year} The Innovations. Open source under MIT.
+            © {year} Ozaar. Open source under MIT.
           </p>
           <p className="text-xs text-[#555555]">No tracking. No ads. No login.</p>
         </div>

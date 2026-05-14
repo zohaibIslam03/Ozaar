@@ -1,11 +1,17 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-export const runtime = "edge";
-export const alt = "The Innovations Tools — Free Online Micro-Tools";
+export const runtime = "nodejs";
+export const alt = "Ozaar — Free Online Micro-Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OgImage() {
+export default async function OgImage() {
+  const logoPath = join(process.cwd(), "public", "ozaar-icon.png");
+  const logoBuffer = await readFile(logoPath);
+  const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -38,23 +44,20 @@ export default function OgImage() {
 
         {/* Logo mark */}
         <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "36px" }}>
-          <div
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori OG renderer requires raw <img> */}
+          <img
+            src={logoSrc}
+            width={52}
+            height={52}
+            alt=""
             style={{
-              width: "52px",
-              height: "52px",
-              background: "#DF0A09",
               borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "30px",
-              boxShadow: "0 0 24px rgba(223,10,9,0.5)",
+              objectFit: "contain",
+              boxShadow: "0 0 24px rgba(223,10,9,0.35)",
             }}
-          >
-            ⚡
-          </div>
+          />
           <span style={{ color: "#ffffff", fontSize: "26px", fontWeight: 600, letterSpacing: "-0.5px" }}>
-            The Innovations
+            Ozaar
           </span>
         </div>
 
