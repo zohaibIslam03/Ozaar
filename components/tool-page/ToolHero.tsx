@@ -144,7 +144,7 @@ export default function ToolHero({ config }: ToolHeroProps) {
             </motion.div>
           </motion.div>
 
-          {/* Right — visual */}
+          {/* Right, visual */}
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}

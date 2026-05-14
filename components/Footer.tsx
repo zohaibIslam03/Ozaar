@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="max-w-6xl lg:max-w-none lg:w-[80vw] mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
-          {/* Col 1 — Brand */}
+          {/* Col 1, Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2 group w-fit">
               <Image
@@ -39,7 +39,7 @@ export default function Footer() {
             <p className="text-xs text-[#555555]">Made with ❤️ for everyone</p>
           </div>
 
-          {/* Col 2 — Tools */}
+          {/* Col 2, Tools */}
           <div className="flex flex-col gap-4">
             <h4 className="text-xs font-semibold text-white uppercase tracking-widest">Tools</h4>
             <ul className="flex flex-col gap-2">
@@ -56,7 +56,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 — Company */}
+          {/* Col 3, Company */}
           <div className="flex flex-col gap-4">
             <h4 className="text-xs font-semibold text-white uppercase tracking-widest">Company</h4>
             <ul className="flex flex-col gap-3">
@@ -89,7 +89,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 — Newsletter */}
+          {/* Col 4, Newsletter */}
           <div className="flex flex-col gap-4">
             <h4 className="text-xs font-semibold text-white uppercase tracking-widest">Stay Updated</h4>
             <p className="text-[13px] text-[#888888] leading-relaxed">

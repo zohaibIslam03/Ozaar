@@ -4,7 +4,7 @@ import AboutContent from "@/components/AboutContent";
 export const metadata: Metadata = {
   title: { absolute: "About Ozaar | Ozaar" },
   description:
-    "Learn how Ozaar works — 12 free, open-source browser tools with no signup, no ads, and no data leaving your device.",
+    "Learn how Ozaar works: 12 free, open-source browser tools with no signup, no ads, and no data leaving your device.",
   alternates: {
     canonical: "https://ozaar.theinnovations.tech/about",
   },

@@ -233,7 +233,7 @@ const Q2_OPTIONS: Record<Q1, Q2Option[]> = {
 };
 
 const RESULTS: Record<string, Result> = {
-  compress: { slug: "image-compressor", name: "Image Compressor", desc: "Compress PNG/JPG to WebP — up to 90% smaller, fully in-browser." },
+  compress: { slug: "image-compressor", name: "Image Compressor", desc: "Compress PNG/JPG to WebP, up to 90% smaller, fully in-browser." },
   bg: { slug: "bg-remover", name: "Background Remover", desc: "AI-powered background removal. No upload, no account." },
   resize: { slug: "image-resizer", name: "Image Resizer", desc: "Resize to exact px or social media presets instantly." },
   qr: { slug: "qr-generator", name: "QR Code Generator", desc: "Instant QR from any URL, text, or contact." },
@@ -243,7 +243,7 @@ const RESULTS: Record<string, Result> = {
   color: { slug: "color-palette", name: "Color Palette Generator", desc: "Generate, explore & export HEX/CSS palettes." },
   password: { slug: "password-generator", name: "Password Generator", desc: "Cryptographically secure custom passwords." },
   currency: { slug: "currency-converter", name: "Currency Converter", desc: "Live rates, 150+ currencies." },
-  unit: { slug: "unit-converter", name: "Unit Converter", desc: "Length, weight, temp, speed — all in one." },
+  unit: { slug: "unit-converter", name: "Unit Converter", desc: "Length, weight, temp, speed, all in one." },
   age: { slug: "age-calculator", name: "Age Calculator", desc: "Calculate age, date differences & countdowns." },
 };
 
@@ -395,7 +395,7 @@ function RightPanel() {
           Find the right tool in 2 clicks.
         </h3>
         <p style={{ fontSize: 14, color: "#888", marginTop: 8, lineHeight: 1.6 }}>
-          Answer 2 quick questions — we&apos;ll point you straight to the tool you need. No browsing required.
+          Answer 2 quick questions, we&apos;ll point you straight to the tool you need. No browsing required.
         </p>
       </div>
 

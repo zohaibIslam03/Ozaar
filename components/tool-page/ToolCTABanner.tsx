@@ -27,7 +27,7 @@ export default function ToolCTABanner({ tool }: ToolCTABannerProps) {
                 lineHeight: 1.15,
               }}
             >
-              Start using {tool.name} — it&apos;s free.
+              Start using {tool.name}, it&apos;s free.
             </h2>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)" }}>
               No signup. No download. No limits.

@@ -6,7 +6,7 @@ import { slideLeft, slideRight, stagger, fadeUp } from "@/lib/animations";
 const FEATURES = [
   {
     title: "Nothing leaves your device",
-    desc: "Every tool processes files using browser APIs — WebAssembly, Canvas, Web Workers. Your files never touch our servers.",
+    desc: "Every tool processes files using browser APIs, WebAssembly, Canvas, Web Workers. Your files never touch our servers.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <rect x="3" y="10" width="16" height="10" rx="2.5" stroke="#DF0A09" strokeWidth="1.5"/>
@@ -39,7 +39,7 @@ const FEATURES = [
   },
   {
     title: "Open source",
-    desc: "Every line of code is public on GitHub. Audit it, fork it, or contribute — complete transparency by design.",
+    desc: "Every line of code is public on GitHub. Audit it, fork it, or contribute, complete transparency by design.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <path d="M11 2C6.03 2 2 6.03 2 11c0 3.98 2.58 7.36 6.16 8.55.45.08.61-.19.61-.43 0-.21-.01-.77-.01-1.51-2.5.46-3.03-.61-3.22-1.17-.11-.28-.58-1.13-.99-1.36-.34-.18-.82-.62-.01-.63.76-.01 1.3.7 1.48.99.87 1.46 2.26 1.05 2.81.8.09-.62.34-1.05.62-1.29-2.15-.24-4.4-1.07-4.4-4.76 0-1.05.37-1.91.99-2.58-.1-.24-.43-1.22.1-2.55 0 0 .8-.26 2.63.99.77-.21 1.59-.32 2.41-.32.82 0 1.64.11 2.41.32 1.83-1.26 2.63-.99 2.63-.99.53 1.33.2 2.31.1 2.55.62.67.99 1.52.99 2.58 0 3.7-2.26 4.52-4.41 4.76.35.3.65.89.65 1.79 0 1.29-.01 2.33-.01 2.65 0 .24.16.52.61.43C17.42 18.36 20 14.98 20 11c0-4.97-4.03-9-9-9z" fill="#DF0A09" opacity="0.8"/>
@@ -120,7 +120,7 @@ export default function PrivacySection() {
     <section className="bg-[#FAFAFA] border-y border-brand-border py-[100px] md:py-[140px]">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left — features list */}
+          {/* Left, features list */}
           <motion.div
             className="flex flex-col gap-8"
             variants={slideLeft}
@@ -134,7 +134,7 @@ export default function PrivacySection() {
                 className="font-heading text-brand-text"
                 style={{ fontSize: "clamp(24px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-0.02em" }}
               >
-                Your data stays yours — always
+                Your data stays yours, always
               </h2>
               <p className="text-base text-brand-muted leading-relaxed">
                 We built every tool to run entirely in the browser. No backend, no database, no tracking. Just code that runs where you are.
@@ -166,7 +166,7 @@ export default function PrivacySection() {
             </motion.div>
           </motion.div>
 
-          {/* Right — flow diagram */}
+          {/* Right, flow diagram */}
           <motion.div
             className="flex flex-col gap-6"
             variants={slideRight}

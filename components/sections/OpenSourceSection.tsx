@@ -12,7 +12,7 @@ const lines = [
   { text: "", color: "#eee" },
   { text: "✓ 12 tools ready at localhost:3000", color: "#4ADE80" },
   { text: "✓ Add your tool in /tools/your-tool-name", color: "#4ADE80" },
-  { text: "✓ Submit a PR — we review within 48 hours", color: "#4ADE80" },
+  { text: "✓ Submit a PR, we review within 48 hours", color: "#4ADE80" },
 ];
 
 function Terminal() {

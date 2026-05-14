@@ -40,7 +40,7 @@ type StrengthLevel = 0 | 1 | 2 | 3;
 interface Strength { label: string; level: StrengthLevel }
 
 function calcStrength(pw: string, opts: Options): Strength {
-  if (!pw) return { label: "—", level: 0 };
+  if (!pw) return { label: "-", level: 0 };
   const types = (Object.keys(opts) as CharKey[]).filter((k) => opts[k]).length;
   const len = pw.length;
   if (len < 8 || types < 2) return { label: "Weak", level: 0 };
@@ -54,9 +54,9 @@ const STRENGTH_BAR = ["bg-red-500", "bg-yellow-500", "bg-blue-500", "bg-green-50
 const BULK_COUNTS: BulkCount[] = [1, 5, 10, 25];
 
 const OPT_LIST: { key: CharKey; label: string; sample: string }[] = [
-  { key: "uppercase", label: "Uppercase", sample: "A–Z" },
-  { key: "lowercase", label: "Lowercase", sample: "a–z" },
-  { key: "numbers", label: "Numbers", sample: "0–9" },
+  { key: "uppercase", label: "Uppercase", sample: "A-Z" },
+  { key: "lowercase", label: "Lowercase", sample: "a-z" },
+  { key: "numbers", label: "Numbers", sample: "0-9" },
   { key: "symbols", label: "Symbols", sample: "!@#…" },
 ];
 
@@ -308,7 +308,7 @@ export default function PasswordGenerator() {
         <p className="flex-1 select-all break-all font-mono text-lg leading-relaxed sm:text-xl">
           {showBulkOnlyHint ? (
             <span className="block text-center text-sm font-medium leading-snug text-brand-muted sm:text-base">
-              {bulkPasswords.length} passwords are listed below — use{" "}
+              {bulkPasswords.length} passwords are listed below. Use{" "}
               <span className="text-brand-text">Copy All</span> or each row&apos;s copy button.
             </span>
           ) : displayPw ? (

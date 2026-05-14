@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const runtime = "nodejs";
-export const alt = "Ozaar — Free Online Micro-Tools";
+export const alt = "Ozaar | Free Online Micro-Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -30,7 +30,7 @@ module.exports = {
       priority: 1.0,
       lastmod: new Date().toISOString(),
     });
-    // Tool pages — highest priority
+    // Tool pages - highest priority
     for (const slug of toolSlugs) {
       result.push({
         loc: `/tools/${slug}`,

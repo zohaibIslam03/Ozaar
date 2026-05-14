@@ -17,7 +17,7 @@ const steps = [
   {
     num: "03",
     title: "Download & go",
-    desc: "Get your result instantly. Come back anytime — it's always free.",
+    desc: "Get your result instantly. Come back anytime, it's always free.",
   },
 ];
 

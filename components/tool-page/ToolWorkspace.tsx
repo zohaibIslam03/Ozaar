@@ -6,7 +6,7 @@ import type { CSSProperties, ReactNode } from "react";
 interface ToolWorkspaceProps {
   children: ReactNode;
   accentColor: string;
-  /** When true, render children only inside `.container` — no outer card wrapper. */
+  /** When true, render children only inside `.container`, no outer card wrapper. */
   fullBleed?: boolean;
   /** When true, omit the eyebrow + h2 and avoid extra spacing above the tool. */
   hideHeader?: boolean;
@@ -72,7 +72,7 @@ export default function ToolWorkspace({
                   marginTop: "4px",
                 }}
               >
-                Try it now — free
+                Try it now, free
               </h2>
             </div>
           )}

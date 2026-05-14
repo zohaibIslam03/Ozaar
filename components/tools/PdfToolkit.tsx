@@ -201,12 +201,12 @@ function parseRange(input: string, total: number): number[] {
     if (part.includes("-")) {
       const [a, b] = part.split("-").map((s) => parseInt(s, 10));
       if (isNaN(a) || isNaN(b) || a < 1 || b > total || a > b)
-        throw new Error(`Invalid range "${part}" — pages are 1–${total}.`);
+        throw new Error(`Invalid range "${part}", pages are 1-${total}.`);
       for (let p = a; p <= b; p++) indices.push(p - 1);
     } else {
       const n = parseInt(part, 10);
       if (isNaN(n) || n < 1 || n > total)
-        throw new Error(`Page "${part}" is out of range — PDF has ${total} pages.`);
+        throw new Error(`Page "${part}" is out of range, PDF has ${total} pages.`);
       indices.push(n - 1);
     }
   }
@@ -230,7 +230,7 @@ function SplitTab() {
       setPageCount(doc.getPageCount());
       setRange(`1-${doc.getPageCount()}`);
     } catch {
-      setError("Could not read PDF — it may be encrypted or corrupted.");
+      setError("Could not read PDF, it may be encrypted or corrupted.");
     }
   };
 
@@ -372,7 +372,7 @@ function CompressTab() {
             { label: "Compressed", value: formatBytes(compressedSize), color: "" },
             {
               label: "Saved",
-              value: saved > 0 ? `${savedPct}%` : "—",
+              value: saved > 0 ? `${savedPct}%` : "-",
               color: saved > 0 ? "text-green-400" : "text-brand-muted",
             },
           ].map(({ label, value, color }) => (

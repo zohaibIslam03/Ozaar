@@ -111,7 +111,7 @@ export default function ColorPalette() {
   const [error, setError] = useState<string | null>(null);
 
   const apply = (hex: string, harmony: HarmonyMode) => {
-    if (!hexToRgb(hex)) { setError("Invalid hex — enter a 6-digit hex code."); return; }
+    if (!hexToRgb(hex)) { setError("Invalid hex, enter a 6-digit hex code."); return; }
     setError(null); setBaseHex(hex); setPalette(generatePalette(hex, harmony));
   };
 

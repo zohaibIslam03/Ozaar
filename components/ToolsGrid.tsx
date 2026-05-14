@@ -81,7 +81,7 @@ export default function ToolsGrid({ tools }: ToolsGridProps) {
 
         {filtered.length === 0 && (
           <p className="text-center text-sm text-brand-muted py-16">
-            No tools in this category yet — check back soon.
+            No tools in this category yet, check back soon.
           </p>
         )}
       </div>

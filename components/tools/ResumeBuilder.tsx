@@ -242,10 +242,10 @@ function calcProgress(d: ResumeData): number {
 const SECTION_ICONS = [User, AlignLeft, Code2, FolderOpen, GraduationCap, Award, Briefcase];
 
 const SECTION_TIPS = [
-  "Fill your name and email first — they appear at the top of your resume.",
+  "Fill your name and email first so they appear at the top of your resume.",
   "Keep it under 3 sentences. Focus on your biggest strengths.",
   "Group skills by category for better ATS readability.",
-  "Include GitHub links — recruiters always check.",
+  "Include GitHub links because recruiters always check.",
   "List most recent education first.",
   "Add relevant certs to stand out from applicants.",
   "Use action verbs: Built, Led, Improved, Reduced.",
@@ -547,7 +547,7 @@ function ResumePreview({ data }: { data: ResumeData }) {
       <div style={{ ...RES.wrap, display: "flex", flexDirection: "column" }}>
         <FileText size={40} color="#E0E0E0" style={{ alignSelf: "center", marginBottom: 12 }} />
         <p style={{ fontSize: 13, color: "#ccc", textAlign: "center", maxWidth: 280, lineHeight: 1.6, alignSelf: "center", marginBottom: 20 }}>
-          Start filling in the form on the left — your resume will appear here instantly.
+          Start filling in the form on the left; your resume will appear here instantly.
         </p>
         <GhostSection label="your name and headline" />
         <GhostSection label="a professional summary" />
@@ -624,7 +624,7 @@ function ResumePreview({ data }: { data: ResumeData }) {
             <div key={exp.id} style={RES.entryMargin}>
               <div style={RES.row}>
                 <span style={{ fontSize: "10.5pt" }}>
-                  <strong>{exp.company}</strong>{exp.role ? ` — ${exp.role}` : ""}
+                  <strong>{exp.company}</strong>{exp.role ? `, ${exp.role}` : ""}
                 </span>
                 <span style={{ fontSize: "9.5pt", color: "#444" }}>{exp.duration}</span>
               </div>
@@ -678,10 +678,10 @@ function ResumePreview({ data }: { data: ResumeData }) {
             <div key={edu.id} style={{ ...RES.row, marginBottom: 5 }}>
               <span style={RES.body}>
                 <strong>{edu.institution}</strong>
-                {edu.degree ? ` — ${edu.degree}` : ""}
+                {edu.degree ? `, ${edu.degree}` : ""}
               </span>
               <span style={{ fontSize: "9.5pt", color: "#444" }}>
-                {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" – ")}
+                {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" - ")}
               </span>
             </div>
           ))}
@@ -864,7 +864,7 @@ export default function ResumeBuilder() {
       <div className="grid w-full max-w-full grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:grid-cols-[42%_58%]">
         {/* ── LEFT PANEL ───────────────────────────────────────────────────── */}
         <div className="flex flex-col overflow-hidden border-b border-gray-100 bg-neutral-50 md:border-b-0 md:border-r md:border-gray-100">
-          {/* Header — does not scroll */}
+          {/* Header, does not scroll */}
           <div className="shrink-0 bg-gray-900 px-6 py-5">
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-1 items-center gap-3">
@@ -944,7 +944,7 @@ export default function ResumeBuilder() {
             {/* Section 2: Summary */}
             <Section index={1} title={SECTIONS[1]} open={openSections[1]} onToggle={() => toggleSection(1)} complete={isSectionComplete(1)}>
               <FInput
-                label="Write 2–4 sentences about your expertise"
+                label="Write 2-4 sentences about your expertise"
                 value={data.summary}
                 onChange={(v) => update({ ...data, summary: v })}
                 placeholder="Experienced developer with 3+ years building scalable web applications..."
@@ -1093,7 +1093,7 @@ export default function ResumeBuilder() {
                     <FInput label="Company *" value={exp.company} onChange={(v) => updateExp(exp.id, "company", v)} placeholder="Acme Corp" />
                     <FInput label="Role / Title *" value={exp.role} onChange={(v) => updateExp(exp.id, "role", v)} placeholder="Software Engineer" />
                   </FieldRow>
-                  <FInput label="Duration" value={exp.duration} onChange={(v) => updateExp(exp.id, "duration", v)} placeholder="Jan 2023 – Present" />
+                  <FInput label="Duration" value={exp.duration} onChange={(v) => updateExp(exp.id, "duration", v)} placeholder="Jan 2023 - Present" />
                   <FInput
                     label="Description (one bullet per line)"
                     value={exp.bullets}
@@ -1118,7 +1118,7 @@ export default function ResumeBuilder() {
             <div className="h-5 shrink-0" aria-hidden />
           </div>
 
-          {/* Bottom bar — does not scroll */}
+          {/* Bottom bar, does not scroll */}
           <div className="flex shrink-0 gap-3 border-t border-gray-100 bg-white p-4">
             <button
               type="button"

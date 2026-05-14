@@ -25,7 +25,7 @@ function getUnits(cat: Category): (SimpleUnit | TemperatureUnit)[] {
 }
 
 function formatResult(n: number): string {
-  if (!isFinite(n)) return "—";
+  if (!isFinite(n)) return "-";
   if (n === 0) return "0";
   const abs = Math.abs(n);
   if (abs >= 1e15 || (abs > 0 && abs < 1e-9)) return n.toExponential(6);
@@ -53,7 +53,7 @@ export default function UnitConverter() {
   const fromUnit = units.find((u) => u.symbol === fromSymbol);
   const toUnit   = units.find((u) => u.symbol === toSymbol);
 
-  const displayResult = inputValue === "" ? "—" : isNaN(result) ? "Invalid" : formatResult(result);
+  const displayResult = inputValue === "" ? "-" : isNaN(result) ? "Invalid" : formatResult(result);
 
   return (
     <motion.div

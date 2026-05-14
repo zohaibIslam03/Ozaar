@@ -12,17 +12,17 @@ const SEO_CONTENT: Record<
 > = {
   "image-compressor": {
     what: [
-      "An image compressor is a tool that reduces the file size of digital images — such as PNG, JPG, and GIF files — to make them faster to load and easier to share. The process works by removing redundant or imperceptible image data, resulting in a smaller file that looks nearly identical to the original at normal viewing sizes.",
+      "An image compressor is a tool that reduces the file size of digital images, such as PNG, JPG, and GIF files, to make them faster to load and easier to share. The process works by removing redundant or imperceptible image data, resulting in a smaller file that looks nearly identical to the original at normal viewing sizes.",
       "Image compression is essential for any website, application, or workflow that handles visual content. Large, unoptimised images are the single most common cause of slow page load times. Search engines like Google factor page speed into rankings, meaning that uncompressed images can directly harm your SEO performance and organic traffic.",
-      "Ozaar Image Compressor converts your PNG, JPG, and GIF images to the modern WebP format, which delivers 25–35% better compression than JPEG at equivalent visual quality. The result is dramatically smaller files with no perceptible quality difference — exactly what fast, high-performing websites need.",
+      "Ozaar Image Compressor converts your PNG, JPG, and GIF images to the modern WebP format, which delivers 25-35% better compression than JPEG at equivalent visual quality. The result is dramatically smaller files with no perceptible quality difference, exactly what fast, high-performing websites need.",
     ],
     how: [
       "Our image compressor uses the browser's native Canvas API to re-encode your images at your chosen quality level. When you drop an image onto the tool, it is loaded into an invisible HTML canvas element. The canvas then exports the image data as a WebP blob at your selected quality setting.",
       "Because the entire process happens inside your browser, there is no server-side processing involved. Your image data never leaves your device. This makes the tool faster than cloud-based compressors (no upload/download latency) and completely private.",
     ],
     why: [
-      "Browser-based image compression has several significant advantages over traditional cloud tools. First, it is genuinely instantaneous — there is no upload wait time, no queue, and no processing delay. Second, it is completely private — your images never touch an external server, making it safe for confidential business assets or personal photos.",
-      "The tool also has no file size limits, no daily quotas, and no account requirements. You can compress a single hero image or an entire batch of product photos, and the tool will handle them identically. Close the tab and open it again tomorrow — it will work exactly the same, with no saved data and no cookies.",
+      "Browser-based image compression has several significant advantages over traditional cloud tools. First, it is genuinely instantaneous, there is no upload wait time, no queue, and no processing delay. Second, it is completely private, your images never touch an external server, making it safe for confidential business assets or personal photos.",
+      "The tool also has no file size limits, no daily quotas, and no account requirements. You can compress a single hero image or an entire batch of product photos, and the tool will handle them identically. Close the tab and open it again tomorrow, it will work exactly the same, with no saved data and no cookies.",
     ],
     relatedLinks: [
       { slug: "image-resizer", name: "Image Resizer", phrase: "resize your images" },
@@ -33,16 +33,16 @@ const SEO_CONTENT: Record<
   "resume-builder": {
     what: [
       "A resume builder is an online tool that guides you through creating a professional resume or CV without needing design software or prior formatting experience. Rather than starting from a blank document, you fill in structured fields for your work history, education, skills, and contact information, and the tool formats everything into a polished, print-ready layout.",
-      "The most critical feature of any modern resume builder is ATS compatibility. Applicant Tracking Systems are software tools used by over 98% of Fortune 500 companies to automatically scan and filter incoming resumes before a human ever reads them. An ATS-friendly resume uses clean, standard formatting that these systems can parse correctly — avoiding tables, graphics, unusual fonts, or multi-column layouts that confuse the parser.",
-      "Ozaar Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export — all completely free and without any account requirement.",
+      "The most critical feature of any modern resume builder is ATS compatibility. Applicant Tracking Systems are software tools used by over 98% of Fortune 500 companies to automatically scan and filter incoming resumes before a human ever reads them. An ATS-friendly resume uses clean, standard formatting that these systems can parse correctly, avoiding tables, graphics, unusual fonts, or multi-column layouts that confuse the parser.",
+      "Ozaar Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export, all completely free and without any account requirement.",
     ],
     how: [
       "Our resume builder uses @react-pdf/renderer to generate PDF documents directly in the browser. As you fill in the form fields, the right-side preview updates in real time using the same rendering engine. When you click 'Download PDF', the PDF is generated client-side and downloaded directly to your device.",
-      "Your resume data is automatically saved to your browser's localStorage after every change. This means you can close the tab, restart your computer, or come back days later and your progress will be preserved — as long as you use the same browser and haven't cleared site data.",
+      "Your resume data is automatically saved to your browser's localStorage after every change. This means you can close the tab, restart your computer, or come back days later and your progress will be preserved, as long as you use the same browser and haven't cleared site data.",
     ],
     why: [
       "Browser-based resume building eliminates the frustrating upload-wait-download cycle of cloud services, and unlike Google Docs or Word templates, our tool produces a PDF from a purpose-built resume renderer designed for clean parsing by ATS software.",
-      "Since nothing is stored on our servers, your personal information — name, address, employment history — stays entirely on your device. There is nothing to delete, no data breach risk, and no company holding your career information.",
+      "Since nothing is stored on our servers, your personal information, name, address, employment history, stays entirely on your device. There is nothing to delete, no data breach risk, and no company holding your career information.",
     ],
     relatedLinks: [
       { slug: "word-counter", name: "Word Counter", phrase: "count the words in your resume" },
@@ -61,8 +61,8 @@ const SEO_CONTENT: Record<
       "The tool uses the File API to read your selected PDF files as ArrayBuffers, passes them to pdf-lib for processing, and then converts the result back into a downloadable Blob. Nothing is transmitted to any server at any point.",
     ],
     why: [
-      "The primary advantage of browser-based PDF tools is privacy. PDF files often contain sensitive information — legal contracts, financial documents, medical records, or confidential business data. Uploading these to cloud services (even reputable ones) introduces data handling risks that many professionals and organisations cannot accept.",
-      "Our tool requires no account, no payment, and no installation. It works on any device with a modern browser — Windows, Mac, Linux, iOS, or Android — and produces standard-compliant PDF output that is compatible with all PDF readers.",
+      "The primary advantage of browser-based PDF tools is privacy. PDF files often contain sensitive information, legal contracts, financial documents, medical records, or confidential business data. Uploading these to cloud services (even reputable ones) introduces data handling risks that many professionals and organisations cannot accept.",
+      "Our tool requires no account, no payment, and no installation. It works on any device with a modern browser, Windows, Mac, Linux, iOS, or Android, and produces standard-compliant PDF output that is compatible with all PDF readers.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress images embedded in your documents" },
@@ -73,16 +73,16 @@ const SEO_CONTENT: Record<
   "qr-generator": {
     what: [
       "A QR code (Quick Response code) is a two-dimensional barcode that can be scanned by smartphone cameras to instantly open a URL, display text, share contact information, or trigger other actions. QR codes were invented in 1994 and have seen explosive adoption since smartphones made scanning them trivially easy.",
-      "A QR code generator is a tool that takes any input — a web address, plain text, an email, a phone number — and encodes it into a scannable QR image. The output can then be printed, embedded in digital content, or displayed on screens for others to scan. The QR code contains no expiry date and works permanently as long as the destination URL or content remains valid.",
-      "Ozaar QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output — at any scale, at no cost.",
+      "A QR code generator is a tool that takes any input, a web address, plain text, an email, a phone number, and encodes it into a scannable QR image. The output can then be printed, embedded in digital content, or displayed on screens for others to scan. The QR code contains no expiry date and works permanently as long as the destination URL or content remains valid.",
+      "Ozaar QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output, at any scale, at no cost.",
     ],
     how: [
       "QR codes are generated using the qrcode.js library, which implements the QR Code 2005 specification (ISO/IEC 18004) entirely in JavaScript. When you enter your content, the library encodes it using Reed-Solomon error correction, calculates the required version (size) of the QR matrix, and renders the pattern as an SVG or canvas element.",
       "Error correction means that QR codes can still be scanned even if up to 30% of the image is damaged or obscured. This makes them robust for printed materials where wear and tear is expected.",
     ],
     why: [
-      "Browser-based QR generation is both faster and more private than cloud-based alternatives. There is no server round-trip — the QR code appears in milliseconds as you type. And since the generation happens locally, any sensitive content you encode (internal URLs, private contact details) never leaves your device.",
-      "Unlike many QR code services, we do not create redirect URLs. The QR code links directly to whatever you entered, which means no tracking, no analytics on your scans, and no service dependency — your QR code works the same whether we are online or not.",
+      "Browser-based QR generation is both faster and more private than cloud-based alternatives. There is no server round-trip, the QR code appears in milliseconds as you type. And since the generation happens locally, any sensitive content you encode (internal URLs, private contact details) never leaves your device.",
+      "Unlike many QR code services, we do not create redirect URLs. The QR code links directly to whatever you entered, which means no tracking, no analytics on your scans, and no service dependency, your QR code works the same whether we are online or not.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress your downloaded QR images" },
@@ -93,16 +93,16 @@ const SEO_CONTENT: Record<
   "password-generator": {
     what: [
       "A password generator is a tool that creates random, unpredictable passwords based on your specified requirements. Unlike manually chosen passwords (which tend to be predictable, reused, or too short), a properly generated password uses true randomness to produce a string that is computationally infeasible to guess or crack.",
-      "Password security is one of the most consequential and most overlooked aspects of personal and business cybersecurity. The vast majority of account compromises occur because of weak, reused, or breached passwords — not because of sophisticated hacking. A strong, unique password for every account is the single most effective defence against credential-based attacks.",
-      "Ozaar Password Generator uses the browser's built-in cryptographic random number generator to produce passwords that meet the highest security standards — with customisable length, character sets, and bulk generation.",
+      "Password security is one of the most consequential and most overlooked aspects of personal and business cybersecurity. The vast majority of account compromises occur because of weak, reused, or breached passwords, not because of sophisticated hacking. A strong, unique password for every account is the single most effective defence against credential-based attacks.",
+      "Ozaar Password Generator uses the browser's built-in cryptographic random number generator to produce passwords that meet the highest security standards, with customisable length, character sets, and bulk generation.",
     ],
     how: [
-      "Our generator uses window.crypto.getRandomValues() — the browser's implementation of a Cryptographically Secure Pseudorandom Number Generator (CSPRNG). This is the same source of randomness used in cryptographic applications, TLS certificates, and operating system entropy pools. It is mathematically impossible to predict the next value from previously observed values.",
-      "Character selection uses a modulo-reduction technique with rejection sampling to ensure each character position has an exactly equal probability of being any character in your chosen set — avoiding the statistical biases that affect simpler random() implementations.",
+      "Our generator uses window.crypto.getRandomValues(), the browser's implementation of a Cryptographically Secure Pseudorandom Number Generator (CSPRNG). This is the same source of randomness used in cryptographic applications, TLS certificates, and operating system entropy pools. It is mathematically impossible to predict the next value from previously observed values.",
+      "Character selection uses a modulo-reduction technique with rejection sampling to ensure each character position has an exactly equal probability of being any character in your chosen set, avoiding the statistical biases that affect simpler random() implementations.",
     ],
     why: [
       "Running the password generator in the browser means your generated passwords are never transmitted anywhere. Many cloud-based password generators (including some high-traffic ones) generate passwords server-side, which creates a theoretical risk that generated passwords could be logged or intercepted. Our generator has no server component.",
-      "There is also no account needed, no generated passwords saved, and no usage analytics. The only record of your generated password exists in your clipboard — and only until you replace it.",
+      "There is also no account needed, no generated passwords saved, and no usage analytics. The only record of your generated password exists in your clipboard, and only until you replace it.",
     ],
     relatedLinks: [
       { slug: "qr-generator", name: "QR Code Generator", phrase: "generate a QR code linking to your account" },
@@ -113,8 +113,8 @@ const SEO_CONTENT: Record<
   "color-palette": {
     what: [
       "A colour palette generator is a design tool that creates sets of harmonious colours based on colour theory principles. Rather than choosing colours arbitrarily, these tools apply mathematical relationships between hues on the colour wheel to produce palettes that are visually pleasing, cohesive, and suitable for use in branding, UI design, and marketing materials.",
-      "Colour harmony is a fundamental principle of design. When colours relate to each other through established geometric relationships on the colour wheel — such as being adjacent (analogous), opposite (complementary), or evenly distributed (triadic) — they tend to feel balanced and intentional rather than random or jarring.",
-      "Ozaar Colour Palette Generator produces 5-colour palettes in four harmony modes — analogous, complementary, triadic, and split-complementary — with one-click export to CSS custom properties or Tailwind CSS configuration.",
+      "Colour harmony is a fundamental principle of design. When colours relate to each other through established geometric relationships on the colour wheel, such as being adjacent (analogous), opposite (complementary), or evenly distributed (triadic), they tend to feel balanced and intentional rather than random or jarring.",
+      "Ozaar Colour Palette Generator produces 5-colour palettes in four harmony modes, analogous, complementary, triadic, and split-complementary, with one-click export to CSS custom properties or Tailwind CSS configuration.",
     ],
     how: [
       "Palette generation uses HSL (Hue, Saturation, Lightness) colour space arithmetic. Given a base hex colour, the tool converts it to HSL and then calculates the hue angles of the other palette colours based on the selected harmony mode. Complementary colours are exactly 180° away on the hue wheel; triadic colours are 120° apart; analogous colours are 30° apart.",
@@ -122,7 +122,7 @@ const SEO_CONTENT: Record<
     ],
     why: [
       "Browser-based colour palette generation is instantaneous and requires no design software license. The tool is accessible to developers who need quick CSS colours, non-designers building their first brand, and experienced designers who want to prototype palette ideas quickly.",
-      "Unlike some palette tools, our exports are immediately usable — the CSS output goes directly into a stylesheet, and the Tailwind output goes directly into tailwind.config.js. No copy-pasting and reformatting required.",
+      "Unlike some palette tools, our exports are immediately usable, the CSS output goes directly into a stylesheet, and the Tailwind output goes directly into tailwind.config.js. No copy-pasting and reformatting required.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress brand assets" },
@@ -134,7 +134,7 @@ const SEO_CONTENT: Record<
     what: [
       "A word counter is a text analysis tool that counts the number of words in a piece of writing, along with other related statistics such as character count, sentence count, paragraph count, and estimated reading or speaking time. These metrics are useful for writers, students, content marketers, and anyone working with text content.",
       "Word counts matter in many contexts. Academic submissions have strict word limits. Blog posts have SEO-optimal length ranges. Job applications have character limits. Speeches must fit specific time slots. Marketing copy must fit within ad character limits. A word counter makes it trivially easy to verify all of these.",
-      "Ozaar Word Counter provides all six key text metrics in real time as you type, along with keyword frequency analysis — making it one of the most complete free word counting tools available.",
+      "Ozaar Word Counter provides all six key text metrics in real time as you type, along with keyword frequency analysis, making it one of the most complete free word counting tools available.",
     ],
     how: [
       "All text analysis in our word counter happens client-side using JavaScript string manipulation. Word counting splits the text on whitespace boundaries (spaces, tabs, newlines) and counts the resulting non-empty tokens. Sentence counting identifies sentence-ending punctuation (periods, exclamation marks, question marks). Paragraph counting splits on double-newline characters.",
@@ -153,16 +153,16 @@ const SEO_CONTENT: Record<
   "image-resizer": {
     what: [
       "An image resizer is a tool that changes the pixel dimensions of a digital image. Resizing can reduce an image to a smaller size (downscaling) or increase it to larger dimensions (upscaling). The former is far more common and preserves image quality well; the latter introduces some pixelation beyond the original resolution.",
-      "Image sizing matters enormously for web performance and social media. Every major platform — Instagram, Twitter, LinkedIn, YouTube, Facebook — has specific pixel dimension requirements for different image types: profile photos, cover images, post images, and ad formats. Uploading incorrectly sized images results in unwanted cropping, compression artefacts, or padding.",
+      "Image sizing matters enormously for web performance and social media. Every major platform, Instagram, Twitter, LinkedIn, YouTube, Facebook, has specific pixel dimension requirements for different image types: profile photos, cover images, post images, and ad formats. Uploading incorrectly sized images results in unwanted cropping, compression artefacts, or padding.",
       "Ozaar Image Resizer provides 20+ social media presets alongside free-form custom dimensions, making it a complete solution for content creators, developers, and marketers.",
     ],
     how: [
       "Image resizing uses the browser's HTML Canvas API. Your image is loaded into an off-screen canvas element at the target dimensions. The canvas's drawImage() method handles the pixel interpolation (scaling), and the result is exported as a PNG or JPEG blob using toBlob() at your chosen quality level.",
-      "Aspect ratio locking is implemented by calculating the proportional dimension when one side is changed — if you set a new width and ratio-lock is on, the height recalculates automatically to maintain the original proportions.",
+      "Aspect ratio locking is implemented by calculating the proportional dimension when one side is changed, if you set a new width and ratio-lock is on, the height recalculates automatically to maintain the original proportions.",
     ],
     why: [
       "Browser-based resizing is faster than uploading to a cloud service, more private than sending images to a third-party server, and more accessible than opening an image editor like Photoshop or GIMP for a simple resize operation.",
-      "Our social media presets are kept up to date with platform specifications. A single image can be resized to Instagram square, Twitter card, LinkedIn banner, and YouTube thumbnail dimensions in under a minute — all without leaving the browser tab.",
+      "Our social media presets are kept up to date with platform specifications. A single image can be resized to Instagram square, Twitter card, LinkedIn banner, and YouTube thumbnail dimensions in under a minute, all without leaving the browser tab.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress the resized image" },
@@ -174,7 +174,7 @@ const SEO_CONTENT: Record<
     what: [
       "A background remover is an image editing tool that automatically separates the main subject of an image from its background, making the background transparent. This is used in product photography, profile photos, marketing design, and any situation where you need to isolate a subject from its surroundings.",
       "Traditional background removal required manual selection tools in software like Photoshop, which is time-consuming and requires skill. Modern AI-powered tools use machine learning models trained on millions of images to identify foreground subjects and separate them from backgrounds automatically and accurately.",
-      "Ozaar Background Remover runs an AI model entirely in your browser using WebAssembly, delivering professional-quality background removal with complete privacy — your images never touch a server.",
+      "Ozaar Background Remover runs an AI model entirely in your browser using WebAssembly, delivering professional-quality background removal with complete privacy, your images never touch a server.",
     ],
     how: [
       "Our background remover uses the @imgly/background-removal library, which bundles a trained neural network (based on the RMBG-1.4 architecture) as a WebAssembly module. When you first load the tool, the WASM model (approximately 150MB) downloads and compiles in your browser. Subsequent uses are instant because the model is cached by the browser.",
@@ -194,7 +194,7 @@ const SEO_CONTENT: Record<
     what: [
       "An age calculator is a tool that computes the exact age of a person or entity given a birth date and compares it to the current date. Beyond a simple year count, a comprehensive age calculator provides the age in years, months, and days; the total count of days, hours, and minutes lived; and the countdown to the next birthday.",
       "Age calculations are more complex than they appear because of irregular month lengths (28, 29, 30, or 31 days) and leap years (February 29 occurs once every four years). A correct implementation must account for all these irregularities to produce accurate results across all possible birth dates.",
-      "Ozaar Age Calculator provides a complete age breakdown including zodiac sign, day of the week you were born on, and a live ticking countdown to your next birthday — accurate to the current second.",
+      "Ozaar Age Calculator provides a complete age breakdown including zodiac sign, day of the week you were born on, and a live ticking countdown to your next birthday, accurate to the current second.",
     ],
     how: [
       "Age calculation is performed using JavaScript's Date object, which represents time as milliseconds since the Unix epoch (January 1, 1970). The tool calculates the difference between the current Date and the birth date, then decomposes this into years, months, and days accounting for the varying lengths of months and the four-year leap year cycle.",
@@ -202,7 +202,7 @@ const SEO_CONTENT: Record<
     ],
     why: [
       "A browser-based age calculator requires no personal data to be stored anywhere. Your date of birth is processed locally in JavaScript and is never transmitted to any server. The calculation uses your device's local clock for maximum accuracy.",
-      "The tool is also useful beyond personal age calculation — it can calculate the age of a business, project, or historical event from any starting date to today, with the same precision and live countdown functionality.",
+      "The tool is also useful beyond personal age calculation, it can calculate the age of a business, project, or historical event from any starting date to today, with the same precision and live countdown functionality.",
     ],
     relatedLinks: [
       { slug: "unit-converter", name: "Unit Converter", phrase: "convert time units and measurements" },
@@ -212,17 +212,17 @@ const SEO_CONTENT: Record<
 
   "currency-converter": {
     what: [
-      "A currency converter is a financial tool that translates a monetary amount from one currency to another using the current exchange rate between them. Exchange rates fluctuate constantly based on macroeconomic factors, interest rates, geopolitical events, and market supply and demand. A current exchange rate converter gives you the mid-market rate — the midpoint between buy and sell rates used by currency traders.",
+      "A currency converter is a financial tool that translates a monetary amount from one currency to another using the current exchange rate between them. Exchange rates fluctuate constantly based on macroeconomic factors, interest rates, geopolitical events, and market supply and demand. A current exchange rate converter gives you the mid-market rate, the midpoint between buy and sell rates used by currency traders.",
       "Currency conversion is needed in many everyday contexts: international travel, cross-border e-commerce, sending money abroad, freelance invoicing for international clients, importing goods, and monitoring investment exposure to foreign currencies. Having access to live, accurate rates is essential for making informed financial decisions.",
       "Ozaar Currency Converter supports 150+ world currencies with hourly rate updates from open.er-api.com and a multi-currency comparison table that shows your amount in multiple currencies simultaneously.",
     ],
     how: [
-      "Exchange rates are fetched from the open.er-api.com API on page load and then cached in your browser's localStorage for up to one hour. When you request a conversion, the tool looks up the rate from the cached data and performs the calculation instantly — no API call needed for each conversion.",
+      "Exchange rates are fetched from the open.er-api.com API on page load and then cached in your browser's localStorage for up to one hour. When you request a conversion, the tool looks up the rate from the cached data and performs the calculation instantly, no API call needed for each conversion.",
       "The base currency for rates is USD. Conversions between non-USD pairs use triangulation: amount × (rate to USD) ÷ (rate of target to USD). This is the standard method used by all currency APIs and ensures consistent results across all 150+ currency pairs.",
     ],
     why: [
-      "Browser-based currency conversion with client-side caching is faster than most dedicated converter apps. After the initial rate fetch, all calculations are instantaneous — no network request per conversion. The hour-long cache also means the tool works reasonably well offline, using the last-fetched rates.",
-      "Unlike bank or exchange-bureau converters, which show rates after their own markup, our converter shows mid-market rates — the true interbank rate without any spread. This is useful for reference and planning, even though the rates you actually receive at a bank or exchange will include a margin.",
+      "Browser-based currency conversion with client-side caching is faster than most dedicated converter apps. After the initial rate fetch, all calculations are instantaneous, no network request per conversion. The hour-long cache also means the tool works reasonably well offline, using the last-fetched rates.",
+      "Unlike bank or exchange-bureau converters, which show rates after their own markup, our converter shows mid-market rates, the true interbank rate without any spread. This is useful for reference and planning, even though the rates you actually receive at a bank or exchange will include a margin.",
     ],
     relatedLinks: [
       { slug: "unit-converter", name: "Unit Converter", phrase: "convert other types of measurements" },
@@ -233,8 +233,8 @@ const SEO_CONTENT: Record<
   "unit-converter": {
     what: [
       "A unit converter is a calculation tool that translates a quantity from one unit of measurement to another. Common conversions include length (metres to feet), weight (kilograms to pounds), temperature (Celsius to Fahrenheit), speed (km/h to mph), area (square metres to square feet), and volume (litres to gallons). These conversions are needed daily in cooking, travel, science, engineering, and everyday life.",
-      "The world uses two major measurement systems — the metric system (SI units) and the imperial system (used primarily in the United States and informally in the UK). Converting between them requires precise conversion factors. Temperature is special: it requires a formula rather than a simple multiplication factor, because the scales have different zero points.",
-      "Ozaar Unit Converter covers 6 measurement categories with 50+ unit types, bi-directional input, and exact temperature formulae — all in a clean, instant browser-based interface.",
+      "The world uses two major measurement systems, the metric system (SI units) and the imperial system (used primarily in the United States and informally in the UK). Converting between them requires precise conversion factors. Temperature is special: it requires a formula rather than a simple multiplication factor, because the scales have different zero points.",
+      "Ozaar Unit Converter covers 6 measurement categories with 50+ unit types, bi-directional input, and exact temperature formulae, all in a clean, instant browser-based interface.",
     ],
     how: [
       "Most unit conversions use a multiplication factor: for example, 1 kilometre = 0.621371 miles, so multiplying kilometres by 0.621371 gives miles. Our converter stores these factors in a lookup table and applies them when you enter a value.",

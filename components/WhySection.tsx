@@ -6,7 +6,7 @@ const benefits = [
   {
     icon: "🚫",
     title: "No Signup Required",
-    desc: "Open any tool and start using it immediately. No account, no email, no OAuth flow — ever.",
+    desc: "Open any tool and start using it immediately. No account, no email, no OAuth flow, ever.",
   },
   {
     icon: "⚡",

@@ -67,7 +67,7 @@ const TOOLS = [
 
 const TOOL_DESCS: Record<Tab, string> = {
   compressor: "Compress JPEG, PNG & WebP images without losing quality. Fully in-browser.",
-  qr: "Generate a QR code from any URL, text, or contact — downloadable as PNG or SVG.",
+  qr: "Generate a QR code from any URL, text, or contact, downloadable as PNG or SVG.",
   password: "Generate cryptographically secure passwords. Customizable length and character sets.",
 };
 
@@ -485,7 +485,7 @@ export default function LiveDemo() {
             Interact with the tools.
           </h2>
           <p className="mt-3 max-w-lg text-[14px] leading-relaxed text-[#666]">
-            No signup — these previews run in your browser. Pick a tab, try the controls, then open the full tool when you want more.
+            No signup, these previews run in your browser. Pick a tab, try the controls, then open the full tool when you want more.
           </p>
         </header>
 

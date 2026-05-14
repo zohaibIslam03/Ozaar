@@ -151,7 +151,7 @@ export default function HeroSection() {
 
       <div className="container relative z-10 py-14 sm:py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left column — text */}
+          {/* Left column, text */}
           <motion.div
             variants={stagger(0.08)}
             initial="hidden"
@@ -188,8 +188,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-[15px] sm:text-[17px] text-brand-muted leading-relaxed max-w-[480px]"
             >
-              Compress images, build resumes, convert currencies, generate QR codes —
-              all in your browser. No account. No data sent anywhere.
+              Compress images, build resumes, convert currencies, generate QR codes, all in your browser. No account. No data sent anywhere.
             </motion.p>
 
             {/* CTAs */}
@@ -231,12 +230,12 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right column — floating browser windows */}
+          {/* Right column, floating browser windows */}
           <motion.div
             className="relative hidden lg:flex items-center justify-center h-[480px]"
             style={{ y: windowsY }}
           >
-            {/* Main window — Image Compressor */}
+            {/* Main window, Image Compressor */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
@@ -247,7 +246,7 @@ export default function HeroSection() {
               </BrowserWindow>
             </motion.div>
 
-            {/* Center window — Resume Builder */}
+            {/* Center window, Resume Builder */}
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
@@ -258,7 +257,7 @@ export default function HeroSection() {
               </BrowserWindow>
             </motion.div>
 
-            {/* Right window — QR Generator */}
+            {/* Right window, QR Generator */}
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}

@@ -26,7 +26,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://ozaar.theinnovations.tech"),
   title: {
-    default: "Free Online Tools — Ozaar",
+    default: "Free Online Tools | Ozaar",
     template: "%s | Ozaar",
   },
   icons: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     "no signup tools",
   ],
   openGraph: {
-    title: "Free Online Tools — Ozaar",
+    title: "Free Online Tools | Ozaar",
     description:
       "12 free open-source tools for everyone. PDF, image, QR, resume, currency and more. No signup. No ads. No limits.",
     url: "https://ozaar.theinnovations.tech",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Tools — Ozaar",
+    title: "Free Online Tools | Ozaar",
     description:
       "12 free open-source tools for everyone. No signup. No ads. No limits.",
   },

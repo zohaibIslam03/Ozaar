@@ -87,7 +87,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Batch compress multiple files",
-        desc: "Process dozens of images at once — drop them all in and download a zip of compressed files.",
+        desc: "Process dozens of images at once, drop them all in and download a zip of compressed files.",
         icon: "batch",
       },
       {
@@ -140,7 +140,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Does compressing reduce image quality?",
         answer:
-          "At quality settings above 75%, the difference is imperceptible to the human eye. Our quality slider lets you find the perfect balance — most users are happy at 80-85% quality with up to 70% file size reduction.",
+          "At quality settings above 75%, the difference is imperceptible to the human eye. Our quality slider lets you find the perfect balance, most users are happy at 80-85% quality with up to 70% file size reduction.",
       },
       {
         question: "What formats are supported?",
@@ -150,7 +150,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Is there a file size limit?",
         answer:
-          "No server-side limit exists since everything runs in your browser. Practical limits depend on your device's RAM — files up to 50MB work fine on most computers.",
+          "No server-side limit exists since everything runs in your browser. Practical limits depend on your device's RAM. Files up to 50MB work fine on most computers.",
       },
       {
         question: "Why WebP instead of JPEG?",
@@ -160,14 +160,14 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I compress multiple images at once?",
         answer:
-          "Yes — you can drag and drop multiple files at once or select multiple files via the file picker. Each is compressed independently so you can download them all.",
+          "Yes, you can drag and drop multiple files at once or select multiple files via the file picker. Each is compressed independently so you can download them all.",
       },
     ],
     relatedTools: ["image-resizer", "bg-remover", "pdf-toolkit"],
     metaTitle:
-      "Free Image Compressor Online — Compress PNG JPG to WebP | Ozaar",
+      "Free Image Compressor Online: Compress PNG JPG to WebP | Ozaar",
     metaDesc:
-      "Compress images online for free. Reduce PNG, JPG file sizes by up to 90% and convert to WebP. No upload required — runs entirely in your browser. No account needed.",
+      "Compress images online for free. Reduce PNG, JPG file sizes by up to 90% and convert to WebP. No upload required, runs entirely in your browser. No account needed.",
     keywords: [
       "image compressor",
       "compress image online",
@@ -214,7 +214,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Auto-saves to localStorage",
-        desc: "Your progress is automatically saved in your browser. Close the tab and return later — everything is still there.",
+        desc: "Your progress is automatically saved in your browser. Close the tab and return later, everything is still there.",
         icon: "save",
       },
     ],
@@ -262,7 +262,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Is this resume builder really free?",
         answer:
-          "Yes, completely free. There are no premium tiers, no watermarks, no hidden fees. Every feature — including PDF export — is available to everyone with no account required.",
+          "Yes, completely free. There are no premium tiers, no watermarks, no hidden fees. Every feature, including PDF export, is available to everyone with no account required.",
       },
       {
         question: "Will my resume pass ATS (Applicant Tracking System)?",
@@ -272,7 +272,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I save my resume and edit it later?",
         answer:
-          "Yes — your resume data is automatically saved to your browser's localStorage. As long as you use the same browser and don't clear site data, you can return and continue editing.",
+          "Yes, your resume data is automatically saved to your browser's localStorage. As long as you use the same browser and don't clear site data, you can return and continue editing.",
       },
       {
         question: "What format does it export in?",
@@ -282,12 +282,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "How many templates are available?",
         answer:
-          "Currently one clean, professional template optimized for ATS. We're adding more templates regularly — star us on GitHub to stay updated.",
+          "Currently one clean, professional template optimized for ATS. We're adding more templates regularly, star us on GitHub to stay updated.",
       },
     ],
     relatedTools: ["word-counter", "pdf-toolkit", "color-palette"],
     metaTitle:
-      "Free Resume Builder Online — ATS-Friendly PDF Export | Ozaar",
+      "Free Resume Builder Online: ATS-Friendly PDF Export | Ozaar",
     metaDesc:
       "Build a professional resume online for free. ATS-optimized templates, live preview, and one-click PDF export. No account required. Saves automatically in your browser.",
     keywords: [
@@ -306,7 +306,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Merge. Split.",
     taglineAccent: "Conquer PDFs.",
     description:
-      "Merge multiple PDFs into one, split by page range, or compress file size — entirely in your browser. No upload, no server, no sign-up required.",
+      "Merge multiple PDFs into one, split by page range, or compress file size, entirely in your browser. No upload, no server, no sign-up required.",
     category: "Files",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -327,7 +327,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Split by page range",
-        desc: "Extract specific pages or split a large PDF into multiple smaller files — all in seconds.",
+        desc: "Extract specific pages or split a large PDF into multiple smaller files, all in seconds.",
         icon: "split",
       },
       {
@@ -392,7 +392,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I merge more than 2 PDFs?",
         answer:
-          "Yes — you can merge as many PDFs as you need. Add files in any order and drag to rearrange them before combining.",
+          "Yes, you can merge as many PDFs as you need. Add files in any order and drag to rearrange them before combining.",
       },
       {
         question: "Does splitting remove pages from the original?",
@@ -406,9 +406,9 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
-    metaTitle: "Free PDF Toolkit Online — Merge, Split & Compress PDFs | Ozaar",
+    metaTitle: "Free PDF Toolkit Online: Merge, Split & Compress PDFs | Ozaar",
     metaDesc:
-      "Free online PDF toolkit. Merge PDFs, split by page range, and compress file size — all in your browser. No upload, no signup, no limits.",
+      "Free online PDF toolkit. Merge PDFs, split by page range, and compress file size, all in your browser. No upload, no signup, no limits.",
     keywords: [
       "pdf merger online",
       "split pdf free",
@@ -451,7 +451,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Download as PNG or SVG",
-        desc: "Get a pixel-perfect PNG for digital use or a scalable SVG for print — both at any size, no watermark.",
+        desc: "Get a pixel-perfect PNG for digital use or a scalable SVG for print, both at any size, no watermark.",
         icon: "download",
       },
       {
@@ -504,7 +504,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Is there a limit to how many QR codes I can generate?",
         answer:
-          "No limit at all. Generate as many as you need — completely free, no account, no daily quota.",
+          "No limit at all. Generate as many as you need, completely free, no account, no daily quota.",
       },
       {
         question: "Can I use the QR codes commercially?",
@@ -514,7 +514,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What's the difference between PNG and SVG export?",
         answer:
-          "PNG is a raster format — ideal for digital use on screens. SVG is a vector format — ideal for print since it scales to any size without pixelation.",
+          "PNG is a raster format, ideal for digital use on screens. SVG is a vector format, ideal for print since it scales to any size without pixelation.",
       },
       {
         question: "Do my QR codes expire?",
@@ -528,7 +528,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "image-resizer", "password-generator"],
-    metaTitle: "Free QR Code Generator Online — PNG & SVG Download | Ozaar",
+    metaTitle: "Free QR Code Generator Online: PNG & SVG Download | Ozaar",
     metaDesc:
       "Generate QR codes instantly from any URL, text, or contact info. Download as PNG or SVG. Free, no watermark, no sign-up. Works entirely in your browser.",
     keywords: [
@@ -563,7 +563,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "Cryptographically secure",
-        desc: "Uses window.crypto.getRandomValues() — the same source of randomness used by security professionals and operating systems.",
+        desc: "Uses window.crypto.getRandomValues(), the same source of randomness used by security professionals and operating systems.",
         icon: "shield",
       },
       {
@@ -578,7 +578,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Bulk password generation",
-        desc: "Generate and copy up to 50 unique passwords at once — perfect for seeding a new team or batch-updating accounts.",
+        desc: "Generate and copy up to 50 unique passwords at once, perfect for seeding a new team or batch-updating accounts.",
         icon: "batch",
       },
     ],
@@ -631,7 +631,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Do you store or log any generated passwords?",
         answer:
-          "No. Password generation happens entirely in your browser using JavaScript. No data is sent to any server — not even anonymised analytics.",
+          "No. Password generation happens entirely in your browser using JavaScript. No data is sent to any server, not even anonymised analytics.",
       },
       {
         question: "What length should my password be?",
@@ -641,7 +641,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I exclude ambiguous characters?",
         answer:
-          "Yes — you can exclude characters like O, 0, l, 1, and I that can be confused visually. Useful when you need to read or type the password manually.",
+          "Yes, you can exclude characters like O, 0, l, 1, and I that can be confused visually. Useful when you need to read or type the password manually.",
       },
       {
         question: "What does 'entropy' mean in the strength meter?",
@@ -651,9 +651,9 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["qr-generator", "word-counter", "image-compressor"],
     metaTitle:
-      "Free Password Generator Online — Cryptographically Secure | Ozaar",
+      "Free Password Generator Online: Cryptographically Secure | Ozaar",
     metaDesc:
-      "Generate cryptographically secure passwords for free. Custom length, character types, strength meter, and bulk mode. Runs in-browser — passwords never sent to any server.",
+      "Generate cryptographically secure passwords for free. Custom length, character types, strength meter, and bulk mode. Runs in-browser, passwords never sent to any server.",
     keywords: [
       "password generator",
       "strong password generator",
@@ -686,7 +686,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "4 colour harmony modes",
-        desc: "Analogous, complementary, triadic, and split-complementary — all based on colour theory principles used by professional designers.",
+        desc: "Analogous, complementary, triadic, and split-complementary, all based on colour theory principles used by professional designers.",
         icon: "palette",
       },
       {
@@ -754,7 +754,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I start from a specific hex code?",
         answer:
-          "Yes — type any valid hex code into the input field and the palette generates instantly. You can also use the visual colour picker.",
+          "Yes, type any valid hex code into the input field and the palette generates instantly. You can also use the visual colour picker.",
       },
       {
         question: "What does the CSS export look like?",
@@ -769,12 +769,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "How many palettes can I generate?",
         answer:
-          "Unlimited — generate as many as you like. Each palette can be exported separately as CSS or Tailwind config.",
+          "Unlimited, generate as many as you like. Each palette can be exported separately as CSS or Tailwind config.",
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
     metaTitle:
-      "Free Color Palette Generator — CSS & Tailwind Export | Ozaar",
+      "Free Color Palette Generator, CSS & Tailwind Export | Ozaar",
     metaDesc:
       "Generate beautiful colour palettes online for free. Analogous, complementary, triadic modes. Export as CSS variables or Tailwind config. No account needed.",
     keywords: [
@@ -809,7 +809,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "6 live text metrics",
-        desc: "Words, characters (with and without spaces), sentences, paragraphs, reading time, and speaking time — all updating as you type.",
+        desc: "Words, characters (with and without spaces), sentences, paragraphs, reading time, and speaking time, all updating as you type.",
         icon: "stats",
       },
       {
@@ -819,12 +819,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Reading & speaking time",
-        desc: "Estimated at the standard 238 words/min reading speed and 130 words/min speaking speed — useful for blog posts, speeches, and presentations.",
+        desc: "Estimated at the standard 238 words/min reading speed and 130 words/min speaking speed, useful for blog posts, speeches, and presentations.",
         icon: "clock",
       },
       {
         title: "Zero data collection",
-        desc: "Your text is analysed entirely in your browser. Nothing is sent anywhere — safe for confidential documents.",
+        desc: "Your text is analysed entirely in your browser. Nothing is sent anywhere, safe for confidential documents.",
         icon: "shield",
       },
     ],
@@ -832,7 +832,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         title: "Paste your text",
         description:
-          "Type or paste any text into the editor — emails, blog posts, essays, scripts, or any content you want to analyse.",
+          "Type or paste any text into the editor, emails, blog posts, essays, scripts, or any content you want to analyse.",
         icon: "paste",
       },
       {
@@ -892,12 +892,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I count characters for Twitter or SMS limits?",
         answer:
-          "Yes — the characters-without-spaces metric is useful for Twitter (280 chars) and the total character count works for SMS (160 chars per segment).",
+          "Yes, the characters-without-spaces metric is useful for Twitter (280 chars) and the total character count works for SMS (160 chars per segment).",
       },
     ],
     relatedTools: ["resume-builder", "pdf-toolkit", "password-generator"],
     metaTitle:
-      "Free Word Counter Online — Character, Sentence & Reading Time | Ozaar",
+      "Free Word Counter Online: Character, Sentence & Reading Time | Ozaar",
     metaDesc:
       "Count words, characters, sentences, and paragraphs in real time. Get reading and speaking time estimates. Free, no signup, works offline.",
     keywords: [
@@ -916,7 +916,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Perfect dimensions.",
     taglineAccent: "Every platform.",
     description:
-      "Resize images to exact pixel dimensions, social media presets, or a percentage scale — all in your browser. Export as PNG or JPEG with quality control.",
+      "Resize images to exact pixel dimensions, social media presets, or a percentage scale, all in your browser. Export as PNG or JPEG with quality control.",
     category: "Images",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -976,7 +976,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
         title: "Social media content creation",
         scenario: "Social Media Manager",
         description:
-          "Resize one image to multiple platform-specific dimensions in seconds. Instagram, Twitter, LinkedIn, Facebook — all from one file.",
+          "Resize one image to multiple platform-specific dimensions in seconds. Instagram, Twitter, LinkedIn, Facebook, all from one file.",
       },
       {
         title: "Web development",
@@ -995,7 +995,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Will resizing reduce image quality?",
         answer:
-          "Making an image smaller typically maintains quality well. Enlarging an image beyond its original dimensions will cause some pixelation — we show a warning when you try to upscale significantly.",
+          "Making an image smaller typically maintains quality well. Enlarging an image beyond its original dimensions will cause some pixelation, we show a warning when you try to upscale significantly.",
       },
       {
         question: "Can I resize animated GIFs?",
@@ -1015,12 +1015,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Can I batch resize multiple images?",
         answer:
-          "Currently the resizer processes one image at a time. Batch resizing is on our roadmap — follow us on GitHub for updates.",
+          "Currently the resizer processes one image at a time. Batch resizing is on our roadmap, follow us on GitHub for updates.",
       },
     ],
     relatedTools: ["image-compressor", "bg-remover", "qr-generator"],
     metaTitle:
-      "Free Image Resizer Online — Social Media Presets & Custom Dimensions | Ozaar",
+      "Free Image Resizer Online: Social Media Presets & Custom Dimensions | Ozaar",
     metaDesc:
       "Resize images online for free. 20+ social media presets, exact pixel dimensions, or percentage scale. Export as PNG or JPEG. No upload, runs in your browser.",
     keywords: [
@@ -1055,12 +1055,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "AI background removal",
-        desc: "Powered by the @imgly/background-removal model running fully client-side via WebAssembly — no API key, no cloud processing.",
+        desc: "Powered by the @imgly/background-removal model running fully client-side via WebAssembly, no API key, no cloud processing.",
         icon: "ai",
       },
       {
         title: "Replace or keep transparent",
-        desc: "Keep the transparent background (PNG) or replace it with any solid colour — perfect for product shots on white or on brand colours.",
+        desc: "Keep the transparent background (PNG) or replace it with any solid colour, perfect for product shots on white or on brand colours.",
         icon: "transparent",
       },
       {
@@ -1111,7 +1111,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
         title: "Marketing assets",
         scenario: "Designer",
         description:
-          "Isolate product images to use on different campaign backgrounds. Transparent PNGs drop into any layout — Canva, Figma, PowerPoint.",
+          "Isolate product images to use on different campaign backgrounds. Transparent PNGs drop into any layout, Canva, Figma, PowerPoint.",
       },
     ],
     faq: [
@@ -1128,7 +1128,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What types of images work best?",
         answer:
-          "The tool works best on images with a clear subject and distinct background — product photos, portraits, and animals. Busy or textured backgrounds with similar colours to the subject may produce less precise edges.",
+          "The tool works best on images with a clear subject and distinct background, product photos, portraits, and animals. Busy or textured backgrounds with similar colours to the subject may produce less precise edges.",
       },
       {
         question: "What format is the output?",
@@ -1143,7 +1143,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["image-compressor", "image-resizer", "color-palette"],
     metaTitle:
-      "Free Background Remover Online — AI-Powered, Private | Ozaar",
+      "Free Background Remover Online: AI-Powered, Private | Ozaar",
     metaDesc:
       "Remove image backgrounds for free using AI that runs in your browser. No upload, no server, completely private. Download transparent PNG. No account required.",
     keywords: [
@@ -1178,7 +1178,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "Exact age breakdown",
-        desc: "Get your precise age in years, months, and days — not just a rounded number. Accurate to the current day.",
+        desc: "Get your precise age in years, months, and days, not just a rounded number. Accurate to the current day.",
         icon: "calendar",
       },
       {
@@ -1188,12 +1188,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Birthday countdown",
-        desc: "See exactly how many days, hours, minutes, and seconds until your next birthday — updating live in real time.",
+        desc: "See exactly how many days, hours, minutes, and seconds until your next birthday, updating live in real time.",
         icon: "countdown",
       },
       {
         title: "Zodiac sign & day of birth",
-        desc: "Find out which day of the week you were born on and your Western zodiac sign — useful trivia and a great conversation starter.",
+        desc: "Find out which day of the week you were born on and your Western zodiac sign, useful trivia and a great conversation starter.",
         icon: "star",
       },
     ],
@@ -1246,12 +1246,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Is the result accurate to today's date?",
         answer:
-          "Yes — the calculation uses your device's current date and time, so the result is accurate to the current day and the countdown ticks in real time.",
+          "Yes, the calculation uses your device's current date and time, so the result is accurate to the current day and the countdown ticks in real time.",
       },
       {
         question: "Can I calculate the age of someone else?",
         answer:
-          "Yes — just enter any date of birth. It doesn't have to be your own. Use it to calculate ages for family members, historical figures, or any date.",
+          "Yes, just enter any date of birth. It doesn't have to be your own. Use it to calculate ages for family members, historical figures, or any date.",
       },
       {
         question: "How is the zodiac sign determined?",
@@ -1266,7 +1266,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["unit-converter", "currency-converter", "word-counter"],
     metaTitle:
-      "Free Age Calculator Online — Exact Age, Birthday Countdown & Zodiac | Ozaar",
+      "Free Age Calculator Online: Exact Age, Birthday Countdown & Zodiac | Ozaar",
     metaDesc:
       "Calculate your exact age in years, months, and days. See total days lived, your next birthday countdown (live), day of birth, and zodiac sign. Free, no signup.",
     keywords: [
@@ -1311,7 +1311,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Multi-currency comparison",
-        desc: "Enter an amount once and see its value in 10+ currencies simultaneously — great for travel planning or international pricing.",
+        desc: "Enter an amount once and see its value in 10+ currencies simultaneously, great for travel planning or international pricing.",
         icon: "table",
       },
       {
@@ -1369,7 +1369,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Are these the rates I'll get at a bank?",
         answer:
-          "These are mid-market rates — the midpoint between buy and sell rates. Banks and exchange bureaux add a margin (typically 1-4%), so the rate you receive in practice will differ.",
+          "These are mid-market rates, the midpoint between buy and sell rates. Banks and exchange bureaux add a margin (typically 1-4%), so the rate you receive in practice will differ.",
       },
       {
         question: "How many currencies are supported?",
@@ -1384,12 +1384,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What is the multi-currency comparison table?",
         answer:
-          "After converting, a table shows your entered amount converted to 10+ popular currencies simultaneously — useful for travellers or anyone dealing with multiple currencies.",
+          "After converting, a table shows your entered amount converted to 10+ popular currencies simultaneously, useful for travellers or anyone dealing with multiple currencies.",
       },
     ],
     relatedTools: ["unit-converter", "age-calculator", "word-counter"],
     metaTitle:
-      "Free Currency Converter Online — Live Exchange Rates, 150+ Currencies | Ozaar",
+      "Free Currency Converter Online: Live Exchange Rates, 150+ Currencies | Ozaar",
     metaDesc:
       "Convert currencies with live exchange rates. 150+ currencies, hourly updates from open.er-api.com, multi-currency comparison table. Free, no signup.",
     keywords: [
@@ -1424,7 +1424,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     features: [
       {
         title: "6 measurement categories",
-        desc: "Length, Weight/Mass, Temperature, Speed, Area, and Volume — all the everyday conversions you need in one place.",
+        desc: "Length, Weight/Mass, Temperature, Speed, Area, and Volume, all the everyday conversions you need in one place.",
         icon: "categories",
       },
       {
@@ -1492,12 +1492,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What units are available for length?",
         answer:
-          "Millimetres, centimetres, metres, kilometres, inches, feet, yards, miles, nautical miles, and light-years — covering everyday and specialised use cases.",
+          "Millimetres, centimetres, metres, kilometres, inches, feet, yards, miles, nautical miles, and light-years, covering everyday and specialised use cases.",
       },
       {
         question: "Can I convert temperature between all four scales?",
         answer:
-          "Yes — Celsius, Fahrenheit, Kelvin, and Rankine are all supported with proper formulae for each pair-wise conversion.",
+          "Yes, Celsius, Fahrenheit, Kelvin, and Rankine are all supported with proper formulae for each pair-wise conversion.",
       },
       {
         question: "Why does my converted value show many decimal places?",
@@ -1507,12 +1507,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Are more unit categories planned?",
         answer:
-          "Yes — we're planning to add Energy (joules, calories, BTU), Pressure (pascal, bar, psi), and Data (bytes, KB, MB, GB). Star us on GitHub to follow progress.",
+          "Yes, we're planning to add Energy (joules, calories, BTU), Pressure (pascal, bar, psi), and Data (bytes, KB, MB, GB). Star us on GitHub to follow progress.",
       },
     ],
     relatedTools: ["currency-converter", "age-calculator", "word-counter"],
     metaTitle:
-      "Free Unit Converter Online — Length, Weight, Temperature & More | Ozaar",
+      "Free Unit Converter Online: Length, Weight, Temperature & More | Ozaar",
     metaDesc:
       "Convert between units of length, weight, temperature, speed, area, and volume instantly. Metric and imperial. Free, no signup, works offline.",
     keywords: [

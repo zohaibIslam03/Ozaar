@@ -133,7 +133,7 @@ export function ResumeDocument({ data }: { data: ResumeData }) {
             {filledExp.map((exp) => (
               <View key={exp.id} style={S.entryMargin}>
                 <View style={S.row}>
-                  <Text style={{ ...S.bodyText, fontFamily: "Times-Bold" }}>{exp.company} — <Text style={{ fontFamily: "Times-Roman" }}>{exp.role}</Text></Text>
+                  <Text style={{ ...S.bodyText, fontFamily: "Times-Bold" }}>{exp.company}, <Text style={{ fontFamily: "Times-Roman" }}>{exp.role}</Text></Text>
                   <Text style={{ fontSize: 10.5, color: "#111111" }}>{exp.duration}</Text>
                 </View>
                 {exp.bullets.split("\n").filter(Boolean).map((b, i) => (
@@ -170,10 +170,10 @@ export function ResumeDocument({ data }: { data: ResumeData }) {
               <View key={edu.id} style={S.certRow}>
                 <Text style={S.bodyText}>
                   <Text style={{ fontFamily: "Times-Bold" }}>{edu.institution}</Text>
-                  {edu.degree ? ` — ${edu.degree}` : ""}
+                  {edu.degree ? `, ${edu.degree}` : ""}
                 </Text>
                 <Text style={{ fontSize: 10.5, color: "#111111" }}>
-                  {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" – ")}
+                  {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" - ")}
                 </Text>
               </View>
             ))}

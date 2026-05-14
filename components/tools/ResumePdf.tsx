@@ -103,7 +103,7 @@ function ResumeDocument({ data }: { data: ResumeData }) {
               <View key={exp.id} style={{ marginBottom: 10 }}>
                 <View style={S.entryHeader}>
                   <Text style={S.bold}>{exp.role}</Text>
-                  <Text style={S.dim}>{exp.start}{exp.start && (exp.current ? " – Present" : exp.end ? ` – ${exp.end}` : "")}</Text>
+                  <Text style={S.dim}>{exp.start}{exp.start && (exp.current ? " - Present" : exp.end ? ` - ${exp.end}` : "")}</Text>
                 </View>
                 <Text style={S.dim}>{exp.company}</Text>
                 {exp.description ? <Text style={S.body}>{exp.description}</Text> : null}
@@ -120,7 +120,7 @@ function ResumeDocument({ data }: { data: ResumeData }) {
               <View key={edu.id} style={{ marginBottom: 8 }}>
                 <View style={S.entryHeader}>
                   <Text style={S.bold}>{edu.school}</Text>
-                  <Text style={S.dim}>{edu.start}{edu.start && edu.end ? ` – ${edu.end}` : ""}</Text>
+                  <Text style={S.dim}>{edu.start}{edu.start && edu.end ? ` - ${edu.end}` : ""}</Text>
                 </View>
                 <Text style={S.dim}>{[edu.degree, edu.field].filter(Boolean).join(", ")}</Text>
               </View>
@@ -197,7 +197,7 @@ export default function ResumePdf({ data }: { data: ResumeData }) {
                   <div key={exp.id} className="mb-2">
                     <div className="flex justify-between">
                       <p className="text-xs font-semibold">{exp.role}</p>
-                      <p className="text-[10px] text-gray-400">{exp.start}{exp.current ? " – Present" : exp.end ? ` – ${exp.end}` : ""}</p>
+                      <p className="text-[10px] text-gray-400">{exp.start}{exp.current ? " - Present" : exp.end ? ` - ${exp.end}` : ""}</p>
                     </div>
                     <p className="text-[10px] text-gray-500">{exp.company}</p>
                     {exp.description && <p className="text-[10px] text-gray-600 mt-0.5">{exp.description}</p>}
@@ -212,7 +212,7 @@ export default function ResumePdf({ data }: { data: ResumeData }) {
                   <div key={edu.id} className="mb-2">
                     <div className="flex justify-between">
                       <p className="text-xs font-semibold">{edu.school}</p>
-                      <p className="text-[10px] text-gray-400">{edu.start}{edu.end ? ` – ${edu.end}` : ""}</p>
+                      <p className="text-[10px] text-gray-400">{edu.start}{edu.end ? ` - ${edu.end}` : ""}</p>
                     </div>
                     <p className="text-[10px] text-gray-500">{[edu.degree, edu.field].filter(Boolean).join(", ")}</p>
                   </div>

@@ -49,7 +49,7 @@ export default function QrGenerator() {
         setDataUrl(png);
         setSvgString(svg);
       } catch {
-        setError("Could not generate QR code — check your input.");
+        setError("Could not generate QR code, check your input.");
       }
     },
     [size, fgColor, bgColor]

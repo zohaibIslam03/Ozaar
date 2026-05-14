@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const config = getToolConfig(params.slug);
   if (!tool) return { title: "Tool Not Found" };
 
-  const title = config?.metaTitle ?? `${tool.name} — Free Online Tool | Ozaar`;
+  const title = config?.metaTitle ?? `${tool.name}: Free Online Tool | Ozaar`;
   const description = config?.metaDesc ?? tool.desc;
   const keywords = config?.keywords ?? [];
   const url = `https://ozaar.theinnovations.tech/tools/${tool.slug}`;

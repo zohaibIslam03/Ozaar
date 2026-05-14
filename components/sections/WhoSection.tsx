@@ -7,7 +7,7 @@ const PERSONAS = [
   {
     label: "Students",
     tagline: "Research, write, submit.",
-    desc: "Compress lecture photos, count essay words, calculate deadlines — all without leaving your browser.",
+    desc: "Compress lecture photos, count essay words, calculate deadlines, all without leaving your browser.",
     icon: (
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
         <rect x="4" y="22" width="28" height="10" rx="3" fill="#E8E8E8" stroke="#D0D0D0" strokeWidth="1.2"/>
@@ -24,7 +24,7 @@ const PERSONAS = [
   {
     label: "Freelancers",
     tagline: "Work faster. Bill more.",
-    desc: "Generate invoices, compress client images for delivery, and create QR codes for proposals — no subscriptions needed.",
+    desc: "Generate invoices, compress client images for delivery, and create QR codes for proposals, no subscriptions needed.",
     icon: (
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
         <rect x="6" y="8" width="24" height="20" rx="3" fill="#E8E8E8" stroke="#D0D0D0" strokeWidth="1.2"/>

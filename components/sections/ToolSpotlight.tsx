@@ -22,7 +22,7 @@ const spotlights = [
     slug: "image-compressor",
     eyebrow: "Images",
     headline: "Compress without compromise.",
-    desc: "Shrink PNG, JPG, and GIF files by up to 90% and convert to WebP — all without visible quality loss. Zero uploads, zero server contact.",
+    desc: "Shrink PNG, JPG, and GIF files by up to 90% and convert to WebP, all without visible quality loss. Zero uploads, zero server contact.",
     bullets: ["Up to 90% smaller file size", "PNG, JPG, GIF → WebP", "100% offline processing"],
     visual: "compressor",
   },

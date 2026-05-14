@@ -150,7 +150,7 @@ export default function BgRemover() {
         <p>
           Processing happens entirely in your browser using WebAssembly.{" "}
           <strong className="text-brand-text font-medium">First load downloads the AI model (~40 MB)</strong>{" "}
-          — subsequent uses are instant.
+         , subsequent uses are instant.
         </p>
       </div>
 

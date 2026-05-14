@@ -68,7 +68,7 @@ const ALL_CURRENCIES: { code: string; name: string; flag: string }[] = [
 const TOP_10 = ["EUR","GBP","JPY","CNY","CAD","AUD","CHF","INR","MXN","KRW"];
 
 function formatRate(n: number): string {
-  if (!isFinite(n)) return "—";
+  if (!isFinite(n)) return "-";
   if (n >= 1000) return n.toLocaleString("en-US", { maximumFractionDigits: 2 });
   if (n >= 1)    return n.toFixed(4);
   return n.toFixed(6);

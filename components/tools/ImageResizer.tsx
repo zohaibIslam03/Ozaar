@@ -422,7 +422,7 @@ export default function ImageResizer() {
           {sameAspect ? (
             <div className="bg-gray-50 rounded-xl p-4 text-center border border-gray-200">
               <p className="text-sm text-gray-600">
-                Same aspect ratio — no cropping needed. Image will be scaled to {outputWidth} × {outputHeight}.
+                Same aspect ratio, no cropping needed. Image will be scaled to {outputWidth} × {outputHeight}.
               </p>
             </div>
           ) : (
@@ -509,7 +509,7 @@ export default function ImageResizer() {
             </div>
           )}
 
-          {/* Output info row — no floating dots */}
+          {/* Output info row, no floating dots */}
           <div className="flex flex-wrap items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
             <div>
               <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Original</p>

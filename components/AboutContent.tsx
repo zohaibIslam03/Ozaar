@@ -57,7 +57,7 @@ const VALUES = [
   },
   {
     title: "Permanent free tier",
-    body: "We rely on sponsorships and open-source contributions — not paywalls.",
+    body: "We rely on sponsorships and open-source contributions, not paywalls.",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DF0A09" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
@@ -98,7 +98,7 @@ function Terminal() {
         <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-        <span className="ml-2 text-[11px] text-[#8B949E]">zsh — bash</span>
+        <span className="ml-2 text-[11px] text-[#8B949E]">zsh to bash</span>
       </div>
       {/* Lines */}
       <div className="p-5 flex flex-col gap-3">
@@ -167,7 +167,7 @@ export default function AboutContent() {
               className="mt-6"
               style={{ fontSize: "clamp(16px, 4vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.65, maxWidth: "560px" }}
             >
-              Free. Open source. Built for humans — not enterprise software buyers.
+              Free. Open source. Built for humans, not enterprise software buyers.
             </p>
           </motion.div>
 
@@ -349,7 +349,7 @@ export default function AboutContent() {
               </div>
             </motion.div>
 
-            {/* Right — terminal */}
+            {/* Right, terminal */}
             <motion.div
               initial={{ opacity: 0, x: 32 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -386,7 +386,7 @@ export default function AboutContent() {
               The best tool is the one that gets out of your way.
             </blockquote>
             <p className="mt-5 text-[14px]" style={{ color: "#999" }}>
-              — Ozaar philosophy
+              Ozaar philosophy
             </p>
           </div>
         </div>
