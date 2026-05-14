@@ -1,3 +1,6 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import MarqueeStrip from "@/components/MarqueeStrip";
 import TrustBar from "@/components/sections/TrustBar";
@@ -12,6 +15,7 @@ import TrustSection from "@/components/TrustSection";
 import OpenSourceSection from "@/components/sections/OpenSourceSection";
 import ToolFinder from "@/components/sections/ToolFinder";
 import FinalCTA from "@/components/FinalCTA";
+import IntroLoader from "@/components/ui/IntroLoader";
 import { tools } from "@/lib/tools";
 
 const websiteSchema = {
@@ -46,30 +50,73 @@ const itemListSchema = {
 };
 
 export default function HomePage() {
+  const [showLoader, setShowLoader] = useState(false);
+  const [loaderDone, setLoaderDone] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    // Full document reload (F5, Ctrl+Shift+R, etc.): play intro again.
+    // Browsers do not expose "hard" vs "soft" reload separately; both are type "reload".
+    if (typeof performance !== "undefined") {
+      const nav = performance.getEntriesByType(
+        "navigation"
+      )[0] as PerformanceNavigationTiming | undefined;
+      if (nav?.type === "reload") {
+        sessionStorage.removeItem("intro-played");
+      }
+    }
+
+    const played = sessionStorage.getItem("intro-played");
+    if (!played) {
+      setShowLoader(true);
+    } else {
+      setLoaderDone(true);
+    }
+    setHydrated(true);
+  }, []);
+
+  const handleLoaderComplete = useCallback(() => {
+    sessionStorage.setItem("intro-played", "true");
+    setShowLoader(false);
+    setLoaderDone(true);
+  }, []);
+
+  const contentVisible =
+    hydrated && (loaderDone || !showLoader);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
-      />
-      <HeroSection />
-      <MarqueeStrip />
-      <TrustBar />
-      <ToolsGrid tools={tools} />
-      <ToolSpotlight />
-      <LiveDemo />
-      <WhoSection />
-      <HowItWorks />
-      <WhyStatements />
-      <PrivacySection />
-      <ToolFinder />
-      <OpenSourceSection />
-      <TrustSection />
-      <FinalCTA />
+      {showLoader && <IntroLoader onComplete={handleLoaderComplete} />}
+      <div
+        className={
+          contentVisible
+            ? "opacity-100 transition-opacity duration-500"
+            : "opacity-0"
+        }
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+        <HeroSection />
+        <MarqueeStrip />
+        <TrustBar />
+        <ToolsGrid tools={tools} />
+        <ToolSpotlight />
+        <LiveDemo />
+        <WhoSection />
+        <HowItWorks />
+        <WhyStatements />
+        <PrivacySection />
+        <ToolFinder />
+        <OpenSourceSection />
+        <TrustSection />
+        <FinalCTA />
+      </div>
     </>
   );
 }
