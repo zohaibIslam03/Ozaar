@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useRef, type DragEvent, type ChangeEvent } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type DragEvent,
+  type ChangeEvent,
+} from "react";
 import { motion } from "framer-motion";
 import { Upload, X, Download, Lock, Unlock, AlertCircle } from "lucide-react";
 
@@ -9,7 +15,6 @@ type OutputFormat = "image/png" | "image/jpeg";
 
 interface OriginalImage {
   file: File;
-  img: HTMLImageElement;
   url: string;
   width: number;
   height: number;
@@ -29,31 +34,36 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function resizeBlob(
-  img: HTMLImageElement,
-  w: number,
-  h: number,
-  fmt: OutputFormat,
-  quality: number
-): Promise<Blob> {
-  return new Promise((resolve, reject) => {
-    const canvas = document.createElement("canvas");
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) { reject(new Error("Canvas not supported")); return; }
-    if (fmt === "image/jpeg") { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, w, h); }
-    ctx.drawImage(img, 0, 0, w, h);
-    canvas.toBlob(
-      (blob) => blob ? resolve(blob) : reject(new Error("Failed")),
-      fmt,
-      fmt === "image/png" ? undefined : quality / 100
-    );
-  });
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
 }
 
+function calcCropNatural(
+  origW: number,
+  origH: number,
+  outW: number,
+  outH: number
+): { w: number; h: number } {
+  if (!outW || !outH) return { w: origW, h: origH };
+  if (outW <= origW && outH <= origH) return { w: outW, h: outH };
+  const s = Math.min(origW / outW, origH / outH);
+  return { w: Math.round(outW * s), h: Math.round(outH * s) };
+}
+
+const TABS: { id: ResizeMode; label: string }[] = [
+  { id: "custom", label: "Custom Size" },
+  { id: "presets", label: "Social Presets" },
+  { id: "scale", label: "Scale %" },
+];
+
 export default function ImageResizer() {
+  // ── File state ───────────────────────────────────────────────────────────────
   const [original, setOriginal] = useState<OriginalImage | null>(null);
+  const [isFileDragging, setIsFileDragging] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  // ── Resize controls ──────────────────────────────────────────────────────────
   const [mode, setMode] = useState<ResizeMode>("custom");
   const [targetW, setTargetW] = useState(0);
   const [targetH, setTargetH] = useState(0);
@@ -61,23 +71,134 @@ export default function ImageResizer() {
   const [locked, setLocked] = useState(true);
   const [format, setFormat] = useState<OutputFormat>("image/png");
   const [quality, setQuality] = useState(85);
-  const [isDragging, setIsDragging] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
+  // ── Crop state ───────────────────────────────────────────────────────────────
+  const [cropX, setCropX] = useState(0);
+  const [cropY, setCropY] = useState(0);
+  const [isCropDragging, setIsCropDragging] = useState(false);
+  const [cropDragStart, setCropDragStart] = useState({ x: 0, y: 0 });
+  const [cropDragStartCrop, setCropDragStartCrop] = useState({ x: 0, y: 0 });
+  const [containerWidth, setContainerWidth] = useState(600);
+
+  // ── Container width measurement ──────────────────────────────────────────────
+  useEffect(() => {
+    const el = mainRef.current;
+    if (!el) return;
+    const update = () => setContainerWidth(el.offsetWidth || 600);
+    update();
+    const obs = new ResizeObserver(update);
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // ── Derived values ───────────────────────────────────────────────────────────
   const aspectRatio = original ? original.width / original.height : 1;
 
+  const displayW =
+    mode === "scale" && original
+      ? Math.round(original.width * (scale / 100))
+      : targetW;
+  const displayH =
+    mode === "scale" && original
+      ? Math.round(original.height * (scale / 100))
+      : targetH;
+
+  const origW = original?.width ?? 0;
+  const origH = original?.height ?? 0;
+  const outputWidth = displayW;
+  const outputHeight = displayH;
+
+  const origAspect = origW > 0 && origH > 0 ? origW / origH : 1;
+  const outAspect =
+    outputWidth > 0 && outputHeight > 0 ? outputWidth / outputHeight : 1;
+  const sameAspect = Math.abs(origAspect - outAspect) < 0.005;
+
+  const { w: cropNaturalW, h: cropNaturalH } =
+    original && !sameAspect
+      ? calcCropNatural(origW, origH, outputWidth, outputHeight)
+      : { w: origW, h: origH };
+
+  const clampedCropX = sameAspect
+    ? 0
+    : clamp(cropX, 0, Math.max(0, origW - cropNaturalW));
+  const clampedCropY = sameAspect
+    ? 0
+    : clamp(cropY, 0, Math.max(0, origH - cropNaturalH));
+
+  const MAX_DISP_H = 300;
+  const displayScale = original
+    ? Math.min(containerWidth / origW, MAX_DISP_H / origH, 1)
+    : 1;
+  const displayImgW = Math.round(origW * displayScale);
+  const displayImgH = Math.round(origH * displayScale);
+
+  // ── Auto-center crop when output size changes ────────────────────────────────
+  useEffect(() => {
+    if (!origW || !origH || !outputWidth || !outputHeight) return;
+    const localSame =
+      Math.abs(origW / origH - outputWidth / outputHeight) < 0.005;
+    if (localSame) return;
+    const { w: cnw, h: cnh } = calcCropNatural(
+      origW, origH, outputWidth, outputHeight
+    );
+    setCropX(Math.max(0, (origW - cnw) / 2));
+    setCropY(Math.max(0, (origH - cnh) / 2));
+  }, [outputWidth, outputHeight, origW, origH]);
+
+  // ── Crop drag handlers ───────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!isCropDragging) return;
+
+    const move = (clientX: number, clientY: number) => {
+      const dx = (clientX - cropDragStart.x) / displayScale;
+      const dy = (clientY - cropDragStart.y) / displayScale;
+      setCropX(clamp(cropDragStartCrop.x + dx, 0, Math.max(0, origW - cropNaturalW)));
+      setCropY(clamp(cropDragStartCrop.y + dy, 0, Math.max(0, origH - cropNaturalH)));
+    };
+
+    const onMouseMove = (e: MouseEvent) => move(e.clientX, e.clientY);
+    const onMouseUp = () => setIsCropDragging(false);
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches[0]) move(e.touches[0].clientX, e.touches[0].clientY);
+    };
+    const onTouchEnd = () => setIsCropDragging(false);
+
+    document.body.style.cursor = "grabbing";
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+
+    return () => {
+      document.body.style.cursor = "";
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [
+    isCropDragging, cropDragStart, cropDragStartCrop,
+    displayScale, origW, origH, cropNaturalW, cropNaturalH,
+  ]);
+
+  // ── File loading ─────────────────────────────────────────────────────────────
   const load = (file: File) => {
-    if (!file.type.startsWith("image/")) { setError("Please upload a PNG, JPG, WEBP, or GIF image."); return; }
+    if (!file.type.startsWith("image/")) {
+      setError("Please upload a PNG, JPG, WEBP, or GIF image.");
+      return;
+    }
     if (original) URL.revokeObjectURL(original.url);
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      setOriginal({ file, img, url, width: img.naturalWidth, height: img.naturalHeight });
+      setOriginal({ file, url, width: img.naturalWidth, height: img.naturalHeight });
       setTargetW(img.naturalWidth);
       setTargetH(img.naturalHeight);
       setScale(100);
+      setCropX(0);
+      setCropY(0);
       setError(null);
     };
     img.onerror = () => { URL.revokeObjectURL(url); setError("Failed to load image."); };
@@ -85,11 +206,15 @@ export default function ImageResizer() {
   };
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault(); setIsDragging(false);
-    const f = e.dataTransfer.files[0]; if (f) load(f);
+    e.preventDefault();
+    setIsFileDragging(false);
+    const f = e.dataTransfer.files[0];
+    if (f) load(f);
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0]; if (f) load(f); e.target.value = "";
+    const f = e.target.files?.[0];
+    if (f) load(f);
+    e.target.value = "";
   };
 
   const changeW = (v: number) => {
@@ -100,50 +225,75 @@ export default function ImageResizer() {
     setTargetH(v);
     if (locked) setTargetW(Math.round(v * aspectRatio));
   };
-
   const applyScale = (s: number) => {
     if (!original) return;
     setScale(s);
-    setTargetW(Math.round(original.width * s / 100));
-    setTargetH(Math.round(original.height * s / 100));
+    setTargetW(Math.round(original.width * (s / 100)));
+    setTargetH(Math.round(original.height * (s / 100)));
   };
-
   const applyPreset = (w: number, h: number) => { setTargetW(w); setTargetH(h); };
 
-  const displayW = mode === "scale" && original ? Math.round(original.width * scale / 100) : targetW;
-  const displayH = mode === "scale" && original ? Math.round(original.height * scale / 100) : targetH;
+  const handleCropDragStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsCropDragging(true);
+    setCropDragStart({ x: e.clientX, y: e.clientY });
+    setCropDragStartCrop({ x: clampedCropX, y: clampedCropY });
+  };
+  const handleCropTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsCropDragging(true);
+    setCropDragStart({ x: t.clientX, y: t.clientY });
+    setCropDragStartCrop({ x: clampedCropX, y: clampedCropY });
+  };
 
-  const download = async () => {
+  // ── Download with crop ───────────────────────────────────────────────────────
+  const download = () => {
     if (!original) return;
-    setBusy(true); setError(null);
-    try {
-      const blob = await resizeBlob(original.img, displayW, displayH, format, quality);
-      const ext = format === "image/png" ? "png" : "jpg";
-      const base = original.file.name.replace(/\.[^.]+$/, "");
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = `${base}_${displayW}x${displayH}.${ext}`; a.click();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to resize image.");
-    } finally {
-      setBusy(false);
-    }
+    setBusy(true);
+    setError(null);
+    const canvas = document.createElement("canvas");
+    canvas.width = outputWidth;
+    canvas.height = outputHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) { setError("Canvas not supported."); setBusy(false); return; }
+    if (format === "image/jpeg") { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, outputWidth, outputHeight); }
+    const img = new Image();
+    img.onload = () => {
+      ctx.drawImage(img, clampedCropX, clampedCropY, cropNaturalW, cropNaturalH, 0, 0, outputWidth, outputHeight);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) { setError("Failed to export image."); setBusy(false); return; }
+          const ext = format === "image/png" ? "png" : "jpg";
+          const base = original.file.name.replace(/\.[^.]+$/, "");
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${base}_${outputWidth}x${outputHeight}.${ext}`;
+          a.click();
+          URL.revokeObjectURL(url);
+          setBusy(false);
+        },
+        format,
+        format === "image/png" ? undefined : quality / 100
+      );
+    };
+    img.onerror = () => { setError("Failed to load image for export."); setBusy(false); };
+    img.src = original.url;
   };
 
   const reset = () => {
     if (original) URL.revokeObjectURL(original.url);
-    setOriginal(null); setError(null); setScale(100);
+    setOriginal(null);
+    setError(null);
+    setScale(100);
+    setCropX(0);
+    setCropY(0);
   };
 
-  const TABS: { id: ResizeMode; label: string }[] = [
-    { id: "custom", label: "Custom Size" },
-    { id: "presets", label: "Social Presets" },
-    { id: "scale", label: "Scale %" },
-  ];
-
+  // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <motion.div
+      ref={mainRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -151,12 +301,14 @@ export default function ImageResizer() {
     >
       {!original ? (
         <div
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-          onDragLeave={() => setIsDragging(false)}
+          onDragOver={(e) => { e.preventDefault(); setIsFileDragging(true); }}
+          onDragLeave={() => setIsFileDragging(false)}
           onDrop={onDrop}
           onClick={() => inputRef.current?.click()}
           className={`border-2 border-dashed rounded-xl p-6 sm:p-12 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-200 ${
-            isDragging ? "border-brand-red bg-brand-red/5" : "border-brand-border hover:border-brand-red/50 hover:bg-white/[0.02]"
+            isFileDragging
+              ? "border-brand-red bg-brand-red/5"
+              : "border-brand-border hover:border-brand-red/50 hover:bg-white/[0.02]"
           }`}
         >
           <Upload className="w-8 h-8 text-brand-muted" />
@@ -166,7 +318,7 @@ export default function ImageResizer() {
         </div>
       ) : (
         <>
-          {/* Original info */}
+          {/* File info bar */}
           <div className="flex items-center gap-3 bg-brand-surface border border-brand-border rounded-lg px-4 py-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={original.url} alt="preview" className="w-12 h-12 object-cover rounded-md shrink-0" />
@@ -202,12 +354,9 @@ export default function ImageResizer() {
               <div className="flex flex-col gap-1.5 flex-1 min-w-[120px]">
                 <label className="text-xs text-brand-muted">Width (px)</label>
                 <input
-                  type="number"
-                  min={1}
-                  value={targetW}
+                  type="number" min={1} value={targetW}
                   onChange={(e) => changeW(Number(e.target.value))}
-                  className="w-full bg-brand-surface border border-brand-border rounded-lg px-3 py-2 text-sm text-brand-text
-                    focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full bg-brand-surface border border-brand-border rounded-lg px-3 py-2 text-sm text-brand-text focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
               <button
@@ -220,12 +369,9 @@ export default function ImageResizer() {
               <div className="flex flex-col gap-1.5 flex-1 min-w-[120px]">
                 <label className="text-xs text-brand-muted">Height (px)</label>
                 <input
-                  type="number"
-                  min={1}
-                  value={targetH}
+                  type="number" min={1} value={targetH}
                   onChange={(e) => changeH(Number(e.target.value))}
-                  className="w-full bg-brand-surface border border-brand-border rounded-lg px-3 py-2 text-sm text-brand-text
-                    focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full bg-brand-surface border border-brand-border rounded-lg px-3 py-2 text-sm text-brand-text focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
               <p className="text-xs text-brand-muted/60 w-full sm:w-auto">
@@ -262,10 +408,7 @@ export default function ImageResizer() {
                 <span className="text-brand-red">{scale}%</span>
               </label>
               <input
-                type="range"
-                min={10}
-                max={200}
-                value={scale}
+                type="range" min={10} max={200} value={scale}
                 onChange={(e) => applyScale(Number(e.target.value))}
                 className="w-full accent-brand-red"
               />
@@ -275,16 +418,118 @@ export default function ImageResizer() {
             </div>
           )}
 
-          {/* Output preview */}
-          <div className="flex flex-wrap items-center gap-3 bg-brand-surface border border-brand-border rounded-xl px-4 sm:px-5 py-4">
-            <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] text-brand-muted/60 uppercase tracking-wider">Original</span>
-              <span className="text-sm text-brand-muted font-mono break-all">{original.width} × {original.height}</span>
+          {/* ── CROP SELECTOR ──────────────────────────────────────────────────── */}
+          {sameAspect ? (
+            <div className="bg-gray-50 rounded-xl p-4 text-center border border-gray-200">
+              <p className="text-sm text-gray-600">
+                Same aspect ratio — no cropping needed. Image will be scaled to {outputWidth} × {outputHeight}.
+              </p>
             </div>
-            <span className="text-brand-muted/50 mx-2">→</span>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] text-brand-muted/60 uppercase tracking-wider">Output</span>
-              <span className="text-sm text-brand-text font-mono font-semibold break-all">{displayW} × {displayH}</span>
+          ) : (
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-semibold text-gray-800">Drag to select crop area</p>
+                <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
+                  Drag the box to choose which part to keep
+                </span>
+              </div>
+
+              <div
+                className="relative rounded-xl overflow-hidden border border-gray-200 bg-gray-100 select-none"
+                style={{ width: displayImgW, height: displayImgH }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={original.url}
+                  alt="Crop preview"
+                  className="block pointer-events-none"
+                  style={{ width: displayImgW, height: displayImgH, objectFit: "cover" }}
+                />
+
+                {/* SVG dark overlay with hole cut out at crop box */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <svg
+                    className="absolute inset-0"
+                    style={{ width: displayImgW, height: displayImgH }}
+                  >
+                    <defs>
+                      <mask id="ir-crop-mask">
+                        <rect width="100%" height="100%" fill="white" />
+                        <rect
+                          x={clampedCropX * displayScale}
+                          y={clampedCropY * displayScale}
+                          width={cropNaturalW * displayScale}
+                          height={cropNaturalH * displayScale}
+                          fill="black"
+                        />
+                      </mask>
+                    </defs>
+                    <rect width="100%" height="100%" fill="rgba(0,0,0,0.5)" mask="url(#ir-crop-mask)" />
+                  </svg>
+                </div>
+
+                {/* Draggable crop box */}
+                <div
+                  className="absolute border-2 border-white cursor-move shadow-lg"
+                  style={{
+                    left: clampedCropX * displayScale,
+                    top: clampedCropY * displayScale,
+                    width: cropNaturalW * displayScale,
+                    height: cropNaturalH * displayScale,
+                  }}
+                  onMouseDown={handleCropDragStart}
+                  onTouchStart={handleCropTouchStart}
+                >
+                  {/* Corner handles */}
+                  <div className="absolute -top-1 -left-1 w-3 h-3 bg-white border-2 border-brand-red rounded-sm pointer-events-none" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-white border-2 border-brand-red rounded-sm pointer-events-none" />
+                  <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-white border-2 border-brand-red rounded-sm pointer-events-none" />
+                  <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-white border-2 border-brand-red rounded-sm pointer-events-none" />
+
+                  {/* Crosshair */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-6 h-px bg-white opacity-60" />
+                    <div className="absolute h-6 w-px bg-white opacity-60" />
+                  </div>
+
+                  {/* Dimension label */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded-md pointer-events-none whitespace-nowrap">
+                    {outputWidth} × {outputHeight}
+                  </div>
+
+                  {/* Rule of thirds */}
+                  <div className="absolute inset-0 pointer-events-none opacity-20">
+                    <div className="absolute top-0 bottom-0 border-r border-white" style={{ left: "33.33%" }} />
+                    <div className="absolute top-0 bottom-0 border-r border-white" style={{ left: "66.66%" }} />
+                    <div className="absolute left-0 right-0 border-b border-white" style={{ top: "33.33%" }} />
+                    <div className="absolute left-0 right-0 border-b border-white" style={{ top: "66.66%" }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Output info row — no floating dots */}
+          <div className="flex flex-wrap items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <div>
+              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Original</p>
+              <p className="text-sm font-bold text-gray-700">{origW} × {origH}</p>
+            </div>
+            <span className="text-gray-300 text-lg">→</span>
+            {!sameAspect && (
+              <>
+                <div>
+                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Crop area</p>
+                  <p className="text-sm font-semibold text-gray-500">
+                    from ({Math.round(clampedCropX)}, {Math.round(clampedCropY)})
+                  </p>
+                </div>
+                <span className="text-gray-300 text-lg">→</span>
+              </>
+            )}
+            <div>
+              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Output</p>
+              <p className="text-sm font-bold" style={{ color: "#DF0A09" }}>{outputWidth} × {outputHeight}</p>
             </div>
           </div>
 
@@ -323,10 +568,7 @@ export default function ImageResizer() {
                     <span className="text-brand-red">{quality}%</span>
                   </label>
                   <input
-                    type="range"
-                    min={10}
-                    max={100}
-                    value={quality}
+                    type="range" min={10} max={100} value={quality}
                     onChange={(e) => setQuality(Number(e.target.value))}
                     className="w-full accent-brand-red"
                   />
@@ -335,16 +577,17 @@ export default function ImageResizer() {
             </div>
             <button
               onClick={download}
-              disabled={busy || displayW < 1 || displayH < 1}
+              disabled={busy || outputWidth < 1 || outputHeight < 1}
               className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-lg bg-brand-red text-white text-sm font-medium
                 hover:bg-brand-red/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <Download className="w-4 h-4" />
-              {busy ? "Resizing…" : `Download ${format === "image/png" ? "PNG" : "JPEG"}`}
+              {busy ? "Exporting…" : `Download ${format === "image/png" ? "PNG" : "JPEG"}`}
             </button>
           </div>
         </>
       )}
+
       {error && !original && (
         <div className="flex items-center gap-2 text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
           <AlertCircle className="w-4 h-4 shrink-0" />
