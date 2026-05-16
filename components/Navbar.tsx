@@ -93,7 +93,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://github.com/theinnovationstech"
+              href="https://github.com/zohaibIslam03/Ozaar"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium text-brand-muted hover:text-brand-text hover:bg-[#F7F7F7] transition-all duration-200"
@@ -157,7 +157,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <a
-                href="https://github.com/theinnovationstech"
+                href="https://github.com/zohaibIslam03/Ozaar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 py-3 px-2 text-base font-medium text-brand-muted hover:text-brand-text transition-colors border-b border-brand-border"

@@ -67,7 +67,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/theinnovationstech"
+                  href="https://github.com/zohaibIslam03/Ozaar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-[13px] text-[#888888] hover:text-white transition-colors duration-150"
@@ -78,7 +78,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/theinnovationstech/tools/blob/main/LICENSE"
+                  href="https://github.com/zohaibIslam03/Ozaar/blob/main/LICENSE"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[13px] text-[#888888] hover:text-white transition-colors duration-150"
