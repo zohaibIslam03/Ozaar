@@ -206,7 +206,7 @@ export default function HeroSection() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <a
-                  href="https://github.com/theinnovationstech"
+                  href="https://github.com/zohaibIslam03/Ozaar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex w-full min-[420px]:w-auto items-center justify-center gap-2 px-7 py-3.5 rounded-full border-[1.5px] border-brand-border text-brand-text text-[15px] font-semibold hover:border-brand-text/40 hover:bg-[#F7F7F7] transition-all duration-200"

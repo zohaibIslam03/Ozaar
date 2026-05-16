@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
 
 const lines = [
-  { text: "$ git clone https://github.com/theinnovationstech/tools", color: "#eee" },
-  { text: "$ cd tools", color: "#eee" },
+  { text: "$ git clone https://github.com/zohaibIslam03/Ozaar.git", color: "#eee" },
+  { text: "$ cd Ozaar", color: "#eee" },
   { text: "$ npm install", color: "#eee" },
   { text: "$ npm run dev", color: "#eee" },
   { text: "", color: "#eee" },
   { text: "✓ 12 tools ready at localhost:3000", color: "#4ADE80" },
   { text: "✓ Add your tool in /tools/your-tool-name", color: "#4ADE80" },
-  { text: "✓ Submit a PR, we review within 48 hours", color: "#4ADE80" },
+  { text: "✓ Submit a PR — we review within 48 hours", color: "#4ADE80" },
 ];
 
 function Terminal() {
@@ -137,7 +137,7 @@ export default function OpenSourceSection() {
             {/* Buttons */}
             <div className="flex flex-col min-[420px]:flex-row flex-wrap gap-3 mt-2">
               <motion.a
-                href="https://github.com/theinnovationstech"
+                href="https://github.com/zohaibIslam03/Ozaar"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
@@ -150,7 +150,7 @@ export default function OpenSourceSection() {
                 View on GitHub →
               </motion.a>
               <motion.a
-                href="https://github.com/theinnovationstech"
+                href="https://github.com/zohaibIslam03/Ozaar"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}

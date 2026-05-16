@@ -67,8 +67,8 @@ const VALUES = [
 ];
 
 const TERMINAL_LINES = [
-  { prompt: "$", text: "git clone https://github.com/theinnovationstech/tools", delay: 0 },
-  { prompt: "$", text: "cd tools && npm install", delay: 0.4 },
+  { prompt: "$", text: "git clone https://github.com/zohaibIslam03/Ozaar.git", delay: 0 },
+  { prompt: "$", text: "cd Ozaar && npm install", delay: 0.4 },
   { prompt: "$", text: "npm run dev", delay: 0.8 },
   { prompt: "▶", text: "Ready on http://localhost:3000", delay: 1.2, green: true },
 ];
@@ -328,7 +328,7 @@ export default function AboutContent() {
                 <motion.a
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  href="https://github.com/theinnovationstech"
+                  href="https://github.com/zohaibIslam03/Ozaar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-[10px] font-semibold text-[14px] px-6 py-3"
