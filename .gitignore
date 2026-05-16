@@ -4,8 +4,6 @@ out
 
 node_modules/
 
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -23,9 +21,9 @@ coverage
 .eslintcache
 
 .DS_Store
-.vscode
 .idea
 .cursor
 .cursorrules
 .cursorrules.md
 .cursorrules.txt
+config.bat
