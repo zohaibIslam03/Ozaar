@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -8,6 +8,9 @@ import { ToastProvider } from "@/components/Toast";
 import BackToTop from "@/components/BackToTop";
 import LenisProvider from "@/components/ui/LenisProvider";
 import CursorFollower from "@/components/ui/CursorFollower";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+
+const BASE_URL = "https://ozaar.theinnovations.tech";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,53 +27,122 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ozaar.theinnovations.tech"),
+  metadataBase: new URL(BASE_URL),
+
   title: {
-    default: "Free Online Tools | Ozaar",
-    template: "%s | Ozaar",
+    default: "Ozaar — Free Online Tools for Everyone | No Signup, No Ads",
+    template: "%s | Ozaar Free Tools",
   },
-  icons: {
-    icon: [{ url: "/ozaar-icon.png", type: "image/png" }],
-    shortcut: "/ozaar-icon.png",
-    apple: "/ozaar-icon.png",
-  },
+
   description:
-    "12 free open-source tools for everyone. PDF, image, QR, resume, currency and more. No signup. No ads. No limits.",
+    "Ozaar offers 12 free browser-based tools: compress images, build ATS-ready resumes, generate QR codes, convert currencies, remove backgrounds & more. No signup. No ads. 100% free forever.",
+
   keywords: [
     "free online tools",
-    "browser tools",
-    "pdf tools",
     "image compressor",
-    "qr generator",
+    "resume builder free",
+    "QR code generator",
+    "background remover free",
+    "PDF toolkit online",
     "password generator",
-    "open source",
-    "no signup tools",
+    "color palette generator",
+    "currency converter",
+    "unit converter",
+    "word counter",
+    "image resizer",
+    "free tools no signup",
+    "browser based tools",
+    "Ozaar tools",
+    "The Innovations tools",
   ],
-  openGraph: {
-    title: "Free Online Tools | Ozaar",
-    description:
-      "12 free open-source tools for everyone. PDF, image, QR, resume, currency and more. No signup. No ads. No limits.",
-    url: "https://ozaar.theinnovations.tech",
-    siteName: "Ozaar",
-    locale: "en_US",
-    type: "website",
+
+  authors: [{ name: "The Innovations", url: "https://theinnovations.tech" }],
+  creator: "The Innovations",
+  publisher: "The Innovations",
+
+  alternates: {
+    canonical: BASE_URL,
   },
+
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: BASE_URL,
+    siteName: "Ozaar — Free Online Tools",
+    title: "Ozaar — 12 Free Online Tools. No Signup. No Ads.",
+    description:
+      "Compress images, build resumes, generate QR codes, remove backgrounds & more. All free, all in your browser. No account needed.",
+    images: [
+      {
+        url: `${BASE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Ozaar — Free Online Tools for Everyone",
+        type: "image/png",
+      },
+    ],
+  },
+
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Tools | Ozaar",
+    title: "Ozaar — 12 Free Online Tools. No Signup. No Ads.",
     description:
-      "12 free open-source tools for everyone. No signup. No ads. No limits.",
+      "Free image compressor, resume builder, QR generator, background remover & more. 100% browser-based. No account needed.",
+    images: [`${BASE_URL}/og-image.png`],
+    creator: "@theinnovations",
+    site: "@theinnovations",
   },
-  alternates: {
-    canonical: "https://ozaar.theinnovations.tech",
-  },
-  robots: { index: true, follow: true },
+
+  applicationName: "Ozaar Free Tools",
+  category: "Technology",
+  classification: "Free Online Tools",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#DF0A09",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
+      <head>
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* DNS prefetch */}
+        <link rel="dns-prefetch" href="https://open.er-api.com" />
+
+        {/* Apple/PWA meta */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Ozaar" />
+        <meta name="mobile-web-app-capable" content="yes" />
+
+        {/* Geo meta (Pakistan-based company, global service) */}
+        <meta name="geo.region" content="PK-PB" />
+        <meta name="geo.placename" content="Lahore" />
+        <meta name="language" content="English" />
+      </head>
       <body className="bg-brand-bg text-brand-text font-sans antialiased min-h-screen flex flex-col">
+        <GoogleAnalytics />
         <LenisProvider>
           <ToastProvider>
             <CursorFollower />

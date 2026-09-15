@@ -115,11 +115,36 @@ export default function Footer() {
 
       {/* Bottom strip */}
       <div className="border-t border-[#2A2A2A]">
-        <div className="max-w-6xl lg:max-w-none lg:w-[80vw] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-6xl lg:max-w-none lg:w-[80vw] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#555555]">
-            © {year} Ozaar. Open source under MIT.
+            © {year} The Innovations · MIT License
           </p>
-          <p className="text-xs text-[#555555]">No tracking. No ads. No login.</p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-xs text-[#555555]">No tracking. No ads. No login.</p>
+            <p className="text-xs text-[#555555]">
+              Powered by{" "}
+              <a
+                href="https://www.involiq.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Involiq — AI Website Builder Pakistan"
+                className="text-[#888888] hover:text-brand-red transition-colors duration-150 font-medium"
+              >
+                Involiq
+              </a>
+            </p>
+            <a
+              href="https://www.involiq.tech/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Website built by Involiq — AI Website Builder"
+              className="inline-flex items-center gap-1.5 text-xs text-[#444444] hover:text-brand-red transition-colors duration-150"
+            >
+              Built with
+              <span className="font-bold text-brand-red">Involiq</span>
+              ↗
+            </a>
+          </div>
         </div>
       </div>
     </footer>

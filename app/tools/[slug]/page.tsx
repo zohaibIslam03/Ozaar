@@ -41,32 +41,62 @@ export function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const tool = getToolBySlug(params.slug);
-  const config = getToolConfig(params.slug);
-  if (!tool) return { title: "Tool Not Found" };
+export const dynamicParams = false;
 
-  const title = config?.metaTitle ?? `${tool.name}: Free Online Tool | Ozaar`;
-  const description = config?.metaDesc ?? tool.desc;
-  const keywords = config?.keywords ?? [];
-  const url = `https://ozaar.theinnovations.tech/tools/${tool.slug}`;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const config = getToolConfig(params.slug);
+  const BASE_URL = "https://ozaar.theinnovations.tech";
+  const toolUrl = `${BASE_URL}/tools/${params.slug}`;
+
+  if (!config) {
+    return {
+      title: "Tool Not Found | Ozaar",
+      description: "This tool does not exist.",
+      robots: { index: false, follow: false },
+    };
+  }
 
   return {
-    title: { absolute: title },
-    description,
-    keywords: keywords.join(", "),
-    alternates: { canonical: url },
-    openGraph: {
-      title,
-      description,
-      url,
-      siteName: "Ozaar",
-      type: "website",
+    title: { absolute: config.metaTitle },
+    description: config.metaDesc,
+    keywords: config.keywords,
+
+    alternates: {
+      canonical: toolUrl,
     },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    openGraph: {
+      type: "website",
+      url: toolUrl,
+      title: config.metaTitle,
+      description: config.metaDesc,
+      siteName: "Ozaar — Free Online Tools",
+      images: [
+        {
+          url: `${BASE_URL}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: config.name + " — Free Online Tool | Ozaar",
+        },
+      ],
+    },
+
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: config.metaTitle,
+      description: config.metaDesc,
+      images: [`${BASE_URL}/og-image.png`],
     },
   };
 }
@@ -106,9 +136,15 @@ export default function ToolPage({ params }: PageProps) {
     name: config.name,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    description: config.description,
+    browserRequirements: "Requires JavaScript",
     url: `https://ozaar.theinnovations.tech/tools/${config.slug}`,
+    description: config.description,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    author: {
+      "@type": "Organization",
+      name: "The Innovations",
+      url: "https://theinnovations.tech",
+    },
   };
 
   const howToSchema = {
