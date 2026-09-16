@@ -30,12 +30,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    default: "Ozaar — Free Online Tools for Everyone | No Signup, No Ads",
+    default: "Ozaar – Free Online Tools | Browser-Based Utilities, No Signup",
     template: "%s | Ozaar Free Tools",
   },
 
   description:
-    "Ozaar offers 12 free browser-based tools: compress images, build ATS-ready resumes, generate QR codes, convert currencies, remove backgrounds & more. No signup. No ads. 100% free forever.",
+    "Ozaar is a free online tools site with browser-based image, PDF, QR, converter and productivity utilities. Compress images, remove backgrounds, build resumes, generate QR codes and more — no signup, no ads.",
 
   keywords: [
     "free online tools",
@@ -82,16 +82,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "Ozaar — Free Online Tools",
-    title: "Ozaar — 12 Free Online Tools. No Signup. No Ads.",
+    siteName: "Ozaar – Free Online Tools",
+    title: "Ozaar – Free Online Tools | No Signup. No Ads.",
     description:
-      "Compress images, build resumes, generate QR codes, remove backgrounds & more. All free, all in your browser. No account needed.",
+      "Ozaar provides free browser-based tools for images, PDFs, QR codes, converters and everyday productivity. Private by design — processing stays on your device.",
     images: [
       {
         url: `${BASE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Ozaar — Free Online Tools for Everyone",
+        alt: "Ozaar – Free Online Tools",
         type: "image/png",
       },
     ],
@@ -99,15 +99,15 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Ozaar — 12 Free Online Tools. No Signup. No Ads.",
+    title: "Ozaar – Free Online Tools | No Signup. No Ads.",
     description:
-      "Free image compressor, resume builder, QR generator, background remover & more. 100% browser-based. No account needed.",
+      "Free browser-based image, PDF, QR and productivity tools from Ozaar. No account needed.",
     images: [`${BASE_URL}/og-image.png`],
     creator: "@theinnovations",
     site: "@theinnovations",
   },
 
-  applicationName: "Ozaar Free Tools",
+  applicationName: "Ozaar – Free Online Tools",
   category: "Technology",
   classification: "Free Online Tools",
 };

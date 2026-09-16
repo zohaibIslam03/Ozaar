@@ -26,7 +26,9 @@ const jsonLd = {
       "@id": "https://ozaar.theinnovations.tech/#website",
       url: "https://ozaar.theinnovations.tech",
       name: "Ozaar",
-      description: "12 free browser-based tools for everyone.",
+      alternateName: ["Ozaar Tools", "Ozaar – Free Online Tools"],
+      description:
+        "Ozaar provides free browser-based online tools for images, PDFs, QR codes, converters and productivity — no signup required.",
       publisher: { "@id": "https://ozaar.theinnovations.tech/#organization" },
     },
     {

@@ -173,13 +173,8 @@ export default function HeroSection() {
                 className="font-heading leading-[1.05] tracking-tight text-brand-text"
                   style={{ fontSize: "clamp(34px, 11vw, 72px)", fontWeight: 900 }}
               >
-                Every tool you need,
-              </h1>
-              <h1
-                className="font-heading leading-[1.05] tracking-tight text-brand-red"
-                  style={{ fontSize: "clamp(34px, 11vw, 72px)", fontWeight: 900 }}
-              >
-                completely free.
+                <span className="block">Ozaar — every tool you need,</span>
+                <span className="block text-brand-red">completely free.</span>
               </h1>
             </motion.div>
 
@@ -188,7 +183,11 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-[15px] sm:text-[17px] text-brand-muted leading-relaxed max-w-[480px]"
             >
-              Compress images, build resumes, convert currencies, generate QR codes, all in your browser. No account. No data sent anywhere.
+              Ozaar is a free online tools site with browser-based{" "}
+              <Link href="/tools/image-compressor" className="text-brand-text underline-offset-2 hover:underline">image</Link>,{" "}
+              <Link href="/tools/pdf-toolkit" className="text-brand-text underline-offset-2 hover:underline">PDF</Link>,{" "}
+              <Link href="/tools/qr-generator" className="text-brand-text underline-offset-2 hover:underline">QR</Link>,{" "}
+              converter and productivity utilities. No account. No data sent anywhere.
             </motion.p>
 
             {/* CTAs */}

@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: toolUrl,
       title: config.metaTitle,
       description: config.metaDesc,
-      siteName: "Ozaar — Free Online Tools",
+      siteName: "Ozaar – Free Online Tools",
       images: [
         {
           url: `${BASE_URL}/og-image.png`,

@@ -85,10 +85,15 @@ export default function ToolHero({ config }: ToolHeroProps) {
                   color: "#111",
                 }}
               >
-                {tagline}
-                <br />
-                <span style={{ color: accentColor }}>{taglineAccent}</span>
+                {name}
               </h1>
+              <p
+                className="mt-3 text-[17px] sm:text-[20px] font-semibold tracking-tight"
+                style={{ color: "#333", lineHeight: 1.35, maxWidth: "480px" }}
+              >
+                {tagline}{" "}
+                <span style={{ color: accentColor }}>{taglineAccent}</span>
+              </p>
             </motion.div>
 
             {/* Description */}
