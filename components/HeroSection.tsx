@@ -173,7 +173,7 @@ export default function HeroSection() {
                 className="font-heading leading-[1.05] tracking-tight text-brand-text"
                   style={{ fontSize: "clamp(34px, 11vw, 72px)", fontWeight: 900 }}
               >
-                <span className="block">Ozaar — every tool you need,</span>
+                <span className="block">Ozaar: every tool you need,</span>
                 <span className="block text-brand-red">completely free.</span>
               </h1>
             </motion.div>

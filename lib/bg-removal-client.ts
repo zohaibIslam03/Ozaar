@@ -2,7 +2,7 @@ import type { WorkerInMessage, WorkerOutMessage } from "./bg-removal.worker";
 
 export type BgRemovalProgress = {
   phase: "download" | "inference";
-  /** 0–100 when determinate; null when inference has no useful total */
+  /** 0-100 when determinate; null when inference has no useful total */
   percent: number | null;
 };
 

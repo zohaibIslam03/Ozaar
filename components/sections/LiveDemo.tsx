@@ -122,7 +122,7 @@ function CompressorPanel() {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Mobile: stacked panels + desktop: side‑by‑side */}
+      {/* Mobile: stacked panels + desktop: side-by-side */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-3">
         <div className="flex-1 px-4 py-4 sm:px-5 sm:py-5" style={boxStyle}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
