@@ -81,8 +81,8 @@ export const toolConfigs: Record<string, ToolConfig> = {
         icon: "compress",
       },
       {
-        title: "PNG, JPG, GIF → WebP",
-        desc: "Convert any common image format to the next-generation WebP format for maximum browser compatibility.",
+        title: "Export as WebP, JPEG, PNG, AVIF, or BMP",
+        desc: "Pick any output format your browser supports. Compression updates live as you change format or quality.",
         icon: "format",
       },
       {
@@ -112,7 +112,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         title: "Download",
         description:
-          "Click download to get your compressed WebP file instantly. No wait time, no email required.",
+          "Download the live preview in your chosen format (WebP, JPEG, PNG, AVIF, or BMP). No wait time, no email required.",
         icon: "download",
       },
     ],
@@ -145,7 +145,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What formats are supported?",
         answer:
-          "You can upload PNG, JPG/JPEG, and GIF images. All compressed files are exported as WebP, which is supported by all modern browsers (Chrome, Firefox, Safari, Edge).",
+          "Upload PNG, JPG, WEBP, GIF, BMP, AVIF, or SVG. Export to WebP, JPEG, PNG, AVIF, or BMP (AVIF/BMP appear when your browser can encode them). Use WebP or AVIF for the smallest files; PNG/BMP are lossless.",
       },
       {
         question: "Is there a file size limit?",
