@@ -66,6 +66,16 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="https://www.involiq.tech/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-[#888888] hover:text-white transition-colors duration-150"
+                >
+                  Involiq
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://github.com/zohaibIslam03/Ozaar"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -118,7 +128,17 @@ export default function Footer() {
           <p className="text-xs text-[#555555]">
             © {year} Ozaar. Open source under MIT.
           </p>
-          <p className="text-xs text-[#555555]">No tracking. No ads. No login.</p>
+          <p className="text-xs text-[#555555] text-center sm:text-right">
+            This site is powered by{" "}
+            <a
+              href="https://www.involiq.tech/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#888888] hover:text-white underline underline-offset-2 transition-colors"
+            >
+              Involiq
+            </a>
+          </p>
         </div>
       </div>
     </footer>

@@ -32,21 +32,22 @@ const SEO_CONTENT: Record<
 
   "resume-builder": {
     what: [
-      "A resume builder is an online tool that guides you through creating a professional resume or CV without design software. You fill in structured fields for contact info, summary, skills, and education, then optionally add experience, projects, and certifications. The tool formats everything into a polished, print-ready layout.",
-      "ATS compatibility matters most. Applicant Tracking Systems are used by most large employers to scan resumes before a human reads them. An ATS-friendly resume uses single-column layout, standard fonts, and clear headings — and avoids tables, graphics, or multi-column designs that confuse parsers.",
-      "Ozaar Resume Builder offers five ATS-safe templates (Classic, Modern, Professional, Minimal, and Executive), live preview, auto-save in your browser, and one-click PDF export — free, with no account. Empty optional sections are left off the page so graduates and career changers are not stuck with blank Experience or Projects blocks.",
+      "A free online resume builder helps you create a professional resume or CV without Word, Canva, or design skills. You fill structured fields for contact details, summary, skills, and education, then optionally add experience, projects, and certifications. Ozaar formats everything into a clean, print-ready PDF.",
+      "ATS (Applicant Tracking System) compatibility is critical. Most large employers scan resumes before a human reads them. An ATS-friendly resume uses a single column, standard fonts, clear headings like Experience and Education, and avoids tables, sidebars, icons, and multi-column layouts that break parsers.",
+      "Ozaar Resume Builder includes five ATS-safe templates — Classic, Modern, Professional, Minimal, and Executive — plus live preview, browser auto-save, and one-click PDF export. Empty optional sections are omitted so early-career applicants never ship blank Experience or Projects blocks. No account, no watermark, no upload to a server.",
     ],
     how: [
-      "Pick a template, then fill the guided form. The right-side preview updates as you type using the same layout rules as the PDF. When you export, @react-pdf/renderer builds the file in your browser and downloads it — nothing is uploaded to a server.",
-      "Experience, projects, and certifications are optional. If those fields are empty, their headings are omitted from both the preview and the PDF. Your data auto-saves to localStorage so you can return on the same browser and continue editing.",
+      "Choose a template, then complete the guided form. The live preview updates as you type using the same layout rules as the export. Click Export PDF and @react-pdf/renderer builds the file entirely in your browser — your data never leaves your device.",
+      "Experience, projects, and certifications are optional. Leave them blank and those headings stay off both the preview and the PDF. Progress auto-saves to localStorage so you can return on the same browser and continue editing.",
+      "Switch templates anytime without losing content. Each layout stays single-column and machine-readable while offering a distinct visual style for recruiters who still read the PDF by eye.",
     ],
     why: [
-      "Browser-based building skips the upload-wait-download cycle of cloud tools. Unlike generic Word or Docs templates, each Ozaar layout is a purpose-built single-column resume designed for clean ATS parsing and a clear visual identity.",
-      "Nothing is stored on our servers. Your name, contact details, and work history stay on your device — no account, no data retention, and no company holding your career information.",
+      "Cloud resume builders often require signup and store career data on their servers. Ozaar runs locally: faster iterations, stronger privacy, and no freemium paywall on PDF export.",
+      "Unlike generic Google Docs or Word templates, every Ozaar layout is purpose-built for ATS parsing and recruiter skim-reading — with optional sections that disappear when unused so the page stays tight and professional.",
     ],
     relatedLinks: [
       { slug: "word-counter", name: "Word Counter", phrase: "count the words in your resume" },
-      { slug: "pdf-toolkit", name: "PDF Toolkit", phrase: "work with your exported PDF" },
+      { slug: "pdf-toolkit", name: "PDF Toolkit", phrase: "merge or compress your exported PDF" },
     ],
   },
 

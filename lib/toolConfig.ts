@@ -298,17 +298,22 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     relatedTools: ["word-counter", "pdf-toolkit", "color-palette"],
     metaTitle:
-      "Free Resume Builder Online: 5 ATS Templates & PDF Export | Ozaar",
+      "Free Resume Builder Online (2026): 5 ATS Templates & PDF Export | Ozaar",
     metaDesc:
-      "Free online resume builder with 5 ATS-friendly templates, live preview, and one-click PDF export. Experience, projects, and certifications are optional. No account required.",
+      "Free ATS-friendly resume builder with 5 professional templates, live preview, and one-click PDF export. Experience, projects, and certifications are optional. No signup. Auto-saves in your browser.",
     keywords: [
       "free resume builder",
       "resume maker online",
-      "cv builder",
-      "ats resume template",
-      "resume pdf download",
+      "ATS resume template",
+      "ATS friendly resume",
+      "resume PDF download",
+      "CV builder free",
       "professional resume creator",
+      "online resume builder no signup",
+      "resume builder with templates",
       "optional resume sections",
+      "classic modern professional resume template",
+      "free CV maker PDF",
     ],
   },
 

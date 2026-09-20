@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { getToolBySlug, tools } from "@/lib/tools";
 import { getToolConfig } from "@/lib/toolConfig";
+import { PUBLISHER, SITE_NAME, SITE_URL, toolUrl } from "@/lib/site";
 import ToolHero from "@/components/tool-page/ToolHero";
 import ToolWorkspace from "@/components/tool-page/ToolWorkspace";
 import ToolHowItWorks from "@/components/tool-page/ToolHowItWorks";
@@ -37,6 +38,9 @@ interface PageProps {
   params: { slug: string };
 }
 
+/** Unknown tool slugs must 404 (not soft-render as 200). */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
 }
@@ -44,29 +48,57 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const tool = getToolBySlug(params.slug);
   const config = getToolConfig(params.slug);
-  if (!tool) return { title: "Tool Not Found" };
+  if (!tool || !config) {
+    return {
+      title: "Tool Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
 
-  const title = config?.metaTitle ?? `${tool.name}: Free Online Tool | Ozaar`;
-  const description = config?.metaDesc ?? tool.desc;
-  const keywords = config?.keywords ?? [];
-  const url = `https://ozaar.theinnovations.tech/tools/${tool.slug}`;
+  const title = config.metaTitle ?? `${tool.name}: Free Online Tool | Ozaar`;
+  const description = config.metaDesc ?? tool.desc;
+  const keywords = config.keywords ?? [];
+  const url = toolUrl(tool.slug);
+  const ogImage = {
+    url: `/tools/${tool.slug}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: `${tool.name} — free online tool on Ozaar`,
+  };
 
   return {
     title: { absolute: title },
     description,
-    keywords: keywords.join(", "),
+    keywords,
+    authors: [{ name: PUBLISHER.name, url: PUBLISHER.url }],
+    creator: PUBLISHER.name,
+    publisher: PUBLISHER.name,
+    category: config.category,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title,
       description,
       url,
-      siteName: "Ozaar",
+      siteName: SITE_NAME,
+      locale: "en_US",
       type: "website",
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [`/tools/${tool.slug}/twitter-image`],
     },
   };
 }
@@ -108,13 +140,27 @@ export default function ToolPage({ params }: PageProps) {
     operatingSystem: "Web Browser",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     description: config.description,
-    url: `https://ozaar.theinnovations.tech/tools/${config.slug}`,
+    url: toolUrl(config.slug),
+    image: `${SITE_URL}/tools/${config.slug}/opengraph-image`,
+    author: {
+      "@type": "Organization",
+      name: PUBLISHER.name,
+      url: PUBLISHER.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: PUBLISHER.name,
+      url: PUBLISHER.url,
+    },
+    isAccessibleForFree: true,
+    featureList: config.features.map((f) => f.title),
   };
 
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
     name: `How to use ${config.name}`,
+    description: config.description,
     step: config.howItWorks.map((s, i) => ({
       "@type": "HowToStep",
       position: i + 1,
@@ -137,10 +183,26 @@ export default function ToolPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://ozaar.theinnovations.tech" },
-      { "@type": "ListItem", position: 2, name: "Tools", item: "https://ozaar.theinnovations.tech/#tools" },
-      { "@type": "ListItem", position: 3, name: config.name, item: `https://ozaar.theinnovations.tech/tools/${config.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Tools", item: `${SITE_URL}/#tools` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: config.name,
+        item: toolUrl(config.slug),
+      },
     ],
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: config.metaTitle ?? config.name,
+    description: config.metaDesc ?? config.description,
+    url: toolUrl(config.slug),
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    about: softwareSchema,
+    inLanguage: "en-US",
   };
 
   return (
@@ -150,6 +212,7 @@ export default function ToolPage({ params }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }} />
 
       {/* Page sections */}
       <ToolHero config={config} />

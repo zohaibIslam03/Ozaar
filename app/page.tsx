@@ -17,20 +17,45 @@ import ToolFinder from "@/components/sections/ToolFinder";
 import FinalCTA from "@/components/FinalCTA";
 import IntroLoader from "@/components/ui/IntroLoader";
 import { tools } from "@/lib/tools";
+import { PUBLISHER, SITE_URL } from "@/lib/site";
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Ozaar",
-  url: "https://ozaar.theinnovations.tech",
-  description: "12 free open-source browser tools. PDF, image, QR, resume, currency and more. No signup required.",
+  url: SITE_URL,
+  description:
+    "12 free open-source browser tools. PDF, image, QR, resume, currency and more. No signup required.",
+  publisher: {
+    "@type": "Organization",
+    name: PUBLISHER.name,
+    url: PUBLISHER.url,
+  },
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://ozaar.theinnovations.tech/?search={search_term_string}",
+      urlTemplate: `${SITE_URL}/?search={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: PUBLISHER.name,
+  url: PUBLISHER.url,
+  description: "Technology company that builds Ozaar and other digital products.",
+  makesOffer: {
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "SoftwareApplication",
+      name: "Ozaar",
+      url: SITE_URL,
+      applicationCategory: "UtilitiesApplication",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
   },
 };
 
@@ -44,7 +69,7 @@ const itemListSchema = {
     "@type": "ListItem",
     position: i + 1,
     name: tool.name,
-    url: `https://ozaar.theinnovations.tech/tools/${tool.slug}`,
+    url: `${SITE_URL}/tools/${tool.slug}`,
     description: tool.desc,
   })),
 };
@@ -97,6 +122,10 @@ export default function HomePage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <script
           type="application/ld+json"

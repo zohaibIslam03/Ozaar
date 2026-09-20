@@ -8,6 +8,7 @@ import { ToastProvider } from "@/components/Toast";
 import BackToTop from "@/components/BackToTop";
 import LenisProvider from "@/components/ui/LenisProvider";
 import CursorFollower from "@/components/ui/CursorFollower";
+import { PUBLISHER, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,47 +25,78 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ozaar.theinnovations.tech"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Free Online Tools | Ozaar",
     template: "%s | Ozaar",
   },
-  icons: {
-    icon: [{ url: "/ozaar-icon.png", type: "image/png" }],
-    shortcut: "/ozaar-icon.png",
-    apple: "/ozaar-icon.png",
-  },
   description:
     "12 free open-source tools for everyone. PDF, image, QR, resume, currency and more. No signup. No ads. No limits.",
+  applicationName: SITE_NAME,
+  authors: [{ name: PUBLISHER.name, url: PUBLISHER.url }],
+  creator: PUBLISHER.name,
+  publisher: PUBLISHER.name,
   keywords: [
     "free online tools",
     "browser tools",
     "pdf tools",
     "image compressor",
     "qr generator",
+    "resume builder",
     "password generator",
     "open source",
     "no signup tools",
+    "Involiq",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/ozaar-icon.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: undefined,
   openGraph: {
     title: "Free Online Tools | Ozaar",
     description:
       "12 free open-source tools for everyone. PDF, image, QR, resume, currency and more. No signup. No ads. No limits.",
-    url: "https://ozaar.theinnovations.tech",
-    siteName: "Ozaar",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Ozaar — free online micro-tools",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Free Online Tools | Ozaar",
-    description:
-      "12 free open-source tools for everyone. No signup. No ads. No limits.",
+    description: SITE_TAGLINE,
+    images: ["/twitter-image"],
   },
   alternates: {
-    canonical: "https://ozaar.theinnovations.tech",
+    canonical: SITE_URL,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "technology",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

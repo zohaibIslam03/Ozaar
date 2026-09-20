@@ -21,7 +21,7 @@ export default function NotFoundClient() {
       >
         404
       </motion.span>
-      <h1 className="text-2xl font-semibold text-brand-text">Tool not found</h1>
+      <h1 className="text-2xl font-semibold text-brand-text">Page not found</h1>
       <p className="text-brand-muted text-sm max-w-sm leading-relaxed">
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
         All 12 tools are available from the homepage.
