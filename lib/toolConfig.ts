@@ -332,12 +332,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Compress file size",
-        desc: "Reduce PDF size for email attachments or uploads without losing document quality.",
+        desc: "Shrink scanned and image-heavy PDFs with quality presets, ideal for email and uploads.",
         icon: "compress",
       },
       {
         title: "Zero server processing",
-        desc: "Everything runs via pdf-lib in your browser. Sensitive documents never leave your device.",
+        desc: "Everything runs in your browser. Sensitive documents never leave your device.",
         icon: "offline",
       },
     ],
@@ -402,7 +402,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Will compression reduce text quality?",
         answer:
-          "Text and vector graphics remain crisp after compression. Only embedded raster images may see slight quality reduction at high compression levels.",
+          "Compression re-renders each page as a JPEG image, so text is no longer selectable and very sharp vector art can soften a little. Use High quality for closer fidelity, or Smallest file for maximum size reduction. Scanned and image-heavy PDFs usually shrink the most.",
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
