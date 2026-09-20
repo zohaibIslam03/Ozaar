@@ -696,7 +696,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Beautiful colors.",
     taglineAccent: "Instantly yours.",
     description:
-      "Generate harmonious 5-colour palettes from any base colour. Analogous, complementary, triadic, and split-complementary modes. Export as CSS variables or Tailwind config.",
+      "Enter any hex colour to get its full shade scale (50–950), or explore Analogous, Complementary, Triadic, and Split-Complementary harmonies. Your base colour is marked, click a swatch to update the brand preview, and dark colours get white text automatically. Export as CSS or Tailwind.",
     category: "Design",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -705,111 +705,118 @@ export const toolConfigs: Record<string, ToolConfig> = {
       "radial-gradient(circle at 1px 1px, #F0F0F0 1px, transparent 0)",
     icon: "🎨",
     stats: [
-      { value: "4 modes", label: "harmony algorithms" },
-      { value: "CSS + Tailwind", label: "export formats" },
-      { value: "Infinite", label: "color combinations" },
+      { value: "11 shades", label: "per colour (50–950)" },
+      { value: "5 modes", label: "shades + harmonies" },
+      { value: "Live", label: "brand preview" },
     ],
     features: [
       {
-        title: "4 colour harmony modes",
-        desc: "Analogous, complementary, triadic, and split-complementary, all based on colour theory principles used by professional designers.",
+        title: "Full shade scale from any colour",
+        desc: "Default Shades mode builds an 11-step tint → shade ramp (50–950) of your hex — same hue from near-white to near-black, ready for UI systems.",
         icon: "palette",
       },
       {
-        title: "One-click CSS export",
-        desc: "Export your palette as CSS custom properties (--color-primary, etc.) ready to paste into your stylesheet.",
+        title: "Colour harmony modes explained simply",
+        desc: "Analogous = neighbours on the wheel. Complementary = opposite contrast. Triadic = three evenly spaced hues. Split-Comp = softer contrast than pure complementary.",
+        icon: "harmony",
+      },
+      {
+        title: "Base marker + live brand preview",
+        desc: "Your base colour is labelled on every palette. Click any swatch to drive the preview header and button; dark backgrounds switch text to white for readability.",
+        icon: "eye",
+      },
+      {
+        title: "CSS & Tailwind export",
+        desc: "Copy shade ramps as --color-50…950 CSS variables or a Tailwind brand colour object. HEX, RGB, and HSL copy from each swatch.",
         icon: "code",
-      },
-      {
-        title: "Tailwind config export",
-        desc: "Copy a Tailwind CSS colors object to drop directly into tailwind.config.js with properly named shades.",
-        icon: "tailwind",
-      },
-      {
-        title: "Click to copy HEX",
-        desc: "Click any colour swatch to copy its hex value to clipboard. Build, iterate, and export your palette in seconds.",
-        icon: "copy",
       },
     ],
     howItWorks: [
       {
         title: "Pick a base colour",
         description:
-          "Use the colour picker or type a hex value to set your starting colour. This becomes the foundation of your palette.",
+          "Use the picker or type a hex code. That colour is marked as Base in the palette and anchors Shades or your chosen harmony.",
         icon: "picker",
       },
       {
-        title: "Choose a harmony mode",
+        title: "Choose a mode",
         description:
-          "Select analogous for soft, cohesive palettes; complementary for contrast; triadic or split-complementary for vibrant variety.",
+          "Shades for a light-to-dark scale of one hue. Analogous for soft neighbours, Complementary for bold opposites, Triadic for three accents, Split-Comp for balanced contrast.",
         icon: "harmony",
       },
       {
-        title: "Export your palette",
+        title: "Preview and export",
         description:
-          "Click on any swatch to copy its hex. Use the export button to copy your full palette as CSS variables or Tailwind config.",
+          "Click a swatch to update the brand preview. Copy HEX/RGB/HSL, then export CSS variables or Tailwind config for your project.",
         icon: "export",
       },
     ],
     useCases: [
       {
-        title: "Brand identity design",
+        title: "Brand colour systems",
         scenario: "Brand Designer",
         description:
-          "Build a cohesive colour system for a new brand in minutes. Start from the primary brand colour and generate a full palette instantly.",
+          "Start from a primary brand hex and generate a full 50–950 shade ladder for buttons, surfaces, and text — then export straight into your design tokens.",
       },
       {
         title: "UI component theming",
         scenario: "Frontend Developer",
         description:
-          "Export directly to Tailwind or CSS variables. Drop your palette into your design system and have consistent colours everywhere.",
+          "Drop Tailwind or CSS exports into your config. Use Shades for neutrals of one hue, or Complementary / Split-Comp when you need a clear accent.",
       },
       {
-        title: "Marketing materials",
+        title: "Marketing & creative",
         scenario: "Marketing Designer",
         description:
-          "Quickly generate on-brand colour options for social posts, ads, and presentations without needing a full design software licence.",
+          "Try Analogous for calm campaigns or Triadic when you need three vivid accents for social posts and decks — no design suite required.",
       },
     ],
     faq: [
       {
-        question: "What is colour harmony?",
+        question: "What does Shades mode do?",
         answer:
-          "Colour harmony refers to the pleasing arrangement of colours based on their positions on the colour wheel. Analogous colours sit next to each other; complementary colours are opposite; triadic colours are evenly spaced.",
+          "Shades keeps your colour’s hue and builds 11 steps from lightest (50) to darkest (950). Your exact base hex is kept in the ramp and labelled Base.",
+      },
+      {
+        question: "What do Analogous, Complementary, Triadic, and Split-Comp mean?",
+        answer:
+          "Analogous uses neighbouring hues for a soft look. Complementary uses the opposite hue for strong contrast. Triadic uses three hues spaced evenly around the wheel. Split-complementary uses the two colours beside the opposite hue — contrast that is usually less harsh than pure complementary.",
       },
       {
         question: "Can I start from a specific hex code?",
         answer:
-          "Yes, type any valid hex code into the input field and the palette generates instantly. You can also use the visual colour picker.",
+          "Yes. Type any 6-digit hex or use the colour picker. The palette updates immediately and marks your base colour.",
       },
       {
-        question: "What does the CSS export look like?",
+        question: "How does the brand preview work?",
         answer:
-          "The CSS export produces a :root block with custom properties: --color-1 through --color-5, ready to paste into any stylesheet or CSS module.",
+          "Click any swatch to apply it to the preview header and button. If that colour is dark (low lightness), the text switches to white so it stays readable.",
       },
       {
-        question: "Is this suitable for accessible design?",
+        question: "What does the export look like?",
         answer:
-          "We display contrast ratios for each colour against white and black so you can verify WCAG accessibility compliance before committing to a palette.",
+          "In Shades mode, CSS exports --color-50 through --color-950 and Tailwind exports a brand object with the same keys. Harmony modes export numbered colours. You can also copy HEX, RGB, or HSL from each swatch.",
       },
       {
-        question: "How many palettes can I generate?",
+        question: "Is anything uploaded to a server?",
         answer:
-          "Unlimited, generate as many as you like. Each palette can be exported separately as CSS or Tailwind config.",
+          "No. Palette math and exports run entirely in your browser. Nothing is stored on our servers.",
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
     metaTitle:
-      "Free Color Palette Generator, CSS & Tailwind Export | Ozaar",
+      "Free Color Palette Generator: Shades 50–950, Harmonies & Tailwind | Ozaar",
     metaDesc:
-      "Generate beautiful colour palettes online for free. Analogous, complementary, triadic modes. Export as CSS variables or Tailwind config. No account needed.",
+      "Free online colour palette tool. Enter a hex for a full 50–950 shade scale, or use Analogous, Complementary, Triadic, and Split-Comp modes. Live brand preview, CSS & Tailwind export. No account.",
     keywords: [
       "color palette generator",
-      "color scheme generator",
-      "complementary colors",
-      "hex color palette",
-      "css variables export",
+      "color shade generator",
+      "hex shade scale 50 950",
+      "analogous complementary triadic colors",
+      "split complementary palette",
       "tailwind color generator",
+      "css color variables export",
+      "brand color preview",
     ],
   },
 
