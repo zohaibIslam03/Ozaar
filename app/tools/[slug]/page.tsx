@@ -41,62 +41,32 @@ export function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
 }
 
-export const dynamicParams = false;
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const tool = getToolBySlug(params.slug);
   const config = getToolConfig(params.slug);
-  const BASE_URL = "https://ozaar.theinnovations.tech";
-  const toolUrl = `${BASE_URL}/tools/${params.slug}`;
+  if (!tool) return { title: "Tool Not Found" };
 
-  if (!config) {
-    return {
-      title: "Tool Not Found | Ozaar",
-      description: "This tool does not exist.",
-      robots: { index: false, follow: false },
-    };
-  }
+  const title = config?.metaTitle ?? `${tool.name}: Free Online Tool | Ozaar`;
+  const description = config?.metaDesc ?? tool.desc;
+  const keywords = config?.keywords ?? [];
+  const url = `https://ozaar.theinnovations.tech/tools/${tool.slug}`;
 
   return {
-    title: { absolute: config.metaTitle },
-    description: config.metaDesc,
-    keywords: config.keywords,
-
-    alternates: {
-      canonical: toolUrl,
-    },
-
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
-
+    title: { absolute: title },
+    description,
+    keywords: keywords.join(", "),
+    alternates: { canonical: url },
     openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Ozaar",
       type: "website",
-      url: toolUrl,
-      title: config.metaTitle,
-      description: config.metaDesc,
-      siteName: "Ozaar – Free Online Tools",
-      images: [
-        {
-          url: `${BASE_URL}/og-image.png`,
-          width: 1200,
-          height: 630,
-          alt: config.name + " — Free Online Tool | Ozaar",
-        },
-      ],
     },
-
     twitter: {
       card: "summary_large_image",
-      title: config.metaTitle,
-      description: config.metaDesc,
-      images: [`${BASE_URL}/og-image.png`],
+      title,
+      description,
     },
   };
 }
@@ -136,15 +106,9 @@ export default function ToolPage({ params }: PageProps) {
     name: config.name,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
-    browserRequirements: "Requires JavaScript",
-    url: `https://ozaar.theinnovations.tech/tools/${config.slug}`,
-    description: config.description,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    author: {
-      "@type": "Organization",
-      name: "The Innovations",
-      url: "https://theinnovations.tech",
-    },
+    description: config.description,
+    url: `https://ozaar.theinnovations.tech/tools/${config.slug}`,
   };
 
   const howToSchema = {
