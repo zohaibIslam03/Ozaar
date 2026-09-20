@@ -240,7 +240,7 @@ const RESULTS: Record<string, Result> = {
   pdf: { slug: "pdf-toolkit", name: "PDF Toolkit", desc: "Merge, split & compress PDFs in your browser." },
   words: { slug: "word-counter", name: "Word Counter", desc: "Count words, characters, sentences & reading time." },
   resume: { slug: "resume-builder", name: "Resume Builder", desc: "5 ATS templates · optional sections · PDF export." },
-  color: { slug: "color-palette", name: "Color Palette Generator", desc: "Generate, explore & export HEX/CSS palettes." },
+  color: { slug: "color-palette", name: "Color Palette Generator", desc: "Shades 50–950 · harmonies · CSS/Tailwind export." },
   password: { slug: "password-generator", name: "Password Generator", desc: "Cryptographically secure custom passwords." },
   currency: { slug: "currency-converter", name: "Currency Converter", desc: "Live rates, 150+ currencies." },
   unit: { slug: "unit-converter", name: "Unit Converter", desc: "Length, weight, temp, speed, all in one." },

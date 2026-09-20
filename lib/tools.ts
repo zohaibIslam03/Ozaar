@@ -11,7 +11,7 @@ export const tools: Tool[] = [
   { slug: "image-compressor", name: "Image Compressor", desc: "Compress PNG/JPG to WebP, fully offline", icon: "🖼️", category: "Images" },
   { slug: "qr-generator", name: "QR Code Generator", desc: "QR for URL, phone, email, WhatsApp & pay links", icon: "⬛", category: "Utilities" },
   { slug: "password-generator", name: "Password Generator", desc: "Cryptographically secure custom passwords", icon: "🔐", category: "Security" },
-  { slug: "color-palette", name: "Color Palette Generator", desc: "Generate, explore & export HEX/CSS palettes", icon: "🎨", category: "Design" },
+  { slug: "color-palette", name: "Color Palette Generator", desc: "Shades 50–950, harmonies, CSS & Tailwind export", icon: "🎨", category: "Design" },
   { slug: "word-counter", name: "Word Counter", desc: "Count words, chars, sentences & reading time", icon: "📝", category: "Writing" },
   { slug: "image-resizer", name: "Image Resizer", desc: "Resize to exact px or social media presets", icon: "✂️", category: "Images" },
   { slug: "bg-remover", name: "Background Remover", desc: "AI-powered background removal in-browser", icon: "🪄", category: "Images" },

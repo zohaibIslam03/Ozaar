@@ -113,17 +113,17 @@ const SEO_CONTENT: Record<
 
   "color-palette": {
     what: [
-      "A colour palette generator is a design tool that creates sets of harmonious colours based on colour theory principles. Rather than choosing colours arbitrarily, these tools apply mathematical relationships between hues on the colour wheel to produce palettes that are visually pleasing, cohesive, and suitable for use in branding, UI design, and marketing materials.",
-      "Colour harmony is a fundamental principle of design. When colours relate to each other through established geometric relationships on the colour wheel, such as being adjacent (analogous), opposite (complementary), or evenly distributed (triadic), they tend to feel balanced and intentional rather than random or jarring.",
-      "Ozaar Colour Palette Generator produces 5-colour palettes in four harmony modes, analogous, complementary, triadic, and split-complementary, with one-click export to CSS custom properties or Tailwind CSS configuration.",
+      "A colour palette generator helps you turn one hex colour into a usable set for brands and UIs. Ozaar starts with Shades mode: an 11-step light-to-dark scale (50–950) of the same hue — the format developers expect for buttons, surfaces, and text.",
+      "You can also explore colour-wheel harmonies. Analogous uses neighbouring hues for a soft look. Complementary uses the opposite hue for strong contrast. Triadic spaces three hues evenly. Split-complementary uses the two colours beside the opposite hue for contrast that is usually easier to live with than pure complementary.",
+      "Your base colour is labelled in every mode. Click a swatch to update the live brand preview; dark selections switch text to white. Export CSS variables or a Tailwind colour object — all in the browser, with no account.",
     ],
     how: [
-      "Palette generation uses HSL (Hue, Saturation, Lightness) colour space arithmetic. Given a base hex colour, the tool converts it to HSL and then calculates the hue angles of the other palette colours based on the selected harmony mode. Complementary colours are exactly 180° away on the hue wheel; triadic colours are 120° apart; analogous colours are 30° apart.",
-      "The CSS and Tailwind exports are generated client-side by formatting the calculated hex values into the appropriate variable or object syntax. No server processing is needed.",
+      "The tool converts your base hex to HSL. Shades mode keeps hue (and adjusts saturation slightly at the extremes) while stepping lightness from near-white to near-black. Harmony modes rotate hue on the wheel: complementary ≈ 180°, triadic ≈ 120° apart, analogous ≈ ±30–60°, split-complementary ≈ 150° and 210°.",
+      "Exports are built client-side. Shades mode outputs --color-50…950 (and matching Tailwind keys). Harmony modes output numbered colours. HEX, RGB, and HSL remain copyable from each card.",
     ],
     why: [
-      "Browser-based colour palette generation is instantaneous and requires no design software license. The tool is accessible to developers who need quick CSS colours, non-designers building their first brand, and experienced designers who want to prototype palette ideas quickly.",
-      "Unlike some palette tools, our exports are immediately usable, the CSS output goes directly into a stylesheet, and the Tailwind output goes directly into tailwind.config.js. No copy-pasting and reformatting required.",
+      "You get a shade ladder and harmony options in one place — useful for token systems and for exploring accents — without opening design software or signing up.",
+      "The live preview shows how a chosen swatch behaves as a header and button colour, including automatic white text on dark backgrounds, so you can judge readability before you export.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress brand assets" },
