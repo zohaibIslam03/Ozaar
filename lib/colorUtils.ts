@@ -2,8 +2,13 @@
 
 export interface RGB { r: number; g: number; b: number }
 export interface HSL { h: number; s: number; l: number }
-export interface ColorSwatch { hex: string; rgb: RGB; hsl: HSL }
-export type HarmonyMode = "analogous" | "complementary" | "triadic" | "split-complementary";
+export interface ColorSwatch { hex: string; rgb: RGB; hsl: HSL; label?: string }
+export type HarmonyMode =
+  | "shades"
+  | "analogous"
+  | "complementary"
+  | "triadic"
+  | "split-complementary";
 
 export function hexToRgb(hex: string): RGB | null {
   const clean = hex.replace("#", "");
@@ -50,13 +55,60 @@ export function randomHex(): string {
 function clamp(n: number, lo: number, hi: number) { return Math.max(lo, Math.min(hi, n)); }
 function norm(h: number) { return ((h % 360) + 360) % 360; }
 
-function sw(h: number, s: number, l: number): ColorSwatch {
-  const hsl = { h: norm(h), s: clamp(s, 0, 100), l: clamp(l, 5, 95) };
+function sw(h: number, s: number, l: number, label?: string): ColorSwatch {
+  const hsl = { h: norm(h), s: clamp(s, 0, 100), l: clamp(l, 5, 97) };
   const rgb = hslToRgb(hsl);
-  return { hex: rgbToHex(rgb), rgb, hsl };
+  return { hex: rgbToHex(rgb), rgb, hsl, label };
+}
+
+/** Tailwind-like shade stops (50 → 950) for a single hue. */
+const SHADE_STOPS: { label: string; l: number; sMul: number }[] = [
+  { label: "50",  l: 97, sMul: 0.35 },
+  { label: "100", l: 94, sMul: 0.5 },
+  { label: "200", l: 86, sMul: 0.7 },
+  { label: "300", l: 76, sMul: 0.85 },
+  { label: "400", l: 64, sMul: 0.95 },
+  { label: "500", l: 52, sMul: 1 },
+  { label: "600", l: 42, sMul: 1 },
+  { label: "700", l: 33, sMul: 0.95 },
+  { label: "800", l: 24, sMul: 0.9 },
+  { label: "900", l: 16, sMul: 0.85 },
+  { label: "950", l: 9,  sMul: 0.75 },
+];
+
+/** Full tint → shade ramp of the entered colour (same hue). */
+export function generateShades(baseHex: string): ColorSwatch[] {
+  const rgb = hexToRgb(baseHex);
+  if (!rgb) return [];
+  const { h, s, l: baseL } = rgbToHsl(rgb);
+
+  const ramp = SHADE_STOPS.map(({ label, l, sMul }) =>
+    sw(h, Math.round(s * sMul), l, label)
+  );
+
+  // Ensure the exact entered colour appears (replace closest stop by lightness)
+  let closest = 0;
+  let best = Infinity;
+  ramp.forEach((c, i) => {
+    const d = Math.abs(c.hsl.l - baseL);
+    if (d < best) { best = d; closest = i; }
+  });
+
+  const cleanHex = `#${baseHex.replace("#", "").toLowerCase()}`;
+  const exactRgb = hexToRgb(cleanHex)!;
+  ramp[closest] = {
+    hex: cleanHex,
+    rgb: exactRgb,
+    hsl: rgbToHsl(exactRgb),
+    label: SHADE_STOPS[closest].label,
+  };
+
+  return ramp;
 }
 
 export function generatePalette(baseHex: string, mode: HarmonyMode): ColorSwatch[] {
+  if (mode === "shades") return generateShades(baseHex);
+
   const rgb = hexToRgb(baseHex);
   if (!rgb) return [];
   const { h, s, l } = rgbToHsl(rgb);
