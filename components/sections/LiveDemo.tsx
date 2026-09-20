@@ -61,13 +61,13 @@ function PhotoBigIcon() {
 
 const TOOLS = [
   { id: "compressor" as Tab, name: "Image Compressor", desc: "Shrink images up to 90%" },
-  { id: "qr" as Tab, name: "QR Generator", desc: "Any URL to a QR code" },
+  { id: "qr" as Tab, name: "QR Generator", desc: "URL, phone, email, chat, pay" },
   { id: "password" as Tab, name: "Password Generator", desc: "Crypto-secure passwords" },
 ];
 
 const TOOL_DESCS: Record<Tab, string> = {
   compressor: "Compress JPEG, PNG & WebP images without losing quality. Fully in-browser.",
-  qr: "Generate a QR code from any URL, text, or contact, downloadable as PNG or SVG.",
+  qr: "Create QR codes for URLs, phone, email, WhatsApp, or any payment link. Download as PNG or SVG.",
   password: "Generate cryptographically secure passwords. Customizable length and character sets.",
 };
 
@@ -122,7 +122,7 @@ function CompressorPanel() {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Mobile: stacked panels + desktop: side‑by‑side */}
+      {/* Mobile: stacked panels + desktop: side-by-side */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-3">
         <div className="flex-1 px-4 py-4 sm:px-5 sm:py-5" style={boxStyle}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
@@ -224,15 +224,51 @@ function CompressorPanel() {
 // ── QR Panel ──────────────────────────────────────────────────────────────
 
 function QrPanel() {
+  const [mode, setMode] = useState<"url" | "phone" | "email" | "whatsapp" | "payment">("url");
   const [url, setUrl] = useState("https://ozaar.theinnovations.tech");
   const [copied, setCopied] = useState(false);
 
+  const placeholders: Record<typeof mode, string> = {
+    url: "Enter URL or text…",
+    phone: "Enter phone number…",
+    email: "Enter email address…",
+    whatsapp: "Enter WhatsApp number…",
+    payment: "Enter payment link…",
+  };
+
   return (
     <div className="flex flex-col gap-5">
+      <div className="flex flex-wrap gap-2">
+        {(
+          [
+            { id: "url", label: "URL" },
+            { id: "phone", label: "Phone" },
+            { id: "email", label: "Email" },
+            { id: "whatsapp", label: "WhatsApp" },
+            { id: "payment", label: "Pay" },
+          ] as const
+        ).map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            onClick={() => setMode(m.id)}
+            className="min-h-[36px] touch-manipulation rounded-lg px-3 text-[12px] font-bold"
+            style={{
+              background: mode === m.id ? "#DF0A09" : "#1A1A1A",
+              border: mode === m.id ? "1px solid #DF0A09" : "1px solid #333",
+              color: "#fff",
+              cursor: "pointer",
+            }}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+
       <input
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        placeholder="Enter URL or text…"
+        placeholder={placeholders[mode]}
         className="min-h-[52px] w-full touch-manipulation rounded-xl px-4 py-3.5 text-[15px] text-white outline-none"
         style={{
           background: "#1A1A1A",
@@ -252,7 +288,6 @@ function QrPanel() {
             <rect x="5" y="53" width="22" height="22" rx="3" fill="#111"/>
             <rect x="9" y="57" width="14" height="14" rx="1.5" fill="white"/>
             <rect x="12" y="60" width="8" height="8" rx="1" fill="#111"/>
-            {/* finder corners in red */}
             <rect x="5" y="5" width="4" height="4" rx="1" fill="#DF0A09"/>
             <rect x="23" y="5" width="4" height="4" rx="1" fill="#DF0A09"/>
             <rect x="5" y="23" width="4" height="4" rx="1" fill="#DF0A09"/>
@@ -268,7 +303,9 @@ function QrPanel() {
         </div>
       </div>
 
-      <p className="text-center text-[13px] text-[#555]">Scan to test ↑</p>
+      <p className="text-center text-[13px] text-[#555]">
+        Demo preview · open the full tool for live {mode} QR codes
+      </p>
 
       <div className="grid grid-cols-2 gap-3">
         <button

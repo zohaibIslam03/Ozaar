@@ -51,39 +51,6 @@ const nextConfig = {
 
     return config;
   },
-
-  async redirects() {
-    return [
-      // Force HTTPS (handled by hosting but add as backup)
-      {
-        source: "/:path*",
-        has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
-        destination: "https://ozaar.theinnovations.tech/:path*",
-        permanent: true,
-      },
-      // Force non-www
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.ozaar.theinnovations.tech" }],
-        destination: "https://ozaar.theinnovations.tech/:path*",
-        permanent: true,
-      },
-    ];
-  },
-
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
-          { key: "X-XSS-Protection", value: "1; mode=block" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;

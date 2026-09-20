@@ -1,16 +1,22 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const runtime = "nodejs";
-export const alt = "Ozaar — Free Online Tools for Everyone";
+export const alt = "Ozaar | Free Online Micro-Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image() {
+export default async function OgImage() {
+  const logoPath = join(process.cwd(), "public", "ozaar-icon.png");
+  const logoBuffer = await readFile(logoPath);
+  const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#FAFAFA",
+          background: "#0A0A0A",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -21,139 +27,79 @@ export default async function Image() {
           position: "relative",
         }}
       >
+        {/* Ambient glow */}
         <div
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 8,
-            background: "#DF0A09",
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            top: -100,
-            right: -100,
-            width: 500,
-            height: 500,
+            top: "30%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "700px",
+            height: "350px",
+            background: "rgba(223,10,9,0.07)",
             borderRadius: "50%",
-            background: "rgba(223,10,9,0.08)",
+            filter: "blur(120px)",
           }}
         />
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            marginBottom: 40,
-          }}
-        >
-          <div
+        {/* Logo mark */}
+        <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "36px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori OG renderer requires raw <img> */}
+          <img
+            src={logoSrc}
+            width={52}
+            height={52}
+            alt=""
             style={{
-              width: 64,
-              height: 64,
-              background: "#DF0A09",
-              borderRadius: 12,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#fff",
-              fontSize: 36,
-              fontWeight: 900,
+              borderRadius: "12px",
+              objectFit: "contain",
+              boxShadow: "0 0 24px rgba(223,10,9,0.35)",
             }}
-          >
-            O
-          </div>
-          <div
-            style={{
-              fontSize: 48,
-              fontWeight: 900,
-              color: "#111",
-              letterSpacing: "-2px",
-            }}
-          >
+          />
+          <span style={{ color: "#ffffff", fontSize: "26px", fontWeight: 600, letterSpacing: "-0.5px" }}>
             Ozaar
-          </div>
+          </span>
         </div>
 
+        {/* Headline */}
         <div
           style={{
             display: "flex",
-            fontSize: 56,
-            fontWeight: 900,
-            color: "#111",
+            fontSize: "68px",
+            fontWeight: 700,
+            color: "#ffffff",
             textAlign: "center",
-            letterSpacing: "-2px",
             lineHeight: 1.1,
-            maxWidth: 900,
+            letterSpacing: "-2px",
+            marginBottom: "20px",
           }}
         >
-          <span>12 Free Tools. </span>
-          <span style={{ color: "#DF0A09" }}>No Signup.</span>
+          Tiny tools.&nbsp;
+          <span style={{ color: "#DF0A09" }}>Big impact.</span>
         </div>
 
-        <div
-          style={{
-            fontSize: 24,
-            color: "#666",
-            marginTop: 20,
-            textAlign: "center",
-            maxWidth: 700,
-          }}
-        >
-          Compress images, build resumes, generate QR codes & more. 100% browser-based. Forever free.
+        {/* Subtext */}
+        <div style={{ fontSize: "24px", color: "#888888", textAlign: "center", maxWidth: "640px" }}>
+          Free, open-source micro-tools for everyone. No sign-up required.
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginTop: 40,
-            flexWrap: "wrap",
-            justifyContent: "center",
-            maxWidth: 900,
-          }}
-        >
-          {[
-            "Image Compressor",
-            "Resume Builder",
-            "QR Generator",
-            "Background Remover",
-            "PDF Toolkit",
-            "Password Generator",
-          ].map((tool) => (
+        {/* Tags */}
+        <div style={{ display: "flex", gap: "12px", marginTop: "44px" }}>
+          {["12 Tools", "100% Free", "No Sign-up", "Open Source"].map((tag) => (
             <div
-              key={tool}
+              key={tag}
               style={{
-                background: "#F5F5F5",
-                border: "1.5px solid #E8E8E8",
-                borderRadius: 999,
-                padding: "8px 20px",
-                fontSize: 18,
-                fontWeight: 600,
-                color: "#111",
-                display: "flex",
+                padding: "8px 18px",
+                border: "1px solid #222222",
+                borderRadius: "999px",
+                color: "#888888",
+                fontSize: "16px",
+                background: "#111111",
               }}
             >
-              {tool}
+              {tag}
             </div>
           ))}
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: 32,
-            fontSize: 18,
-            color: "#999",
-            letterSpacing: "0.05em",
-          }}
-        >
-          ozaar.theinnovations.tech
         </div>
       </div>
     ),

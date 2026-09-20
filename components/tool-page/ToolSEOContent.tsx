@@ -32,21 +32,22 @@ const SEO_CONTENT: Record<
 
   "resume-builder": {
     what: [
-      "A resume builder is an online tool that guides you through creating a professional resume or CV without needing design software or prior formatting experience. Rather than starting from a blank document, you fill in structured fields for your work history, education, skills, and contact information, and the tool formats everything into a polished, print-ready layout.",
-      "The most critical feature of any modern resume builder is ATS compatibility. Applicant Tracking Systems are software tools used by over 98% of Fortune 500 companies to automatically scan and filter incoming resumes before a human ever reads them. An ATS-friendly resume uses clean, standard formatting that these systems can parse correctly, avoiding tables, graphics, unusual fonts, or multi-column layouts that confuse the parser.",
-      "Ozaar Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export, all completely free and without any account requirement.",
+      "A free online resume builder helps you create a professional resume or CV without Word, Canva, or design skills. You fill structured fields for contact details, summary, skills, and education, then optionally add experience, projects, and certifications. Ozaar formats everything into a clean, print-ready PDF.",
+      "ATS (Applicant Tracking System) compatibility is critical. Most large employers scan resumes before a human reads them. An ATS-friendly resume uses a single column, standard fonts, clear headings like Experience and Education, and avoids tables, sidebars, icons, and multi-column layouts that break parsers.",
+      "Ozaar Resume Builder includes five ATS-safe templates — Classic, Modern, Professional, Minimal, and Executive — plus live preview, browser auto-save, and one-click PDF export. Empty optional sections are omitted so early-career applicants never ship blank Experience or Projects blocks. No account, no watermark, no upload to a server.",
     ],
     how: [
-      "Our resume builder uses @react-pdf/renderer to generate PDF documents directly in the browser. As you fill in the form fields, the right-side preview updates in real time using the same rendering engine. When you click 'Download PDF', the PDF is generated client-side and downloaded directly to your device.",
-      "Your resume data is automatically saved to your browser's localStorage after every change. This means you can close the tab, restart your computer, or come back days later and your progress will be preserved, as long as you use the same browser and haven't cleared site data.",
+      "Choose a template, then complete the guided form. The live preview updates as you type using the same layout rules as the export. Click Export PDF and @react-pdf/renderer builds the file entirely in your browser — your data never leaves your device.",
+      "Experience, projects, and certifications are optional. Leave them blank and those headings stay off both the preview and the PDF. Progress auto-saves to localStorage so you can return on the same browser and continue editing.",
+      "Switch templates anytime without losing content. Each layout stays single-column and machine-readable while offering a distinct visual style for recruiters who still read the PDF by eye.",
     ],
     why: [
-      "Browser-based resume building eliminates the frustrating upload-wait-download cycle of cloud services, and unlike Google Docs or Word templates, our tool produces a PDF from a purpose-built resume renderer designed for clean parsing by ATS software.",
-      "Since nothing is stored on our servers, your personal information, name, address, employment history, stays entirely on your device. There is nothing to delete, no data breach risk, and no company holding your career information.",
+      "Cloud resume builders often require signup and store career data on their servers. Ozaar runs locally: faster iterations, stronger privacy, and no freemium paywall on PDF export.",
+      "Unlike generic Google Docs or Word templates, every Ozaar layout is purpose-built for ATS parsing and recruiter skim-reading — with optional sections that disappear when unused so the page stays tight and professional.",
     ],
     relatedLinks: [
       { slug: "word-counter", name: "Word Counter", phrase: "count the words in your resume" },
-      { slug: "pdf-toolkit", name: "PDF Toolkit", phrase: "work with your exported PDF" },
+      { slug: "pdf-toolkit", name: "PDF Toolkit", phrase: "merge or compress your exported PDF" },
     ],
   },
 
@@ -72,17 +73,17 @@ const SEO_CONTENT: Record<
 
   "qr-generator": {
     what: [
-      "A QR code (Quick Response code) is a two-dimensional barcode that can be scanned by smartphone cameras to instantly open a URL, display text, share contact information, or trigger other actions. QR codes were invented in 1994 and have seen explosive adoption since smartphones made scanning them trivially easy.",
-      "A QR code generator is a tool that takes any input, a web address, plain text, an email, a phone number, and encodes it into a scannable QR image. The output can then be printed, embedded in digital content, or displayed on screens for others to scan. The QR code contains no expiry date and works permanently as long as the destination URL or content remains valid.",
-      "Ozaar QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output, at any scale, at no cost.",
+      "A QR code (Quick Response code) is a two-dimensional barcode that smartphones can scan to open a URL, dial a phone number, draft an email, start a WhatsApp chat, open a payment link, or show plain text. They work offline as encoded data, with no account or redirect service required.",
+      "Ozaar QR Code Generator supports five types: URL/Text, Phone, Email, WhatsApp, and Payment link. Fill in the fields for the type you need and the code updates as you type. Download as PNG for screens or SVG for print, with custom colours and sizes, and no watermark.",
+      "Everything runs in your browser. Sensitive numbers, emails, and payment URLs never leave your device.",
     ],
     how: [
-      "QR codes are generated using the qrcode.js library, which implements the QR Code 2005 specification (ISO/IEC 18004) entirely in JavaScript. When you enter your content, the library encodes it using Reed-Solomon error correction, calculates the required version (size) of the QR matrix, and renders the pattern as an SVG or canvas element.",
-      "Error correction means that QR codes can still be scanned even if up to 30% of the image is damaged or obscured. This makes them robust for printed materials where wear and tear is expected.",
+      "Each QR type builds the right payload automatically: tel: for phone, mailto: for email (with optional subject and body), wa.me for WhatsApp (with optional message), and a direct URL for websites or payment links. The qrcode.js library then encodes that string with Reed-Solomon error correction and renders PNG and SVG.",
+      "Error correction means codes can still scan even if part of the printed image is damaged. Because we do not wrap your content in a tracking redirect, the QR works permanently as long as the destination itself remains valid.",
     ],
     why: [
-      "Browser-based QR generation is both faster and more private than cloud-based alternatives. There is no server round-trip, the QR code appears in milliseconds as you type. And since the generation happens locally, any sensitive content you encode (internal URLs, private contact details) never leaves your device.",
-      "Unlike many QR code services, we do not create redirect URLs. The QR code links directly to whatever you entered, which means no tracking, no analytics on your scans, and no service dependency, your QR code works the same whether we are online or not.",
+      "Browser-based generation is fast and private. There is no server round-trip, and internal links or private contact details stay on your device.",
+      "Unlike many QR services, we do not create redirect URLs. No tracking of scans, no expiry from our side, and no dependency on our servers after you download the file.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress your downloaded QR images" },
@@ -112,17 +113,17 @@ const SEO_CONTENT: Record<
 
   "color-palette": {
     what: [
-      "A colour palette generator is a design tool that creates sets of harmonious colours based on colour theory principles. Rather than choosing colours arbitrarily, these tools apply mathematical relationships between hues on the colour wheel to produce palettes that are visually pleasing, cohesive, and suitable for use in branding, UI design, and marketing materials.",
-      "Colour harmony is a fundamental principle of design. When colours relate to each other through established geometric relationships on the colour wheel, such as being adjacent (analogous), opposite (complementary), or evenly distributed (triadic), they tend to feel balanced and intentional rather than random or jarring.",
-      "Ozaar Colour Palette Generator produces 5-colour palettes in four harmony modes, analogous, complementary, triadic, and split-complementary, with one-click export to CSS custom properties or Tailwind CSS configuration.",
+      "A colour palette generator helps you turn one hex colour into a usable set for brands and UIs. Ozaar starts with Shades mode: an 11-step light-to-dark scale (50–950) of the same hue — the format developers expect for buttons, surfaces, and text.",
+      "You can also explore colour-wheel harmonies. Analogous uses neighbouring hues for a soft look. Complementary uses the opposite hue for strong contrast. Triadic spaces three hues evenly. Split-complementary uses the two colours beside the opposite hue for contrast that is usually easier to live with than pure complementary.",
+      "Your base colour is labelled in every mode. Click a swatch to update the live brand preview; dark selections switch text to white. Export CSS variables or a Tailwind colour object — all in the browser, with no account.",
     ],
     how: [
-      "Palette generation uses HSL (Hue, Saturation, Lightness) colour space arithmetic. Given a base hex colour, the tool converts it to HSL and then calculates the hue angles of the other palette colours based on the selected harmony mode. Complementary colours are exactly 180° away on the hue wheel; triadic colours are 120° apart; analogous colours are 30° apart.",
-      "The CSS and Tailwind exports are generated client-side by formatting the calculated hex values into the appropriate variable or object syntax. No server processing is needed.",
+      "The tool converts your base hex to HSL. Shades mode keeps hue (and adjusts saturation slightly at the extremes) while stepping lightness from near-white to near-black. Harmony modes rotate hue on the wheel: complementary ≈ 180°, triadic ≈ 120° apart, analogous ≈ ±30–60°, split-complementary ≈ 150° and 210°.",
+      "Exports are built client-side. Shades mode outputs --color-50…950 (and matching Tailwind keys). Harmony modes output numbered colours. HEX, RGB, and HSL remain copyable from each card.",
     ],
     why: [
-      "Browser-based colour palette generation is instantaneous and requires no design software license. The tool is accessible to developers who need quick CSS colours, non-designers building their first brand, and experienced designers who want to prototype palette ideas quickly.",
-      "Unlike some palette tools, our exports are immediately usable, the CSS output goes directly into a stylesheet, and the Tailwind output goes directly into tailwind.config.js. No copy-pasting and reformatting required.",
+      "You get a shade ladder and harmony options in one place — useful for token systems and for exploring accents — without opening design software or signing up.",
+      "The live preview shows how a chosen swatch behaves as a header and button colour, including automatic white text on dark backgrounds, so you can judge readability before you export.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress brand assets" },

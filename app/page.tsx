@@ -17,117 +17,61 @@ import ToolFinder from "@/components/sections/ToolFinder";
 import FinalCTA from "@/components/FinalCTA";
 import IntroLoader from "@/components/ui/IntroLoader";
 import { tools } from "@/lib/tools";
+import { PUBLISHER, SITE_URL } from "@/lib/site";
 
-const jsonLd = {
+const websiteSchema = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://ozaar.theinnovations.tech/#website",
-      url: "https://ozaar.theinnovations.tech",
+  "@type": "WebSite",
+  name: "Ozaar",
+  url: SITE_URL,
+  description:
+    "12 free open-source browser tools. PDF, image, QR, resume, currency and more. No signup required.",
+  publisher: {
+    "@type": "Organization",
+    name: PUBLISHER.name,
+    url: PUBLISHER.url,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/?search={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: PUBLISHER.name,
+  url: PUBLISHER.url,
+  description: "Technology company that builds Ozaar and other digital products.",
+  makesOffer: {
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "SoftwareApplication",
       name: "Ozaar",
-      alternateName: ["Ozaar Tools", "Ozaar – Free Online Tools"],
-      description:
-        "Ozaar provides free browser-based online tools for images, PDFs, QR codes, converters and productivity — no signup required.",
-      publisher: { "@id": "https://ozaar.theinnovations.tech/#organization" },
+      url: SITE_URL,
+      applicationCategory: "UtilitiesApplication",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
-    {
-      "@type": "Organization",
-      "@id": "https://ozaar.theinnovations.tech/#organization",
-      name: "The Innovations",
-      url: "https://theinnovations.tech",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://ozaar.theinnovations.tech/og-image.png",
-      },
-      sameAs: [
-        "https://www.facebook.com/theinnovations.tech",
-        "https://www.instagram.com/theinnovations.tech/",
-        "https://www.linkedin.com/company/theinnovations/",
-        "https://github.com/zohaibIslam03/Ozaar",
-      ],
-    },
-    {
-      "@type": "ItemList",
-      name: "Free Online Tools",
-      description: "12 free browser-based tools",
-      numberOfItems: 12,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Image Compressor",
-          url: "https://ozaar.theinnovations.tech/tools/image-compressor",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Resume Builder",
-          url: "https://ozaar.theinnovations.tech/tools/resume-builder",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "QR Code Generator",
-          url: "https://ozaar.theinnovations.tech/tools/qr-generator",
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
-          name: "Background Remover",
-          url: "https://ozaar.theinnovations.tech/tools/bg-remover",
-        },
-        {
-          "@type": "ListItem",
-          position: 5,
-          name: "PDF Toolkit",
-          url: "https://ozaar.theinnovations.tech/tools/pdf-toolkit",
-        },
-        {
-          "@type": "ListItem",
-          position: 6,
-          name: "Password Generator",
-          url: "https://ozaar.theinnovations.tech/tools/password-generator",
-        },
-        {
-          "@type": "ListItem",
-          position: 7,
-          name: "Color Palette Generator",
-          url: "https://ozaar.theinnovations.tech/tools/color-palette",
-        },
-        {
-          "@type": "ListItem",
-          position: 8,
-          name: "Word Counter",
-          url: "https://ozaar.theinnovations.tech/tools/word-counter",
-        },
-        {
-          "@type": "ListItem",
-          position: 9,
-          name: "Image Resizer",
-          url: "https://ozaar.theinnovations.tech/tools/image-resizer",
-        },
-        {
-          "@type": "ListItem",
-          position: 10,
-          name: "Age Calculator",
-          url: "https://ozaar.theinnovations.tech/tools/age-calculator",
-        },
-        {
-          "@type": "ListItem",
-          position: 11,
-          name: "Currency Converter",
-          url: "https://ozaar.theinnovations.tech/tools/currency-converter",
-        },
-        {
-          "@type": "ListItem",
-          position: 12,
-          name: "Unit Converter",
-          url: "https://ozaar.theinnovations.tech/tools/unit-converter",
-        },
-      ],
-    },
-  ],
+  },
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Free Online Tools",
+  description: "A curated collection of 12 free, open-source browser tools.",
+  numberOfItems: tools.length,
+  itemListElement: tools.map((tool, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: tool.name,
+    url: `${SITE_URL}/tools/${tool.slug}`,
+    description: tool.desc,
+  })),
 };
 
 export default function HomePage() {
@@ -177,7 +121,15 @@ export default function HomePage() {
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
         <HeroSection />
         <MarqueeStrip />

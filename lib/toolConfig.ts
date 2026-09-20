@@ -81,8 +81,8 @@ export const toolConfigs: Record<string, ToolConfig> = {
         icon: "compress",
       },
       {
-        title: "PNG, JPG, GIF → WebP",
-        desc: "Convert any common image format to the next-generation WebP format for maximum browser compatibility.",
+        title: "Export as WebP, JPEG, PNG, AVIF, or BMP",
+        desc: "Pick any output format your browser supports. Compression updates live as you change format or quality.",
         icon: "format",
       },
       {
@@ -112,7 +112,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         title: "Download",
         description:
-          "Click download to get your compressed WebP file instantly. No wait time, no email required.",
+          "Download the live preview in your chosen format (WebP, JPEG, PNG, AVIF, or BMP). No wait time, no email required.",
         icon: "download",
       },
     ],
@@ -145,7 +145,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "What formats are supported?",
         answer:
-          "You can upload PNG, JPG/JPEG, and GIF images. All compressed files are exported as WebP, which is supported by all modern browsers (Chrome, Firefox, Safari, Edge).",
+          "Upload PNG, JPG, WEBP, GIF, BMP, AVIF, or SVG. Export to WebP, JPEG, PNG, AVIF, or BMP (AVIF/BMP appear when your browser can encode them). Use WebP or AVIF for the smallest files; PNG/BMP are lossless.",
       },
       {
         question: "Is there a file size limit?",
@@ -184,7 +184,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Your resume.",
     taglineAccent: "Your opportunity.",
     description:
-      "Build an ATS-friendly resume in minutes with our free online resume builder. Live preview, multiple templates, and one-click PDF export. No account required.",
+      "Build a professional resume for any industry. Choose from 5 ATS-friendly templates, preview live as you type, and export a PDF in one click. Experience, projects, and certifications are optional — empty sections stay off the page. No account required.",
     category: "Career",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -192,49 +192,55 @@ export const toolConfigs: Record<string, ToolConfig> = {
     heroPattern: "repeating-linear-gradient(transparent, transparent 23px, #F5F5F5 24px)",
     icon: "📋",
     stats: [
-      { value: "ATS", label: "optimized templates" },
-      { value: "1-click", label: "PDF export" },
+      { value: "5", label: "ATS-friendly templates" },
+      { value: "3", label: "optional sections" },
       { value: "0", label: "signups needed" },
     ],
     features: [
       {
-        title: "ATS-optimized templates",
-        desc: "Pass automated resume screening systems used by 98% of Fortune 500 companies. Clean, parseable layouts.",
+        title: "5 ATS-friendly templates",
+        desc: "Classic (serif double-rules), Modern (teal accent bar), Professional (navy header band), Minimal (clean black accents), and Executive (bold banded headers). All single-column and ATS-safe.",
         icon: "check",
       },
       {
         title: "Live side-by-side preview",
-        desc: "See your resume update in real time as you type. What you see is exactly what you get in the PDF.",
+        desc: "See your resume update in real time as you type. Switch templates anytime without losing your content.",
         icon: "eye",
       },
       {
-        title: "One-click PDF export",
-        desc: "Download a pixel-perfect PDF ready to attach to any job application, directly from your browser.",
-        icon: "download",
+        title: "Optional experience, projects & certs",
+        desc: "Skip what you do not have yet. Empty optional sections are omitted from the preview and PDF so you never get blank headings or wasted space.",
+        icon: "optional",
       },
       {
-        title: "Auto-saves to localStorage",
-        desc: "Your progress is automatically saved in your browser. Close the tab and return later, everything is still there.",
-        icon: "save",
+        title: "One-click PDF export",
+        desc: "Download a pixel-perfect PDF ready to attach to any job application, generated entirely in your browser.",
+        icon: "download",
       },
     ],
     howItWorks: [
       {
+        title: "Pick a template",
+        description:
+          "Choose Classic, Modern, Professional, Minimal, or Executive. Switch later anytime — your content stays intact.",
+        icon: "template",
+      },
+      {
         title: "Fill in your details",
         description:
-          "Enter your name, contact info, work experience, education, and skills using our guided step-by-step form.",
+          "Add personal info, summary, skills, and education. Experience, projects, and certifications are optional — leave them blank if you do not need them.",
         icon: "edit",
       },
       {
         title: "Preview in real time",
         description:
-          "Watch your professional resume take shape as you type. Switch between templates with one click.",
+          "Watch the layout update as you type. Only filled sections appear on the page, so optional gaps never leave empty blocks.",
         icon: "eye",
       },
       {
         title: "Export as PDF",
         description:
-          "Click 'Download PDF' to get a polished, ATS-friendly resume file ready to send to employers.",
+          "Click Export PDF to download a polished, ATS-friendly file ready to send to employers.",
         icon: "download",
       },
     ],
@@ -243,60 +249,71 @@ export const toolConfigs: Record<string, ToolConfig> = {
         title: "Fresh graduates",
         scenario: "Recent Graduate",
         description:
-          "Land your first professional job with a clean, structured resume that highlights your education, projects, and internships in the best possible light.",
+          "Lead with education, skills, and projects. Skip experience if you are early-career — optional sections stay off the resume until you add them.",
       },
       {
         title: "Career changers",
         scenario: "Career Switcher",
         description:
-          "Highlight your transferable skills and reframe your experience for a new industry. Our templates are designed to present any background compellingly.",
+          "Highlight transferable skills and reframe your background for a new industry. Pick a template that fits the role, then export without reformatting.",
       },
       {
         title: "Active job seekers",
         scenario: "Job Seeker",
         description:
-          "Pass ATS filters at top companies. Our templates use clean, machine-readable formatting that applicant tracking systems parse correctly.",
+          "Pass ATS filters with single-column, machine-readable layouts. No tables, sidebars, or graphics that confuse applicant tracking systems.",
       },
     ],
     faq: [
       {
         question: "Is this resume builder really free?",
         answer:
-          "Yes, completely free. There are no premium tiers, no watermarks, no hidden fees. Every feature, including PDF export, is available to everyone with no account required.",
+          "Yes, completely free. There are no premium tiers, no watermarks, and no hidden fees. Every feature, including PDF export and all five templates, is available with no account required.",
       },
       {
         question: "Will my resume pass ATS (Applicant Tracking System)?",
         answer:
-          "Our templates are specifically designed for ATS compatibility. We use standard fonts, clear section headings, and avoid tables, columns, or graphics that ATS systems struggle to parse.",
+          "Yes. All five templates are single-column with standard fonts and clear section headings. We avoid tables, multi-column layouts, and graphics that ATS parsers often misread.",
+      },
+      {
+        question: "Are experience, projects, and certifications required?",
+        answer:
+          "No. Those three sections are optional. If you leave them empty, they do not appear in the live preview or the exported PDF — no blank headings or empty space.",
       },
       {
         question: "Can I save my resume and edit it later?",
         answer:
-          "Yes, your resume data is automatically saved to your browser's localStorage. As long as you use the same browser and don't clear site data, you can return and continue editing.",
+          "Yes. Your resume data is auto-saved to your browser's localStorage after every change. Return on the same browser (without clearing site data) to continue editing.",
       },
       {
         question: "What format does it export in?",
         answer:
-          "Resumes are exported as PDF files, which is the universally accepted format for job applications and preserves your formatting perfectly on any device.",
+          "PDF — the standard format for job applications. Formatting stays consistent on any device.",
       },
       {
         question: "How many templates are available?",
         answer:
-          "Currently one clean, professional template optimized for ATS. We're adding more templates regularly, star us on GitHub to stay updated.",
+          "Five: Classic, Modern, Professional, Minimal, and Executive. Each has a distinct layout while staying ATS-safe. You can switch templates without losing your content.",
       },
     ],
     relatedTools: ["word-counter", "pdf-toolkit", "color-palette"],
     metaTitle:
-      "Free Resume Builder Online: ATS-Friendly PDF Export | Ozaar",
+      "Free Resume Builder Online (2026): 5 ATS Templates & PDF Export | Ozaar",
     metaDesc:
-      "Build a professional resume online for free. ATS-optimized templates, live preview, and one-click PDF export. No account required. Saves automatically in your browser.",
+      "Free ATS-friendly resume builder with 5 professional templates, live preview, and one-click PDF export. Experience, projects, and certifications are optional. No signup. Auto-saves in your browser.",
     keywords: [
       "free resume builder",
       "resume maker online",
-      "cv builder",
-      "ats resume template",
-      "resume pdf download",
+      "ATS resume template",
+      "ATS friendly resume",
+      "resume PDF download",
+      "CV builder free",
       "professional resume creator",
+      "online resume builder no signup",
+      "resume builder with templates",
+      "optional resume sections",
+      "classic modern professional resume template",
+      "free CV maker PDF",
     ],
   },
 
@@ -332,12 +349,12 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
       {
         title: "Compress file size",
-        desc: "Reduce PDF size for email attachments or uploads without losing document quality.",
+        desc: "Shrink scanned and image-heavy PDFs with quality presets, ideal for email and uploads.",
         icon: "compress",
       },
       {
         title: "Zero server processing",
-        desc: "Everything runs via pdf-lib in your browser. Sensitive documents never leave your device.",
+        desc: "Everything runs in your browser. Sensitive documents never leave your device.",
         icon: "offline",
       },
     ],
@@ -402,7 +419,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         question: "Will compression reduce text quality?",
         answer:
-          "Text and vector graphics remain crisp after compression. Only embedded raster images may see slight quality reduction at high compression levels.",
+          "Compression re-renders each page as a JPEG image, so text is no longer selectable and very sharp vector art can soften a little. Use High quality for closer fidelity, or Smallest file for maximum size reduction. Scanned and image-heavy PDFs usually shrink the most.",
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
@@ -425,7 +442,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "One scan.",
     taglineAccent: "Infinite possibilities.",
     description:
-      "Generate QR codes instantly from any URL, text, or contact info. Customise size and colours, then download as PNG or SVG in seconds. No sign-up, no watermark.",
+      "Generate QR codes for URLs, text, phone numbers, email, WhatsApp chats, and payment links. Customise size and colours, then download as PNG or SVG. No sign-up, no watermark.",
     category: "Utilities",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -434,19 +451,19 @@ export const toolConfigs: Record<string, ToolConfig> = {
       "linear-gradient(#F0F0F0 1px, transparent 1px), linear-gradient(90deg, #F0F0F0 1px, transparent 1px)",
     icon: "⬛",
     stats: [
-      { value: "Instant", label: "generation" },
+      { value: "5 types", label: "URL, phone, email, chat, pay" },
       { value: "PNG + SVG", label: "export formats" },
       { value: "No", label: "watermark ever" },
     ],
     features: [
       {
-        title: "URL, text, or vCard",
-        desc: "Generate QR codes from any web address, plain text, email address, phone number, or contact card.",
+        title: "URL, phone, email, WhatsApp & payments",
+        desc: "Build QR codes that open links, dial numbers, draft emails, start WhatsApp chats, or open any payment link.",
         icon: "link",
       },
       {
         title: "Custom size & colors",
-        desc: "Choose any size from 64px to 1024px and customise foreground and background colors to match your brand.",
+        desc: "Choose 128px, 256px, or 512px and customise foreground and background colours to match your brand.",
         icon: "palette",
       },
       {
@@ -462,9 +479,9 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     howItWorks: [
       {
-        title: "Enter your content",
+        title: "Choose a QR type",
         description:
-          "Type or paste any URL, text, email, or phone number into the input field. The QR code updates instantly as you type.",
+          "Pick URL/Text, Phone, Email, WhatsApp, or Payment, then fill in the matching fields. The code updates as you type.",
         icon: "type",
       },
       {
@@ -476,31 +493,36 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         title: "Download your QR code",
         description:
-          "Click 'Download PNG' or 'Download SVG' to save your QR code. Print it, embed it, or share it anywhere.",
+          "Download as PNG or SVG. Print it, embed it, or share it anywhere. No account and no watermark.",
         icon: "download",
       },
     ],
     useCases: [
       {
-        title: "Restaurant menus",
-        scenario: "Restaurant Owner",
+        title: "Menus, links & pages",
+        scenario: "Business Owner",
         description:
-          "Generate a QR code linking to your online menu. Place it on tables and let customers browse without physical menus.",
+          "Encode a website or menu URL so customers can open it with one scan, no typing required.",
       },
       {
-        title: "Business cards",
+        title: "Call, email, or WhatsApp",
         scenario: "Freelancer",
         description:
-          "Embed a QR code linking to your portfolio or LinkedIn profile. One scan gives a new contact everything they need.",
+          "Put a phone, email, or WhatsApp QR on a card or poster so people can reach you in one tap.",
       },
       {
-        title: "Event check-in",
-        scenario: "Event Organiser",
+        title: "Accept payments",
+        scenario: "Seller or Creator",
         description:
-          "Create unique QR codes for each ticket. Download as SVG for sharp printing at any size, even large-format banners.",
+          "Encode any payment or checkout link so buyers can pay by scanning, at events, stores, or invoices.",
       },
     ],
     faq: [
+      {
+        question: "What types of QR codes can I create?",
+        answer:
+          "URL or plain text, phone (opens the dialer), email (opens the mail app with optional subject and body), WhatsApp (opens a chat with an optional pre-filled message), and payment (any payment or checkout link).",
+      },
       {
         question: "Is there a limit to how many QR codes I can generate?",
         answer:
@@ -528,14 +550,18 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "image-resizer", "password-generator"],
-    metaTitle: "Free QR Code Generator Online: PNG & SVG Download | Ozaar",
+    metaTitle: "Free QR Code Generator: URL, Phone, Email, WhatsApp & Pay | Ozaar",
     metaDesc:
-      "Generate QR codes instantly from any URL, text, or contact info. Download as PNG or SVG. Free, no watermark, no sign-up. Works entirely in your browser.",
+      "Free QR code generator for URLs, phone, email, WhatsApp, and payment links. Customise colours, download PNG or SVG. No watermark, no sign-up, runs in your browser.",
     keywords: [
       "qr code generator",
       "generate qr code free",
       "qr code maker",
       "url to qr",
+      "whatsapp qr code",
+      "phone qr code",
+      "email qr code",
+      "payment qr code",
       "custom qr code",
       "free qr generator",
     ],
@@ -670,7 +696,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Beautiful colors.",
     taglineAccent: "Instantly yours.",
     description:
-      "Generate harmonious 5-colour palettes from any base colour. Analogous, complementary, triadic, and split-complementary modes. Export as CSS variables or Tailwind config.",
+      "Enter any hex colour to get its full shade scale (50–950), or explore Analogous, Complementary, Triadic, and Split-Complementary harmonies. Your base colour is marked, click a swatch to update the brand preview, and dark colours get white text automatically. Export as CSS or Tailwind.",
     category: "Design",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -679,111 +705,118 @@ export const toolConfigs: Record<string, ToolConfig> = {
       "radial-gradient(circle at 1px 1px, #F0F0F0 1px, transparent 0)",
     icon: "🎨",
     stats: [
-      { value: "4 modes", label: "harmony algorithms" },
-      { value: "CSS + Tailwind", label: "export formats" },
-      { value: "Infinite", label: "color combinations" },
+      { value: "11 shades", label: "per colour (50–950)" },
+      { value: "5 modes", label: "shades + harmonies" },
+      { value: "Live", label: "brand preview" },
     ],
     features: [
       {
-        title: "4 colour harmony modes",
-        desc: "Analogous, complementary, triadic, and split-complementary, all based on colour theory principles used by professional designers.",
+        title: "Full shade scale from any colour",
+        desc: "Default Shades mode builds an 11-step tint → shade ramp (50–950) of your hex — same hue from near-white to near-black, ready for UI systems.",
         icon: "palette",
       },
       {
-        title: "One-click CSS export",
-        desc: "Export your palette as CSS custom properties (--color-primary, etc.) ready to paste into your stylesheet.",
+        title: "Colour harmony modes explained simply",
+        desc: "Analogous = neighbours on the wheel. Complementary = opposite contrast. Triadic = three evenly spaced hues. Split-Comp = softer contrast than pure complementary.",
+        icon: "harmony",
+      },
+      {
+        title: "Base marker + live brand preview",
+        desc: "Your base colour is labelled on every palette. Click any swatch to drive the preview header and button; dark backgrounds switch text to white for readability.",
+        icon: "eye",
+      },
+      {
+        title: "CSS & Tailwind export",
+        desc: "Copy shade ramps as --color-50…950 CSS variables or a Tailwind brand colour object. HEX, RGB, and HSL copy from each swatch.",
         icon: "code",
-      },
-      {
-        title: "Tailwind config export",
-        desc: "Copy a Tailwind CSS colors object to drop directly into tailwind.config.js with properly named shades.",
-        icon: "tailwind",
-      },
-      {
-        title: "Click to copy HEX",
-        desc: "Click any colour swatch to copy its hex value to clipboard. Build, iterate, and export your palette in seconds.",
-        icon: "copy",
       },
     ],
     howItWorks: [
       {
         title: "Pick a base colour",
         description:
-          "Use the colour picker or type a hex value to set your starting colour. This becomes the foundation of your palette.",
+          "Use the picker or type a hex code. That colour is marked as Base in the palette and anchors Shades or your chosen harmony.",
         icon: "picker",
       },
       {
-        title: "Choose a harmony mode",
+        title: "Choose a mode",
         description:
-          "Select analogous for soft, cohesive palettes; complementary for contrast; triadic or split-complementary for vibrant variety.",
+          "Shades for a light-to-dark scale of one hue. Analogous for soft neighbours, Complementary for bold opposites, Triadic for three accents, Split-Comp for balanced contrast.",
         icon: "harmony",
       },
       {
-        title: "Export your palette",
+        title: "Preview and export",
         description:
-          "Click on any swatch to copy its hex. Use the export button to copy your full palette as CSS variables or Tailwind config.",
+          "Click a swatch to update the brand preview. Copy HEX/RGB/HSL, then export CSS variables or Tailwind config for your project.",
         icon: "export",
       },
     ],
     useCases: [
       {
-        title: "Brand identity design",
+        title: "Brand colour systems",
         scenario: "Brand Designer",
         description:
-          "Build a cohesive colour system for a new brand in minutes. Start from the primary brand colour and generate a full palette instantly.",
+          "Start from a primary brand hex and generate a full 50–950 shade ladder for buttons, surfaces, and text — then export straight into your design tokens.",
       },
       {
         title: "UI component theming",
         scenario: "Frontend Developer",
         description:
-          "Export directly to Tailwind or CSS variables. Drop your palette into your design system and have consistent colours everywhere.",
+          "Drop Tailwind or CSS exports into your config. Use Shades for neutrals of one hue, or Complementary / Split-Comp when you need a clear accent.",
       },
       {
-        title: "Marketing materials",
+        title: "Marketing & creative",
         scenario: "Marketing Designer",
         description:
-          "Quickly generate on-brand colour options for social posts, ads, and presentations without needing a full design software licence.",
+          "Try Analogous for calm campaigns or Triadic when you need three vivid accents for social posts and decks — no design suite required.",
       },
     ],
     faq: [
       {
-        question: "What is colour harmony?",
+        question: "What does Shades mode do?",
         answer:
-          "Colour harmony refers to the pleasing arrangement of colours based on their positions on the colour wheel. Analogous colours sit next to each other; complementary colours are opposite; triadic colours are evenly spaced.",
+          "Shades keeps your colour’s hue and builds 11 steps from lightest (50) to darkest (950). Your exact base hex is kept in the ramp and labelled Base.",
+      },
+      {
+        question: "What do Analogous, Complementary, Triadic, and Split-Comp mean?",
+        answer:
+          "Analogous uses neighbouring hues for a soft look. Complementary uses the opposite hue for strong contrast. Triadic uses three hues spaced evenly around the wheel. Split-complementary uses the two colours beside the opposite hue — contrast that is usually less harsh than pure complementary.",
       },
       {
         question: "Can I start from a specific hex code?",
         answer:
-          "Yes, type any valid hex code into the input field and the palette generates instantly. You can also use the visual colour picker.",
+          "Yes. Type any 6-digit hex or use the colour picker. The palette updates immediately and marks your base colour.",
       },
       {
-        question: "What does the CSS export look like?",
+        question: "How does the brand preview work?",
         answer:
-          "The CSS export produces a :root block with custom properties: --color-1 through --color-5, ready to paste into any stylesheet or CSS module.",
+          "Click any swatch to apply it to the preview header and button. If that colour is dark (low lightness), the text switches to white so it stays readable.",
       },
       {
-        question: "Is this suitable for accessible design?",
+        question: "What does the export look like?",
         answer:
-          "We display contrast ratios for each colour against white and black so you can verify WCAG accessibility compliance before committing to a palette.",
+          "In Shades mode, CSS exports --color-50 through --color-950 and Tailwind exports a brand object with the same keys. Harmony modes export numbered colours. You can also copy HEX, RGB, or HSL from each swatch.",
       },
       {
-        question: "How many palettes can I generate?",
+        question: "Is anything uploaded to a server?",
         answer:
-          "Unlimited, generate as many as you like. Each palette can be exported separately as CSS or Tailwind config.",
+          "No. Palette math and exports run entirely in your browser. Nothing is stored on our servers.",
       },
     ],
     relatedTools: ["image-compressor", "resume-builder", "word-counter"],
     metaTitle:
-      "Free Color Palette Generator, CSS & Tailwind Export | Ozaar",
+      "Free Color Palette Generator: Shades 50–950, Harmonies & Tailwind | Ozaar",
     metaDesc:
-      "Generate beautiful colour palettes online for free. Analogous, complementary, triadic modes. Export as CSS variables or Tailwind config. No account needed.",
+      "Free online colour palette tool. Enter a hex for a full 50–950 shade scale, or use Analogous, Complementary, Triadic, and Split-Comp modes. Live brand preview, CSS & Tailwind export. No account.",
     keywords: [
       "color palette generator",
-      "color scheme generator",
-      "complementary colors",
-      "hex color palette",
-      "css variables export",
+      "color shade generator",
+      "hex shade scale 50 950",
+      "analogous complementary triadic colors",
+      "split complementary palette",
       "tailwind color generator",
+      "css color variables export",
+      "brand color preview",
     ],
   },
 

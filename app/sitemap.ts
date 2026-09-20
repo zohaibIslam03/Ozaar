@@ -1,46 +1,33 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { tools } from "@/lib/tools";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://ozaar.theinnovations.tech";
-
-const tools = [
-  "pdf-toolkit",
-  "image-compressor",
-  "image-resizer",
-  "bg-remover",
-  "qr-generator",
-  "password-generator",
-  "color-palette",
-  "word-counter",
-  "resume-builder",
-  "age-calculator",
-  "currency-converter",
-  "unit-converter",
-];
-
+/**
+ * App Router sitemap — preferred over static next-sitemap files here because:
+ * - URLs stay in sync with lib/tools (no duplicated slug list)
+ * - Served at /sitemap.xml for crawlers the same way static XML would be
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const lastModified = new Date();
 
-  const staticPages: MetadataRoute.Sitemap = [
+  return [
     {
-      url: BASE_URL,
-      lastModified: now,
+      url: SITE_URL,
+      lastModified,
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 1,
     },
     {
-      url: `${BASE_URL}/about`,
-      lastModified: now,
+      url: `${SITE_URL}/about`,
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.6,
     },
+    ...tools.map((tool) => ({
+      url: `${SITE_URL}/tools/${tool.slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: tool.slug === "resume-builder" ? 0.95 : 0.9,
+    })),
   ];
-
-  const toolPages: MetadataRoute.Sitemap = tools.map((slug) => ({
-    url: `${BASE_URL}/tools/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.9,
-  }));
-
-  return [...staticPages, ...toolPages];
 }

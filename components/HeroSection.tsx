@@ -84,7 +84,7 @@ function QrMockup() {
       </svg>
       <div className="flex flex-col gap-1.5 flex-1">
         <p className="text-[11px] font-semibold text-[#111]">QR Generated</p>
-        <p className="text-[10px] text-[#999] break-all">ozaar.theinnovations.tech</p>
+        <p className="text-[10px] text-[#999]">URL · Phone · Email · Chat · Pay</p>
         <div className="flex gap-1.5 mt-1">
           <span className="text-[9px] bg-[#DF0A09]/10 text-[#DF0A09] font-semibold px-2 py-0.5 rounded-full">PNG</span>
           <span className="text-[9px] bg-[#F7F7F7] text-[#666] font-semibold px-2 py-0.5 rounded-full">SVG</span>
@@ -173,7 +173,7 @@ export default function HeroSection() {
                 className="font-heading leading-[1.05] tracking-tight text-brand-text"
                   style={{ fontSize: "clamp(34px, 11vw, 72px)", fontWeight: 900 }}
               >
-                <span className="block">Ozaar — every tool you need,</span>
+                <span className="block">Ozaar: every tool you need,</span>
                 <span className="block text-brand-red">completely free.</span>
               </h1>
             </motion.div>

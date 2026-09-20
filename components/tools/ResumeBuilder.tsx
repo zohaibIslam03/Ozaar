@@ -12,7 +12,7 @@ import {
   FileText,
   User,
   AlignLeft,
-  Code2,
+  Layers,
   FolderOpen,
   GraduationCap,
   Award,
@@ -45,6 +45,11 @@ import type {
   Certification,
   Experience,
 } from "@/types/resume";
+import {
+  RESUME_TEMPLATES,
+  getResumeTemplate,
+  type ResumeTemplate,
+} from "@/lib/resumeTemplates";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -60,9 +65,10 @@ const EMPTY_DATA: ResumeData = {
   phone: "",
   email: "",
   linkedIn: "",
-  github: "",
+  website: "",
   location: "",
   summary: "",
+  templateId: "classic",
   skills: [],
   projects: [],
   education: [],
@@ -223,6 +229,7 @@ function EntryCard({ onRemove, children }: { onRemove: () => void; children: Rea
 // ── Progress bar ──────────────────────────────────────────────────────────────
 
 function calcProgress(d: ResumeData): number {
+  // Core fields only. Projects, experience, and certifications are optional.
   let score = 0;
   if (d.fullName) score++;
   if (d.jobTitle) score++;
@@ -231,24 +238,22 @@ function calcProgress(d: ResumeData): number {
   if (d.location) score++;
   if (d.summary) score++;
   if (d.skills.some((s) => s.category && s.skills)) score++;
-  if (d.projects.some((p) => p.name)) score++;
   if (d.education.some((e) => e.institution)) score++;
-  if (d.certifications.some((c) => c.provider && c.course)) score++;
-  return Math.round((score / 10) * 100);
+  return Math.round((score / 8) * 100);
 }
 
 // ── Section accordion ─────────────────────────────────────────────────────────
 
-const SECTION_ICONS = [User, AlignLeft, Code2, FolderOpen, GraduationCap, Award, Briefcase];
+const SECTION_ICONS = [User, AlignLeft, Layers, FolderOpen, GraduationCap, Award, Briefcase];
 
 const SECTION_TIPS = [
   "Fill your name and email first so they appear at the top of your resume.",
   "Keep it under 3 sentences. Focus on your biggest strengths.",
-  "Group skills by category for better ATS readability.",
-  "Include GitHub links because recruiters always check.",
+  "Group skills by category so they are easy to scan.",
+  "Optional. Add a portfolio, case study, or work sample only if you have one.",
   "List most recent education first.",
-  "Add relevant certs to stand out from applicants.",
-  "Use action verbs: Built, Led, Improved, Reduced.",
+  "Optional. Skip if you do not have certifications yet.",
+  "Optional. Skip if you are early-career or changing fields.",
 ];
 
 function Section({
@@ -258,6 +263,7 @@ function Section({
   onToggle,
   complete,
   badge,
+  optional,
   children,
 }: {
   index: number;
@@ -266,6 +272,7 @@ function Section({
   onToggle: () => void;
   complete?: boolean;
   badge?: string;
+  optional?: boolean;
   children: React.ReactNode;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -308,7 +315,14 @@ function Section({
         >
           <Icon size={14} strokeWidth={1.75} color={iconOpen ? "#fff" : "#888"} />
         </div>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#111", flex: 1, minWidth: 0 }}>{title}</span>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#111", flex: 1, minWidth: 0 }}>
+          {title}
+          {optional && (
+            <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+              Optional
+            </span>
+          )}
+        </span>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: "auto", flexShrink: 0 }}>
           {complete && (
             <span
@@ -407,13 +421,13 @@ function SortableProject({
         >
           <X size={13} />
         </button>
-        <FInput label="Project Name *" value={proj.name} onChange={(v) => onChange({ ...proj, name: v })} placeholder="E-Commerce Platform" />
-        <FInput label="GitHub / Live URL" value={proj.url} onChange={(v) => onChange({ ...proj, url: v })} placeholder="https://github.com/..." />
+        <FInput label="Project Name *" value={proj.name} onChange={(v) => onChange({ ...proj, name: v })} placeholder="Community Outreach Campaign" />
+        <FInput label="Link / Portfolio URL" value={proj.url} onChange={(v) => onChange({ ...proj, url: v })} placeholder="https://example.com/project" />
         <FInput
           label="Description (one bullet per line)"
           value={proj.bullets}
           onChange={(v) => onChange({ ...proj, bullets: v })}
-          placeholder={"Built with Laravel and Vue.js\nIntegrated Stripe payments"}
+          placeholder={"Increased engagement by 40%\nCoordinated a team of 8 volunteers"}
           textarea
           rows={3}
           hint="Each line becomes a bullet point"
@@ -452,6 +466,244 @@ function EmptyState({
   );
 }
 
+// ── Template thumbnail (visual mock before user fills data) ───────────────────
+
+function TemplateThumbnail({ template }: { template: ResumeTemplate }) {
+  const p = template.preview;
+  const align = p.nameAlign;
+  const isBand = p.headerVariant === "band";
+  const isTopBar = p.headerVariant === "top-bar";
+  const isDouble = p.headerVariant === "double-rule";
+  const isExec = p.sectionVariant === "band";
+  const isLeftBar = p.sectionVariant === "left-bar";
+  const isThick = p.sectionVariant === "thick-rule";
+  const isSubtle = p.sectionVariant === "subtle";
+
+  const sectionLabel = (label: string) => {
+    if (isExec) {
+      return (
+        <div
+          style={{
+            fontSize: 5,
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "#fff",
+            background: p.sectionBandBg || template.accent,
+            padding: "2px 4px",
+            marginTop: 5,
+            marginBottom: 3,
+            textAlign: "left",
+          }}
+        >
+          {label}
+        </div>
+      );
+    }
+    if (isLeftBar) {
+      return (
+        <div style={{ display: "flex", alignItems: "stretch", gap: 4, marginTop: 5, marginBottom: 3 }}>
+          <div style={{ width: 2.5, background: template.accent, borderRadius: 1, flexShrink: 0 }} />
+          <div>
+            <div
+              style={{
+                fontSize: 5,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: template.accent,
+                textAlign: "left",
+              }}
+            >
+              {label}
+            </div>
+            <div style={{ height: 1, background: template.accent, marginTop: 1 }} />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <>
+        <div
+          style={{
+            fontSize: isSubtle ? 4.5 : 5.5,
+            fontWeight: isSubtle ? 600 : 700,
+            textTransform: "uppercase",
+            letterSpacing: isSubtle ? "0.16em" : isThick ? "0.12em" : "0.1em",
+            color: (p.sectionTitle.color as string) || template.accent,
+            textAlign: p.sectionTitle.textAlign === "center" ? "center" : align,
+            marginTop: isSubtle ? 7 : 5,
+            marginBottom: 1,
+          }}
+        >
+          {label}
+        </div>
+        <div
+          style={{
+            height: isThick ? 2.5 : isSubtle ? 0.75 : 1,
+            background: isSubtle ? "#E2E8F0" : template.accent,
+            marginBottom: isSubtle ? 4 : 3,
+          }}
+        />
+      </>
+    );
+  };
+
+  const headerInner = (
+    <>
+      <div
+        style={{
+          fontSize: template.id === "executive" ? 13 : template.id === "minimal" ? 9 : 11,
+          fontWeight: p.nameWeight === 800 ? 800 : p.nameWeight === 500 ? 500 : 700,
+          lineHeight: 1.1,
+          marginBottom: 2,
+          letterSpacing: p.nameLetterSpacing,
+          color: isBand ? (p.headerTextColor || "#fff") : p.nameColor,
+          textAlign: align,
+        }}
+      >
+        Alex Rivera
+      </div>
+      <div
+        style={{
+          fontSize: 5.5,
+          color: isBand ? "#B8D4F0" : (p.jobTitleStyle.color as string) || "#555",
+          fontStyle: (p.jobTitleStyle.fontStyle as string) || "normal",
+          fontWeight: (p.jobTitleStyle.fontWeight as number) || 400,
+          textTransform: (p.jobTitleStyle.textTransform as string) || "none",
+          letterSpacing: (p.jobTitleStyle.letterSpacing as string) || undefined,
+          marginBottom: 2,
+          textAlign: align,
+        }}
+      >
+        Marketing Manager
+      </div>
+      <div
+        style={{
+          fontSize: 4,
+          color: isBand ? "#D6E6F5" : p.contactColor,
+          marginBottom: isDouble ? 0 : isSubtle ? 6 : 4,
+          lineHeight: 1.35,
+          textAlign: align,
+        }}
+      >
+        you@email.com · City
+      </div>
+      {isDouble && (
+        <div style={{ marginTop: 4, marginBottom: 4 }}>
+          <div style={{ height: 2, background: template.accent }} />
+          <div style={{ height: 1, background: template.accent, marginTop: 1.5 }} />
+        </div>
+      )}
+    </>
+  );
+
+  return (
+    <div
+      aria-hidden
+      style={{
+        width: "100%",
+        aspectRatio: "3 / 4",
+        background: "#fff",
+        border: "1px solid #E8E8E8",
+        borderRadius: 8,
+        overflow: "hidden",
+        boxShadow: "0 4px 14px rgba(0,0,0,0.06)",
+        fontFamily: p.fontFamily,
+        color: "#111",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {isTopBar && (
+        <div style={{ height: 5, background: template.accent, flexShrink: 0 }} />
+      )}
+      {isBand ? (
+        <div style={{ background: p.headerBg || template.accent, padding: "8px 8px 6px" }}>
+          {headerInner}
+        </div>
+      ) : (
+        <div
+          style={{
+            padding: isSubtle ? "14px 12px 0" : isTopBar ? "7px 8px 0" : "9px 9px 0",
+          }}
+        >
+          {headerInner}
+        </div>
+      )}
+      <div style={{ padding: isSubtle ? "0 12px 8px" : "0 8px 7px", flex: 1 }}>
+        {sectionLabel("Summary")}
+        <p style={{ fontSize: 4.5, lineHeight: 1.35, color: "#333", margin: "0 0 4px", textAlign: "left" }}>
+          Results-driven pro with 5+ years delivering outcomes.
+        </p>
+        {sectionLabel("Experience")}
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 1, textAlign: "left" }}>
+          <span style={{ fontSize: 5.5, fontWeight: 700 }}>Acme Co, Lead</span>
+          <span style={{ fontSize: 4.5, color: "#666" }}>2021–Now</span>
+        </div>
+        <p style={{ fontSize: 4.5, lineHeight: 1.3, color: "#333", margin: "0 0 1px", textAlign: "left" }}>
+          • Grew engagement 40% YoY
+        </p>
+        <p style={{ fontSize: 4.5, lineHeight: 1.3, color: "#333", margin: "0 0 3px", textAlign: "left" }}>
+          • Led a team of 6
+        </p>
+        {sectionLabel("Education")}
+        <div style={{ display: "flex", justifyContent: "space-between", textAlign: "left" }}>
+          <span style={{ fontSize: 5.5, fontWeight: 700 }}>State University</span>
+          <span style={{ fontSize: 4.5, color: "#666" }}>2019</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TemplatePicker({
+  selectedId,
+  onSelect,
+}: {
+  selectedId: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div className="mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+      <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="m-0 text-sm font-bold text-gray-900">Choose an ATS-friendly template</p>
+          <p className="m-0 mt-0.5 text-xs text-gray-500">
+            Five distinct layouts. Switch anytime — your content stays. Experience, projects, and certifications stay off the page until you fill them.
+          </p>
+        </div>
+        <p className="m-0 text-xs font-semibold text-brand-red">
+          Selected: {getResumeTemplate(selectedId).name}
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+        {RESUME_TEMPLATES.map((t) => {
+          const active = selectedId === t.id;
+          return (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => onSelect(t.id)}
+              className={`group rounded-xl border p-2.5 text-left transition-all ${
+                active
+                  ? "border-brand-red bg-brand-red/[0.04] ring-2 ring-brand-red/25"
+                  : "border-gray-200 bg-neutral-50 hover:border-gray-300 hover:bg-white"
+              }`}
+            >
+              <TemplateThumbnail template={t} />
+              <p className={`m-0 mt-2.5 text-xs font-bold ${active ? "text-brand-red" : "text-gray-900"}`}>
+                {t.name}
+              </p>
+              <p className="m-0 mt-0.5 text-[10px] leading-snug text-gray-500">{t.tagline}</p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Resume preview ────────────────────────────────────────────────────────────
 
 function GhostSection({ label }: { label: string }) {
@@ -478,16 +730,174 @@ function GhostSection({ label }: { label: string }) {
   );
 }
 
-const RES: Record<string, React.CSSProperties> = {
-  wrap: {
+function PreviewSectionHeading({
+  title,
+  template,
+}: {
+  title: string;
+  template: ResumeTemplate;
+}) {
+  const p = template.preview;
+  const v = p.sectionVariant;
+
+  if (v === "band") {
+    return (
+      <div
+        style={{
+          ...p.sectionTitle,
+          background: p.sectionBandBg || template.accent,
+          color: p.sectionBandColor || "#fff",
+          marginBottom: 10,
+        }}
+      >
+        {title}
+      </div>
+    );
+  }
+
+  if (v === "left-bar") {
+    return (
+      <div style={{ display: "flex", alignItems: "stretch", gap: 10, marginTop: 16, marginBottom: 8 }}>
+        <div
+          style={{
+            width: p.sectionLeftBarWidth || 4,
+            background: template.accent,
+            borderRadius: 1,
+            flexShrink: 0,
+          }}
+        />
+        <div style={{ flex: 1 }}>
+          <div style={{ ...p.sectionTitle, marginTop: 0, paddingLeft: 0 }}>{title}</div>
+          <hr style={{ ...p.sectionRule, marginTop: 4 }} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div style={p.sectionTitle}>{title}</div>
+      <hr style={p.sectionRule} />
+    </>
+  );
+}
+
+function PreviewHeader({
+  template,
+  fullName,
+  jobTitle,
+  contactParts,
+  showGhosts,
+}: {
+  template: ResumeTemplate;
+  fullName: string;
+  jobTitle: string;
+  contactParts: { label: string; href?: string }[];
+  showGhosts: boolean;
+}) {
+  const p = template.preview;
+  const isBand = p.headerVariant === "band";
+
+  const nameEl = (
+    <div
+      style={{
+        fontSize: p.nameSize,
+        fontWeight: p.nameWeight,
+        textAlign: p.nameAlign,
+        color: isBand ? p.headerTextColor || "#fff" : p.nameColor,
+        marginBottom: 5,
+        letterSpacing: p.nameLetterSpacing,
+      }}
+    >
+      {fullName}
+    </div>
+  );
+
+  const titleEl = jobTitle ? (
+    <div style={p.jobTitleStyle}>{jobTitle}</div>
+  ) : showGhosts ? (
+    <GhostSection label="your job title" />
+  ) : null;
+
+  const contactEl =
+    contactParts.length > 0 ? (
+      <div
+        style={{
+          textAlign: p.contactAlign,
+          fontSize: "9.5pt",
+          color: p.contactColor,
+          marginBottom: p.headerVariant === "double-rule" ? 0 : 14,
+          lineHeight: 1.7,
+        }}
+      >
+        {contactParts.map((part, i) => (
+          <span key={i}>
+            {i > 0 && (
+              <span style={{ color: isBand ? "rgba(255,255,255,0.45)" : "#999" }}>{p.contactSep}</span>
+            )}
+            {part.href ? (
+              <a
+                href={part.href}
+                style={{ color: isBand ? p.contactColor : "#0000EE" }}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {part.label}
+              </a>
+            ) : (
+              part.label
+            )}
+          </span>
+        ))}
+      </div>
+    ) : showGhosts ? (
+      <GhostSection label="contact details" />
+    ) : null;
+
+  const doubleRule =
+    p.headerVariant === "double-rule" ? (
+      <div style={{ marginTop: 10, marginBottom: 14 }}>
+        <div style={{ height: 2.5, background: template.accent }} />
+        <div style={{ height: 1, background: template.accent, marginTop: 3 }} />
+      </div>
+    ) : null;
+
+  if (isBand) {
+    return (
+      <div style={{ background: p.headerBg || template.accent, padding: p.headerPad || "28px 42px 24px" }}>
+        {nameEl}
+        {titleEl}
+        {contactEl}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {nameEl}
+      {titleEl}
+      {contactEl}
+      {doubleRule}
+    </>
+  );
+}
+
+function ResumePreview({ data }: { data: ResumeData }) {
+  const template = getResumeTemplate(data.templateId);
+  const p = template.preview;
+  const isBand = p.headerVariant === "band";
+  const isTopBar = p.headerVariant === "top-bar";
+  const edgeToEdge = isBand || isTopBar;
+
+  const wrap: React.CSSProperties = {
     width: "100%",
     maxWidth: 660,
     background: "#ffffff",
     border: "1px solid #E0E0E0",
     borderRadius: 8,
-    margin: "0 20px 20px",
-    padding: "40px 48px",
-    fontFamily: "'Times New Roman', Georgia, serif",
+    margin: "0 auto",
+    padding: edgeToEdge ? 0 : p.pagePad,
+    fontFamily: p.fontFamily,
     fontSize: "11pt",
     lineHeight: 1.45,
     color: "#000000",
@@ -496,40 +906,17 @@ const RES: Record<string, React.CSSProperties> = {
     boxSizing: "border-box",
     position: "relative",
     overflow: "hidden",
-  },
-  name: { fontSize: "24pt", fontWeight: "bold", textAlign: "center", color: "#000", marginBottom: 5 },
-  jobTitle: { fontSize: "11pt", textAlign: "center", color: "#444", marginBottom: 6, fontStyle: "italic" },
-  contactLine: { textAlign: "center", fontSize: "9.5pt", color: "#333", marginBottom: 14, lineHeight: 1.7 },
-  sectionTitle: {
-    fontSize: "10.5pt",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-    color: "#000",
-    marginTop: 14,
-    marginBottom: 3,
-  },
-  sectionRule: { borderTop: "1.5px solid #000", marginBottom: 7 },
-  body: { fontSize: "10pt", color: "#111", lineHeight: 1.5 },
-  bullet: { fontSize: "10pt", color: "#111", lineHeight: 1.5, marginBottom: 2 },
-  row: { display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 4 },
-  entryMargin: { marginBottom: 9 },
-};
+  };
 
-function SectionRule() {
-  return <hr style={RES.sectionRule} />;
-}
-
-function ResumePreview({ data }: { data: ResumeData }) {
   const contactParts: { label: string; href?: string }[] = [];
   if (data.phone) contactParts.push({ label: data.phone });
   if (data.email) contactParts.push({ label: data.email, href: `mailto:${data.email}` });
   if (data.linkedIn) contactParts.push({ label: "LinkedIn Profile", href: data.linkedIn });
-  if (data.github) contactParts.push({ label: "GitHub Profile", href: data.github });
+  if (data.website) contactParts.push({ label: "Website", href: data.website });
   if (data.location) contactParts.push({ label: data.location });
 
   const filledSkills = data.skills.filter((s) => s.category && s.skills);
-  const filledProjects = data.projects.filter((p) => p.name);
+  const filledProjects = data.projects.filter((pr) => pr.name);
   const filledEdu = data.education.filter((e) => e.institution);
   const filledCerts = data.certifications.filter((c) => c.provider && c.course);
   const filledExp = data.experience.filter((e) => e.company && e.role);
@@ -540,115 +927,96 @@ function ResumePreview({ data }: { data: ResumeData }) {
     filledSkills.length === 0 &&
     filledProjects.length === 0 &&
     filledEdu.length === 0 &&
-    filledExp.length === 0;
+    filledExp.length === 0 &&
+    filledCerts.length === 0;
 
-  if (isEmpty) {
-    return (
-      <div style={{ ...RES.wrap, display: "flex", flexDirection: "column" }}>
-        <FileText size={40} color="#E0E0E0" style={{ alignSelf: "center", marginBottom: 12 }} />
-        <p style={{ fontSize: 13, color: "#ccc", textAlign: "center", maxWidth: 280, lineHeight: 1.6, alignSelf: "center", marginBottom: 20 }}>
-          Start filling in the form on the left; your resume will appear here instantly.
-        </p>
-        <GhostSection label="your name and headline" />
-        <GhostSection label="a professional summary" />
-        <GhostSection label="skills" />
-        <GhostSection label="experience" />
-        <GhostSection label="projects" />
-        <GhostSection label="education" />
-        <GhostSection label="certifications" />
-      </div>
-    );
-  }
+  const body = p.body;
+  const bullet: React.CSSProperties = { ...body, marginBottom: 2 };
+  const row: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    flexWrap: "wrap",
+    gap: 4,
+  };
+  const entryMargin: React.CSSProperties = { marginBottom: 9 };
+  const contentPad: React.CSSProperties = edgeToEdge ? { padding: p.pagePad } : {};
 
-  return (
-    <div style={RES.wrap}>
-      <div style={RES.name}>{data.fullName || "Your Name"}</div>
-      {data.jobTitle ? <div style={RES.jobTitle}>{data.jobTitle}</div> : <GhostSection label="your job title" />}
+  const sampleContact = [
+    { label: "you@email.com" },
+    { label: "+1 555 000 0000" },
+    { label: "City, Country" },
+  ];
 
-      {contactParts.length > 0 ? (
-        <div style={RES.contactLine}>
-          {contactParts.map((p, i) => (
-            <span key={i}>
-              {i > 0 && <span style={{ color: "#999", margin: "0 4px" }}>|</span>}
-              {p.href ? (
-                <a href={p.href} style={{ color: "#0000EE" }} target="_blank" rel="noreferrer">
-                  {p.label}
-                </a>
-              ) : (
-                p.label
-              )}
-            </span>
-          ))}
-        </div>
-      ) : (
-        <GhostSection label="contact details" />
-      )}
-
-      {data.summary ? (
+  const sections = (
+    showGhosts: boolean,
+    opts: {
+      summary?: string;
+      skills?: { id: string; category: string; skills: string }[];
+      exp?: { id: string; company: string; role: string; duration: string; bullets: string }[];
+      projects?: { id: string; name: string; url: string; bullets: string }[];
+      edu?: { id: string; institution: string; degree: string; yearFrom: string; yearTo: string }[];
+      certs?: { id: string; provider: string; course: string; year: string }[];
+    }
+  ) => (
+    <>
+      {(opts.summary || showGhosts) && (
         <>
-          <div style={RES.sectionTitle}>Professional Summary</div>
-          <SectionRule />
-          <p style={RES.body}>{data.summary}</p>
-        </>
-      ) : (
-        <>
-          <div style={RES.sectionTitle}>Professional Summary</div>
-          <SectionRule />
-          <GhostSection label="a professional summary" />
+          <PreviewSectionHeading title="Professional Summary" template={template} />
+          {opts.summary ? <p style={body}>{opts.summary}</p> : <GhostSection label="a professional summary" />}
         </>
       )}
 
-      {filledSkills.length > 0 ? (
+      {(opts.skills?.length || showGhosts) && (
         <>
-          <div style={RES.sectionTitle}>Technical Skills</div>
-          <SectionRule />
-          {filledSkills.map((sk) => (
-            <p key={sk.id} style={{ ...RES.bullet, marginBottom: 2 }}>
-              {"• "}<strong>{sk.category}</strong>{": "}{sk.skills}
-            </p>
-          ))}
-        </>
-      ) : (
-        <>
-          <div style={RES.sectionTitle}>Technical Skills</div>
-          <SectionRule />
-          <GhostSection label="skills" />
+          <PreviewSectionHeading title="Skills" template={template} />
+          {opts.skills && opts.skills.length > 0 ? (
+            opts.skills.map((sk) => (
+              <p key={sk.id} style={bullet}>
+                {"• "}
+                <strong>{sk.category}</strong>
+                {": "}
+                {sk.skills}
+              </p>
+            ))
+          ) : (
+            <GhostSection label="skills" />
+          )}
         </>
       )}
 
-      {filledExp.length > 0 ? (
+      {opts.exp && opts.exp.length > 0 && (
         <>
-          <div style={RES.sectionTitle}>Experience</div>
-          <SectionRule />
-          {filledExp.map((exp) => (
-            <div key={exp.id} style={RES.entryMargin}>
-              <div style={RES.row}>
+          <PreviewSectionHeading title="Experience" template={template} />
+          {opts.exp.map((exp) => (
+            <div key={exp.id} style={entryMargin}>
+              <div style={row}>
                 <span style={{ fontSize: "10.5pt" }}>
-                  <strong>{exp.company}</strong>{exp.role ? `, ${exp.role}` : ""}
+                  <strong>{exp.company}</strong>
+                  {exp.role ? `, ${exp.role}` : ""}
                 </span>
                 <span style={{ fontSize: "9.5pt", color: "#444" }}>{exp.duration}</span>
               </div>
-              {exp.bullets.split("\n").filter(Boolean).map((b, i) => (
-                <p key={i} style={RES.bullet}>{"• "}{b}</p>
-              ))}
+              {exp.bullets
+                .split("\n")
+                .filter(Boolean)
+                .map((b, i) => (
+                  <p key={i} style={bullet}>
+                    {"• "}
+                    {b}
+                  </p>
+                ))}
             </div>
           ))}
         </>
-      ) : (
-        <>
-          <div style={RES.sectionTitle}>Experience</div>
-          <SectionRule />
-          <GhostSection label="experience" />
-        </>
       )}
 
-      {filledProjects.length > 0 ? (
+      {opts.projects && opts.projects.length > 0 && (
         <>
-          <div style={RES.sectionTitle}>Projects</div>
-          <SectionRule />
-          {filledProjects.map((proj) => (
-            <div key={proj.id} style={RES.entryMargin}>
-              <div style={RES.row}>
+          <PreviewSectionHeading title="Projects" template={template} />
+          {opts.projects.map((proj) => (
+            <div key={proj.id} style={entryMargin}>
+              <div style={row}>
                 <strong style={{ fontSize: "10.5pt" }}>{proj.name}</strong>
                 {proj.url && (
                   <a href={proj.url} style={{ color: "#0000EE", fontSize: "9.5pt" }} target="_blank" rel="noreferrer">
@@ -656,64 +1024,151 @@ function ResumePreview({ data }: { data: ResumeData }) {
                   </a>
                 )}
               </div>
-              {proj.bullets.split("\n").filter(Boolean).map((b, i) => (
-                <p key={i} style={RES.bullet}>{"• "}{b}</p>
-              ))}
+              {proj.bullets
+                .split("\n")
+                .filter(Boolean)
+                .map((b, i) => (
+                  <p key={i} style={bullet}>
+                    {"• "}
+                    {b}
+                  </p>
+                ))}
             </div>
           ))}
         </>
-      ) : (
+      )}
+
+      {(opts.edu?.length || showGhosts) && (
         <>
-          <div style={RES.sectionTitle}>Projects</div>
-          <SectionRule />
-          <GhostSection label="projects" />
+          <PreviewSectionHeading title="Education" template={template} />
+          {opts.edu && opts.edu.length > 0 ? (
+            opts.edu.map((edu) => (
+              <div key={edu.id} style={{ ...row, marginBottom: 5 }}>
+                <span style={body}>
+                  <strong>{edu.institution}</strong>
+                  {edu.degree ? `, ${edu.degree}` : ""}
+                </span>
+                <span style={{ fontSize: "9.5pt", color: "#444" }}>
+                  {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" - ")}
+                </span>
+              </div>
+            ))
+          ) : (
+            <GhostSection label="education" />
+          )}
         </>
       )}
 
-      {filledEdu.length > 0 ? (
+      {opts.certs && opts.certs.length > 0 && (
         <>
-          <div style={RES.sectionTitle}>Education</div>
-          <SectionRule />
-          {filledEdu.map((edu) => (
-            <div key={edu.id} style={{ ...RES.row, marginBottom: 5 }}>
-              <span style={RES.body}>
-                <strong>{edu.institution}</strong>
-                {edu.degree ? `, ${edu.degree}` : ""}
-              </span>
-              <span style={{ fontSize: "9.5pt", color: "#444" }}>
-                {[edu.yearFrom, edu.yearTo].filter(Boolean).join(" - ")}
-              </span>
-            </div>
-          ))}
-        </>
-      ) : (
-        <>
-          <div style={RES.sectionTitle}>Education</div>
-          <SectionRule />
-          <GhostSection label="education" />
-        </>
-      )}
-
-      {filledCerts.length > 0 ? (
-        <>
-          <div style={RES.sectionTitle}>Certifications</div>
-          <SectionRule />
-          {filledCerts.map((cert) => (
-            <div key={cert.id} style={{ ...RES.row, marginBottom: 5 }}>
-              <span style={RES.body}>
-                <strong>{cert.provider}</strong>{cert.course ? ` · ${cert.course}` : ""}
+          <PreviewSectionHeading title="Certifications" template={template} />
+          {opts.certs.map((cert) => (
+            <div key={cert.id} style={{ ...row, marginBottom: 5 }}>
+              <span style={body}>
+                <strong>{cert.provider}</strong>
+                {cert.course ? ` · ${cert.course}` : ""}
               </span>
               <span style={{ fontSize: "9.5pt", color: "#444" }}>{cert.year}</span>
             </div>
           ))}
         </>
-      ) : (
-        <>
-          <div style={RES.sectionTitle}>Certifications</div>
-          <SectionRule />
-          <GhostSection label="certifications" />
-        </>
       )}
+    </>
+  );
+
+  const headerAndBody = (
+    fullName: string,
+    jobTitle: string,
+    contacts: { label: string; href?: string }[],
+    showGhosts: boolean,
+    sectionOpts: Parameters<typeof sections>[1]
+  ) => (
+    <>
+      {isTopBar && (
+        <div style={{ height: p.topBarHeight || 8, background: template.accent, width: "100%" }} />
+      )}
+      {isBand ? (
+        <PreviewHeader
+          template={template}
+          fullName={fullName}
+          jobTitle={jobTitle}
+          contactParts={contacts}
+          showGhosts={showGhosts}
+        />
+      ) : null}
+      <div style={contentPad}>
+        {!isBand && (
+          <PreviewHeader
+            template={template}
+            fullName={fullName}
+            jobTitle={jobTitle}
+            contactParts={contacts}
+            showGhosts={showGhosts}
+          />
+        )}
+        {sections(showGhosts, sectionOpts)}
+      </div>
+    </>
+  );
+
+  if (isEmpty) {
+    return (
+      <div style={wrap}>
+        <p
+          style={{
+            fontSize: 11,
+            color: "#999",
+            textAlign: "center",
+            margin: 0,
+            padding: "10px 16px 0",
+            fontFamily: "system-ui, sans-serif",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          Sample look · <strong style={{ color: template.accent }}>{template.name}</strong> template
+          {" · "}start filling the form to replace this
+        </p>
+        {headerAndBody("Alex Rivera", "Marketing Manager", sampleContact, false, {
+          summary:
+            "Results-driven professional with 5+ years of experience delivering measurable outcomes across teams and projects. Known for clear communication and reliable execution.",
+          skills: [
+            { id: "1", category: "Core", skills: "Communication, Leadership, Planning" },
+            { id: "2", category: "Tools", skills: "Excel, CRM, Presentation software" },
+          ],
+          exp: [
+            {
+              id: "1",
+              company: "Acme Company",
+              role: "Marketing Manager",
+              duration: "2021 - Present",
+              bullets: "Grew campaign engagement by 40% year over year\nLed a cross-functional team of 6",
+            },
+          ],
+          edu: [
+            {
+              id: "1",
+              institution: "State University",
+              degree: "Bachelor of Business Administration",
+              yearFrom: "2017",
+              yearTo: "2021",
+            },
+          ],
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <div style={wrap}>
+      {headerAndBody(data.fullName || "Your Name", data.jobTitle, contactParts, true, {
+        summary: data.summary || undefined,
+        skills: filledSkills,
+        exp: filledExp,
+        projects: filledProjects,
+        edu: filledEdu,
+        certs: filledCerts,
+      })}
     </div>
   );
 }
@@ -723,7 +1178,7 @@ function ResumePreview({ data }: { data: ResumeData }) {
 const SECTIONS = [
   "Personal Information",
   "Professional Summary",
-  "Technical Skills",
+  "Skills",
   "Projects",
   "Education",
   "Certifications",
@@ -740,7 +1195,14 @@ export default function ResumeBuilder() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setData(JSON.parse(raw) as ResumeData);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as ResumeData & { github?: string };
+      setData({
+        ...EMPTY_DATA,
+        ...parsed,
+        website: parsed.website || parsed.github || "",
+        templateId: parsed.templateId || "classic",
+      });
     } catch {}
   }, []);
 
@@ -861,7 +1323,13 @@ export default function ResumeBuilder() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="grid w-full max-w-full grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:grid-cols-[42%_58%]">
+      {/* Template picker */}
+      <TemplatePicker
+        selectedId={data.templateId}
+        onSelect={(id) => update({ ...data, templateId: id })}
+      />
+
+      <div className="grid w-full max-w-full grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:min-h-[min(85vh,920px)] md:grid-cols-[42%_58%]">
         {/* ── LEFT PANEL ───────────────────────────────────────────────────── */}
         <div className="flex flex-col overflow-hidden border-b border-gray-100 bg-neutral-50 md:border-b-0 md:border-r md:border-gray-100">
           {/* Header, does not scroll */}
@@ -927,8 +1395,8 @@ export default function ResumeBuilder() {
             {/* Section 1: Personal */}
             <Section index={0} title={SECTIONS[0]} open={openSections[0]} onToggle={() => toggleSection(0)} complete={isSectionComplete(0)}>
               <FieldRow>
-                <FInput label="Full Name *" value={data.fullName} onChange={(v) => update({ ...data, fullName: v })} placeholder="Jane Smith" />
-                <FInput label="Job Title *" value={data.jobTitle} onChange={(v) => update({ ...data, jobTitle: v })} placeholder="Software Engineer" />
+                <FInput label="Full Name *" value={data.fullName} onChange={(v) => update({ ...data, fullName: v })} placeholder="Alex Rivera" />
+                <FInput label="Job Title *" value={data.jobTitle} onChange={(v) => update({ ...data, jobTitle: v })} placeholder="Marketing Manager" />
               </FieldRow>
               <FieldRow>
                 <FInput label="Phone" value={data.phone} onChange={(v) => update({ ...data, phone: v })} placeholder="+1 555 000 0000" />
@@ -936,9 +1404,9 @@ export default function ResumeBuilder() {
               </FieldRow>
               <FieldRow>
                 <FInput label="LinkedIn URL" value={data.linkedIn} onChange={(v) => update({ ...data, linkedIn: v })} placeholder="linkedin.com/in/..." />
-                <FInput label="GitHub URL" value={data.github} onChange={(v) => update({ ...data, github: v })} placeholder="github.com/..." />
+                <FInput label="Website / Portfolio" value={data.website} onChange={(v) => update({ ...data, website: v })} placeholder="yoursite.com" />
               </FieldRow>
-              <FInput label="Location" value={data.location} onChange={(v) => update({ ...data, location: v })} placeholder="New York, NY" />
+              <FInput label="Location" value={data.location} onChange={(v) => update({ ...data, location: v })} placeholder="City, Country" />
             </Section>
 
             {/* Section 2: Summary */}
@@ -947,7 +1415,7 @@ export default function ResumeBuilder() {
                 label="Write 2-4 sentences about your expertise"
                 value={data.summary}
                 onChange={(v) => update({ ...data, summary: v })}
-                placeholder="Experienced developer with 3+ years building scalable web applications..."
+                placeholder="Results-driven professional with 5+ years of experience delivering measurable outcomes across teams and projects..."
                 textarea
                 rows={5}
                 maxLength={500}
@@ -980,7 +1448,7 @@ export default function ResumeBuilder() {
                       fontFamily: "inherit",
                       transition: "all 0.2s ease",
                     }}
-                    placeholder="Languages"
+                    placeholder="Category (e.g. Communication)"
                     value={sk.category}
                     onChange={(e) => updateSkill(sk.id, "category", e.target.value)}
                   />
@@ -999,7 +1467,7 @@ export default function ResumeBuilder() {
                       fontFamily: "inherit",
                       transition: "all 0.2s ease",
                     }}
-                    placeholder="PHP, JavaScript, SQL"
+                    placeholder="Public speaking, Excel, Negotiation"
                     value={sk.skills}
                     onChange={(e) => updateSkill(sk.id, "skills", e.target.value)}
                   />
@@ -1012,14 +1480,14 @@ export default function ResumeBuilder() {
                 <EmptyState
                   message="No skill categories yet"
                   hint={`Click '+ Add Category' below to get started`}
-                  icon={Code2}
+                  icon={Layers}
                 />
               )}
               <AddButton label="Add Category" onClick={addSkill} />
             </Section>
 
             {/* Section 4: Projects */}
-            <Section index={3} title={SECTIONS[3]} open={openSections[3]} onToggle={() => toggleSection(3)} complete={isSectionComplete(3)} badge={sectionBadge(3)}>
+            <Section index={3} title={SECTIONS[3]} open={openSections[3]} onToggle={() => toggleSection(3)} complete={isSectionComplete(3)} badge={sectionBadge(3)} optional>
               <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleProjectDragEnd}>
                 <SortableContext items={data.projects.map((p) => p.id)} strategy={verticalListSortingStrategy}>
                   {data.projects.map((proj) => (
@@ -1047,7 +1515,7 @@ export default function ResumeBuilder() {
               {data.education.map((edu) => (
                 <EntryCard key={edu.id} onRemove={() => removeEducation(edu.id)}>
                   <FInput label="Institution *" value={edu.institution} onChange={(v) => updateEducation(edu.id, "institution", v)} placeholder="University of XYZ" />
-                  <FInput label="Degree / Level *" value={edu.degree} onChange={(v) => updateEducation(edu.id, "degree", v)} placeholder="B.Sc. Computer Science" />
+                  <FInput label="Degree / Level *" value={edu.degree} onChange={(v) => updateEducation(edu.id, "degree", v)} placeholder="Bachelor of Business Administration" />
                   <FieldRow>
                     <FInput label="Year From" value={edu.yearFrom} onChange={(v) => updateEducation(edu.id, "yearFrom", v)} placeholder="2020" />
                     <FInput label="Year To" value={edu.yearTo} onChange={(v) => updateEducation(edu.id, "yearTo", v)} placeholder="2024" />
@@ -1065,14 +1533,14 @@ export default function ResumeBuilder() {
             </Section>
 
             {/* Section 6: Certifications */}
-            <Section index={5} title={SECTIONS[5]} open={openSections[5]} onToggle={() => toggleSection(5)} complete={isSectionComplete(5)} badge={sectionBadge(5)}>
+            <Section index={5} title={SECTIONS[5]} open={openSections[5]} onToggle={() => toggleSection(5)} complete={isSectionComplete(5)} badge={sectionBadge(5)} optional>
               {data.certifications.map((cert) => (
                 <EntryCard key={cert.id} onRemove={() => removeCert(cert.id)}>
                   <FieldRow>
-                    <FInput label="Provider *" value={cert.provider} onChange={(v) => updateCert(cert.id, "provider", v)} placeholder="Meta" />
+                    <FInput label="Provider *" value={cert.provider} onChange={(v) => updateCert(cert.id, "provider", v)} placeholder="Google" />
                     <FInput label="Year" value={cert.year} onChange={(v) => updateCert(cert.id, "year", v)} placeholder="2024" />
                   </FieldRow>
-                  <FInput label="Certificate Name *" value={cert.course} onChange={(v) => updateCert(cert.id, "course", v)} placeholder="Back-End Development Professional Certificate" />
+                  <FInput label="Certificate Name *" value={cert.course} onChange={(v) => updateCert(cert.id, "course", v)} placeholder="Digital Marketing Certificate" />
                 </EntryCard>
               ))}
               {data.certifications.length === 0 && (
@@ -1086,19 +1554,19 @@ export default function ResumeBuilder() {
             </Section>
 
             {/* Section 7: Experience */}
-            <Section index={6} title={SECTIONS[6]} open={openSections[6]} onToggle={() => toggleSection(6)} complete={isSectionComplete(6)} badge={sectionBadge(6)}>
+            <Section index={6} title={SECTIONS[6]} open={openSections[6]} onToggle={() => toggleSection(6)} complete={isSectionComplete(6)} badge={sectionBadge(6)} optional>
               {data.experience.map((exp) => (
                 <EntryCard key={exp.id} onRemove={() => removeExp(exp.id)}>
                   <FieldRow>
                     <FInput label="Company *" value={exp.company} onChange={(v) => updateExp(exp.id, "company", v)} placeholder="Acme Corp" />
-                    <FInput label="Role / Title *" value={exp.role} onChange={(v) => updateExp(exp.id, "role", v)} placeholder="Software Engineer" />
+                    <FInput label="Role / Title *" value={exp.role} onChange={(v) => updateExp(exp.id, "role", v)} placeholder="Operations Lead" />
                   </FieldRow>
                   <FInput label="Duration" value={exp.duration} onChange={(v) => updateExp(exp.id, "duration", v)} placeholder="Jan 2023 - Present" />
                   <FInput
                     label="Description (one bullet per line)"
                     value={exp.bullets}
                     onChange={(v) => updateExp(exp.id, "bullets", v)}
-                    placeholder={"Built REST APIs with Node.js\nReduced latency by 30%"}
+                    placeholder={"Grew revenue by 25% year over year\nLed a team of 6 across two regions"}
                     textarea
                     rows={3}
                     hint="Each line → one bullet point"
@@ -1141,9 +1609,9 @@ export default function ResumeBuilder() {
         </div>
 
         {/* ── RIGHT PANEL ──────────────────────────────────────────────────── */}
-        <div className="flex flex-col bg-gray-100 bg-[radial-gradient(circle,_#DCDCDC_1px,_transparent_1px)] bg-[length:20px_20px]">
+        <div className="flex min-h-[520px] flex-col bg-gray-100 bg-[radial-gradient(circle,_#DCDCDC_1px,_transparent_1px)] bg-[length:20px_20px] md:min-h-0">
           {/* Live Preview label row + export */}
-          <div className="relative box-border flex w-full max-w-[700px] shrink-0 items-center justify-between self-center px-5 pb-3 pt-4">
+          <div className="relative box-border flex w-full shrink-0 items-center justify-between px-5 pb-3 pt-4">
             <div className="flex items-center gap-2">
               <span className="inline-block h-2 w-2 shrink-0 animate-pulse rounded-full bg-green-500" aria-hidden />
               <span className="text-[13px] font-semibold text-gray-600">Live Preview</span>
@@ -1159,7 +1627,7 @@ export default function ResumeBuilder() {
             </button>
           </div>
 
-          <div className="flex w-full justify-center pb-5">
+          <div className="flex min-h-0 flex-1 w-full items-start justify-center overflow-auto px-5 pb-5 pt-0">
             <ResumePreview data={data} />
           </div>
         </div>

@@ -51,7 +51,7 @@ export function ensureOrtRuntime(): Promise<void> {
       return;
     }
 
-    // Module workers: no DOM / no importScripts — evaluate UMD onto globalThis
+    // Module workers: no DOM / no importScripts; evaluate UMD onto globalThis
     if (typeof document === "undefined") {
       const res = await fetch("/bg-removal/ort.min.js");
       if (!res.ok) {

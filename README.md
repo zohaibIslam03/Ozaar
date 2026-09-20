@@ -4,7 +4,7 @@
 
 # ⚡ Ozaar
 
-### Free online tools for everyone — no signup, no ads, no limits.
+### Free online tools for everyone . no signup, no ads, no limits.
 
 <br />
 
@@ -30,7 +30,7 @@
 
 ## 🛠 What is Ozaar?
 
-**Ozaar** is a collection of **12 free, open-source browser tools** built for everyone — students, freelancers, creators, and professionals.
+**Ozaar** is a collection of **12 free, open-source browser tools** built for everyone . students, freelancers, creators, and professionals.
 
 Every tool runs **100% in your browser**. No uploads to servers. No accounts. No tracking. No paywalls. Just tools that work.
 
@@ -44,7 +44,7 @@ Every tool runs **100% in your browser**. No uploads to servers. No accounts. No
 | 🖼 **Image Compressor** | Compress PNG/JPG to WebP, up to 90% smaller | Images |
 | ✂️ **Image Resizer** | Resize with social media presets & crop selector | Images |
 | 🪄 **Background Remover** | AI-powered background removal in-browser | Images |
-| ⬛ **QR Code Generator** | Generate QR codes from any URL or text | Utilities |
+| ⬛ **QR Code Generator** | QR for URL, phone, email, WhatsApp & payment links | Utilities |
 | 🔐 **Password Generator** | Cryptographically secure passwords | Security |
 | 🎨 **Color Palette Generator** | Generate & export HEX/CSS palettes | Design |
 | 📝 **Word Counter** | Count words, chars, reading time & more | Writing |
@@ -123,11 +123,11 @@ Ozaar/
 
 Every tool on Ozaar is built with privacy as the default:
 
-- ✅ **No server uploads** — all processing happens in your browser
-- ✅ **No analytics on your files** — we don't know what you process
-- ✅ **No cookies** — we don't track sessions
-- ✅ **No accounts** — open and use immediately
-- ✅ **Works offline** — most tools work after first page load
+- ✅ **No server uploads** . all processing happens in your browser
+- ✅ **No analytics on your files** . we don't know what you process
+- ✅ **No cookies** . we don't track sessions
+- ✅ **No accounts** . open and use immediately
+- ✅ **Works offline** . most tools work after first page load
 
 ---
 
@@ -164,8 +164,8 @@ git push origin feature/my-new-tool
 - [ ] Create `app/tools/my-tool/page.tsx` using the tool page layout
 - [ ] Add the tool card to the homepage tools grid
 - [ ] Test on mobile (375px) and desktop (1440px)
-- [ ] Run `tsc --noEmit` — no TypeScript errors
-- [ ] Run `npm run build` — must pass
+- [ ] Run `tsc --noEmit` . no TypeScript errors
+- [ ] Run `npm run build` . must pass
 
 ---
 
@@ -178,7 +178,7 @@ git push origin feature/my-new-tool
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** . see the [LICENSE](LICENSE) file for details.
 
 This means you can:
 - ✅ Use it commercially

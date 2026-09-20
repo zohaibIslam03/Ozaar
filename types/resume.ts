@@ -40,9 +40,10 @@ export interface ResumeData {
   phone: string;
   email: string;
   linkedIn: string;
-  github: string;
+  website: string;
   location: string;
   summary: string;
+  templateId: string;
   skills: SkillCategory[];
   projects: Project[];
   education: Education[];

@@ -1,5 +1,9 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
+/**
+ * App Router robots — served at /robots.txt with Sitemap pointing at /sitemap.xml.
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -9,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://ozaar.theinnovations.tech/sitemap.xml",
-    host: "https://ozaar.theinnovations.tech",
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }
