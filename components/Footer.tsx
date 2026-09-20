@@ -36,7 +36,6 @@ export default function Footer() {
             <p className="text-sm text-[#888888] leading-relaxed max-w-[200px]">
               Free, open-source browser tools built for everyone.
             </p>
-            <p className="text-xs text-[#555555]">Made with ❤️ for everyone</p>
           </div>
 
           {/* Col 2, Tools */}
