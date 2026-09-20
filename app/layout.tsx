@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/ozaar-icon.png", type: "image/png", sizes: "192x192" },
+      { url: "/ozaar-icon.png", type: "image/png", sizes: "73x73" },
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: "/favicon.ico",
