@@ -9,7 +9,7 @@ export interface Tool {
 export const tools: Tool[] = [
   { slug: "pdf-toolkit", name: "PDF Toolkit", desc: "Merge, split & compress PDFs in your browser", icon: "📄", category: "Files" },
   { slug: "image-compressor", name: "Image Compressor", desc: "Compress PNG/JPG to WebP, fully offline", icon: "🖼️", category: "Images" },
-  { slug: "qr-generator", name: "QR Code Generator", desc: "Instant QR from any URL, text or contact", icon: "⬛", category: "Utilities" },
+  { slug: "qr-generator", name: "QR Code Generator", desc: "QR for URL, phone, email, WhatsApp & pay links", icon: "⬛", category: "Utilities" },
   { slug: "password-generator", name: "Password Generator", desc: "Cryptographically secure custom passwords", icon: "🔐", category: "Security" },
   { slug: "color-palette", name: "Color Palette Generator", desc: "Generate, explore & export HEX/CSS palettes", icon: "🎨", category: "Design" },
   { slug: "word-counter", name: "Word Counter", desc: "Count words, chars, sentences & reading time", icon: "📝", category: "Writing" },

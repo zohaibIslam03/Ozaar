@@ -44,7 +44,7 @@ Every tool runs **100% in your browser**. No uploads to servers. No accounts. No
 | 🖼 **Image Compressor** | Compress PNG/JPG to WebP, up to 90% smaller | Images |
 | ✂️ **Image Resizer** | Resize with social media presets & crop selector | Images |
 | 🪄 **Background Remover** | AI-powered background removal in-browser | Images |
-| ⬛ **QR Code Generator** | Generate QR codes from any URL or text | Utilities |
+| ⬛ **QR Code Generator** | QR for URL, phone, email, WhatsApp & payment links | Utilities |
 | 🔐 **Password Generator** | Cryptographically secure passwords | Security |
 | 🎨 **Color Palette Generator** | Generate & export HEX/CSS palettes | Design |
 | 📝 **Word Counter** | Count words, chars, reading time & more | Writing |

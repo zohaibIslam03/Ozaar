@@ -72,17 +72,17 @@ const SEO_CONTENT: Record<
 
   "qr-generator": {
     what: [
-      "A QR code (Quick Response code) is a two-dimensional barcode that can be scanned by smartphone cameras to instantly open a URL, display text, share contact information, or trigger other actions. QR codes were invented in 1994 and have seen explosive adoption since smartphones made scanning them trivially easy.",
-      "A QR code generator is a tool that takes any input, a web address, plain text, an email, a phone number, and encodes it into a scannable QR image. The output can then be printed, embedded in digital content, or displayed on screens for others to scan. The QR code contains no expiry date and works permanently as long as the destination URL or content remains valid.",
-      "Ozaar QR Code Generator produces fully customisable, watermark-free QR codes that can be downloaded as PNG for digital use or SVG for high-quality print output, at any scale, at no cost.",
+      "A QR code (Quick Response code) is a two-dimensional barcode that smartphones can scan to open a URL, dial a phone number, draft an email, start a WhatsApp chat, open a payment link, or show plain text. They work offline as encoded data, with no account or redirect service required.",
+      "Ozaar QR Code Generator supports five types: URL/Text, Phone, Email, WhatsApp, and Payment link. Fill in the fields for the type you need and the code updates as you type. Download as PNG for screens or SVG for print, with custom colours and sizes, and no watermark.",
+      "Everything runs in your browser. Sensitive numbers, emails, and payment URLs never leave your device.",
     ],
     how: [
-      "QR codes are generated using the qrcode.js library, which implements the QR Code 2005 specification (ISO/IEC 18004) entirely in JavaScript. When you enter your content, the library encodes it using Reed-Solomon error correction, calculates the required version (size) of the QR matrix, and renders the pattern as an SVG or canvas element.",
-      "Error correction means that QR codes can still be scanned even if up to 30% of the image is damaged or obscured. This makes them robust for printed materials where wear and tear is expected.",
+      "Each QR type builds the right payload automatically: tel: for phone, mailto: for email (with optional subject and body), wa.me for WhatsApp (with optional message), and a direct URL for websites or payment links. The qrcode.js library then encodes that string with Reed-Solomon error correction and renders PNG and SVG.",
+      "Error correction means codes can still scan even if part of the printed image is damaged. Because we do not wrap your content in a tracking redirect, the QR works permanently as long as the destination itself remains valid.",
     ],
     why: [
-      "Browser-based QR generation is both faster and more private than cloud-based alternatives. There is no server round-trip, the QR code appears in milliseconds as you type. And since the generation happens locally, any sensitive content you encode (internal URLs, private contact details) never leaves your device.",
-      "Unlike many QR code services, we do not create redirect URLs. The QR code links directly to whatever you entered, which means no tracking, no analytics on your scans, and no service dependency, your QR code works the same whether we are online or not.",
+      "Browser-based generation is fast and private. There is no server round-trip, and internal links or private contact details stay on your device.",
+      "Unlike many QR services, we do not create redirect URLs. No tracking of scans, no expiry from our side, and no dependency on our servers after you download the file.",
     ],
     relatedLinks: [
       { slug: "image-compressor", name: "Image Compressor", phrase: "compress your downloaded QR images" },

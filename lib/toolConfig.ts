@@ -425,7 +425,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "One scan.",
     taglineAccent: "Infinite possibilities.",
     description:
-      "Generate QR codes instantly from any URL, text, or contact info. Customise size and colours, then download as PNG or SVG in seconds. No sign-up, no watermark.",
+      "Generate QR codes for URLs, text, phone numbers, email, WhatsApp chats, and payment links. Customise size and colours, then download as PNG or SVG. No sign-up, no watermark.",
     category: "Utilities",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -434,19 +434,19 @@ export const toolConfigs: Record<string, ToolConfig> = {
       "linear-gradient(#F0F0F0 1px, transparent 1px), linear-gradient(90deg, #F0F0F0 1px, transparent 1px)",
     icon: "⬛",
     stats: [
-      { value: "Instant", label: "generation" },
+      { value: "5 types", label: "URL, phone, email, chat, pay" },
       { value: "PNG + SVG", label: "export formats" },
       { value: "No", label: "watermark ever" },
     ],
     features: [
       {
-        title: "URL, text, or vCard",
-        desc: "Generate QR codes from any web address, plain text, email address, phone number, or contact card.",
+        title: "URL, phone, email, WhatsApp & payments",
+        desc: "Build QR codes that open links, dial numbers, draft emails, start WhatsApp chats, or open any payment link.",
         icon: "link",
       },
       {
         title: "Custom size & colors",
-        desc: "Choose any size from 64px to 1024px and customise foreground and background colors to match your brand.",
+        desc: "Choose 128px, 256px, or 512px and customise foreground and background colours to match your brand.",
         icon: "palette",
       },
       {
@@ -462,9 +462,9 @@ export const toolConfigs: Record<string, ToolConfig> = {
     ],
     howItWorks: [
       {
-        title: "Enter your content",
+        title: "Choose a QR type",
         description:
-          "Type or paste any URL, text, email, or phone number into the input field. The QR code updates instantly as you type.",
+          "Pick URL/Text, Phone, Email, WhatsApp, or Payment, then fill in the matching fields. The code updates as you type.",
         icon: "type",
       },
       {
@@ -476,31 +476,36 @@ export const toolConfigs: Record<string, ToolConfig> = {
       {
         title: "Download your QR code",
         description:
-          "Click 'Download PNG' or 'Download SVG' to save your QR code. Print it, embed it, or share it anywhere.",
+          "Download as PNG or SVG. Print it, embed it, or share it anywhere. No account and no watermark.",
         icon: "download",
       },
     ],
     useCases: [
       {
-        title: "Restaurant menus",
-        scenario: "Restaurant Owner",
+        title: "Menus, links & pages",
+        scenario: "Business Owner",
         description:
-          "Generate a QR code linking to your online menu. Place it on tables and let customers browse without physical menus.",
+          "Encode a website or menu URL so customers can open it with one scan, no typing required.",
       },
       {
-        title: "Business cards",
+        title: "Call, email, or WhatsApp",
         scenario: "Freelancer",
         description:
-          "Embed a QR code linking to your portfolio or LinkedIn profile. One scan gives a new contact everything they need.",
+          "Put a phone, email, or WhatsApp QR on a card or poster so people can reach you in one tap.",
       },
       {
-        title: "Event check-in",
-        scenario: "Event Organiser",
+        title: "Accept payments",
+        scenario: "Seller or Creator",
         description:
-          "Create unique QR codes for each ticket. Download as SVG for sharp printing at any size, even large-format banners.",
+          "Encode any payment or checkout link so buyers can pay by scanning, at events, stores, or invoices.",
       },
     ],
     faq: [
+      {
+        question: "What types of QR codes can I create?",
+        answer:
+          "URL or plain text, phone (opens the dialer), email (opens the mail app with optional subject and body), WhatsApp (opens a chat with an optional pre-filled message), and payment (any payment or checkout link).",
+      },
       {
         question: "Is there a limit to how many QR codes I can generate?",
         answer:
@@ -528,14 +533,18 @@ export const toolConfigs: Record<string, ToolConfig> = {
       },
     ],
     relatedTools: ["image-compressor", "image-resizer", "password-generator"],
-    metaTitle: "Free QR Code Generator Online: PNG & SVG Download | Ozaar",
+    metaTitle: "Free QR Code Generator: URL, Phone, Email, WhatsApp & Pay | Ozaar",
     metaDesc:
-      "Generate QR codes instantly from any URL, text, or contact info. Download as PNG or SVG. Free, no watermark, no sign-up. Works entirely in your browser.",
+      "Free QR code generator for URLs, phone, email, WhatsApp, and payment links. Customise colours, download PNG or SVG. No watermark, no sign-up, runs in your browser.",
     keywords: [
       "qr code generator",
       "generate qr code free",
       "qr code maker",
       "url to qr",
+      "whatsapp qr code",
+      "phone qr code",
+      "email qr code",
+      "payment qr code",
       "custom qr code",
       "free qr generator",
     ],

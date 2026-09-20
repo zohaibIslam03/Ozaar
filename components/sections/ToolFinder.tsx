@@ -236,7 +236,7 @@ const RESULTS: Record<string, Result> = {
   compress: { slug: "image-compressor", name: "Image Compressor", desc: "Compress PNG/JPG to WebP, up to 90% smaller, fully in-browser." },
   bg: { slug: "bg-remover", name: "Background Remover", desc: "AI-powered background removal. No upload, no account." },
   resize: { slug: "image-resizer", name: "Image Resizer", desc: "Resize to exact px or social media presets instantly." },
-  qr: { slug: "qr-generator", name: "QR Code Generator", desc: "Instant QR from any URL, text, or contact." },
+  qr: { slug: "qr-generator", name: "QR Code Generator", desc: "QR for URL, phone, email, WhatsApp, and payment links." },
   pdf: { slug: "pdf-toolkit", name: "PDF Toolkit", desc: "Merge, split & compress PDFs in your browser." },
   words: { slug: "word-counter", name: "Word Counter", desc: "Count words, characters, sentences & reading time." },
   resume: { slug: "resume-builder", name: "Resume Builder", desc: "ATS-friendly templates, PDF export, no account." },
