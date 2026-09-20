@@ -239,7 +239,7 @@ const RESULTS: Record<string, Result> = {
   qr: { slug: "qr-generator", name: "QR Code Generator", desc: "QR for URL, phone, email, WhatsApp, and payment links." },
   pdf: { slug: "pdf-toolkit", name: "PDF Toolkit", desc: "Merge, split & compress PDFs in your browser." },
   words: { slug: "word-counter", name: "Word Counter", desc: "Count words, characters, sentences & reading time." },
-  resume: { slug: "resume-builder", name: "Resume Builder", desc: "ATS-friendly templates, PDF export, no account." },
+  resume: { slug: "resume-builder", name: "Resume Builder", desc: "5 ATS templates · optional sections · PDF export." },
   color: { slug: "color-palette", name: "Color Palette Generator", desc: "Generate, explore & export HEX/CSS palettes." },
   password: { slug: "password-generator", name: "Password Generator", desc: "Cryptographically secure custom passwords." },
   currency: { slug: "currency-converter", name: "Currency Converter", desc: "Live rates, 150+ currencies." },

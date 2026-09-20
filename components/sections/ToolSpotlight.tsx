@@ -30,8 +30,8 @@ const spotlights = [
     slug: "resume-builder",
     eyebrow: "Career",
     headline: "Your next job starts here.",
-    desc: "Build an ATS-friendly resume in minutes. Live preview, one-click PDF export, and auto-save to your browser. No account ever needed.",
-    bullets: ["ATS-optimized templates", "Live side-by-side preview", "One-click PDF export"],
+    desc: "Build an ATS-friendly resume in minutes. Five templates, optional experience/projects/certs, live preview, and one-click PDF export. No account ever needed.",
+    bullets: ["5 ATS-safe templates", "Optional sections omitted when empty", "One-click PDF export"],
     visual: "resume",
   },
   {

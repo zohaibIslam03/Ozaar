@@ -32,17 +32,17 @@ const SEO_CONTENT: Record<
 
   "resume-builder": {
     what: [
-      "A resume builder is an online tool that guides you through creating a professional resume or CV without needing design software or prior formatting experience. Rather than starting from a blank document, you fill in structured fields for your work history, education, skills, and contact information, and the tool formats everything into a polished, print-ready layout.",
-      "The most critical feature of any modern resume builder is ATS compatibility. Applicant Tracking Systems are software tools used by over 98% of Fortune 500 companies to automatically scan and filter incoming resumes before a human ever reads them. An ATS-friendly resume uses clean, standard formatting that these systems can parse correctly, avoiding tables, graphics, unusual fonts, or multi-column layouts that confuse the parser.",
-      "Ozaar Resume Builder produces ATS-optimized resumes with live preview, automatic local saving, and one-click PDF export, all completely free and without any account requirement.",
+      "A resume builder is an online tool that guides you through creating a professional resume or CV without design software. You fill in structured fields for contact info, summary, skills, and education, then optionally add experience, projects, and certifications. The tool formats everything into a polished, print-ready layout.",
+      "ATS compatibility matters most. Applicant Tracking Systems are used by most large employers to scan resumes before a human reads them. An ATS-friendly resume uses single-column layout, standard fonts, and clear headings — and avoids tables, graphics, or multi-column designs that confuse parsers.",
+      "Ozaar Resume Builder offers five ATS-safe templates (Classic, Modern, Professional, Minimal, and Executive), live preview, auto-save in your browser, and one-click PDF export — free, with no account. Empty optional sections are left off the page so graduates and career changers are not stuck with blank Experience or Projects blocks.",
     ],
     how: [
-      "Our resume builder uses @react-pdf/renderer to generate PDF documents directly in the browser. As you fill in the form fields, the right-side preview updates in real time using the same rendering engine. When you click 'Download PDF', the PDF is generated client-side and downloaded directly to your device.",
-      "Your resume data is automatically saved to your browser's localStorage after every change. This means you can close the tab, restart your computer, or come back days later and your progress will be preserved, as long as you use the same browser and haven't cleared site data.",
+      "Pick a template, then fill the guided form. The right-side preview updates as you type using the same layout rules as the PDF. When you export, @react-pdf/renderer builds the file in your browser and downloads it — nothing is uploaded to a server.",
+      "Experience, projects, and certifications are optional. If those fields are empty, their headings are omitted from both the preview and the PDF. Your data auto-saves to localStorage so you can return on the same browser and continue editing.",
     ],
     why: [
-      "Browser-based resume building eliminates the frustrating upload-wait-download cycle of cloud services, and unlike Google Docs or Word templates, our tool produces a PDF from a purpose-built resume renderer designed for clean parsing by ATS software.",
-      "Since nothing is stored on our servers, your personal information, name, address, employment history, stays entirely on your device. There is nothing to delete, no data breach risk, and no company holding your career information.",
+      "Browser-based building skips the upload-wait-download cycle of cloud tools. Unlike generic Word or Docs templates, each Ozaar layout is a purpose-built single-column resume designed for clean ATS parsing and a clear visual identity.",
+      "Nothing is stored on our servers. Your name, contact details, and work history stay on your device — no account, no data retention, and no company holding your career information.",
     ],
     relatedLinks: [
       { slug: "word-counter", name: "Word Counter", phrase: "count the words in your resume" },

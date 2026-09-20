@@ -184,7 +184,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
     tagline: "Your resume.",
     taglineAccent: "Your opportunity.",
     description:
-      "Build an ATS-friendly resume in minutes with our free online resume builder. Live preview, multiple templates, and one-click PDF export. No account required.",
+      "Build a professional resume for any industry. Choose from 5 ATS-friendly templates, preview live as you type, and export a PDF in one click. Experience, projects, and certifications are optional — empty sections stay off the page. No account required.",
     category: "Career",
     accentColor: ACCENT,
     accentLight: ACCENT_LIGHT,
@@ -192,49 +192,55 @@ export const toolConfigs: Record<string, ToolConfig> = {
     heroPattern: "repeating-linear-gradient(transparent, transparent 23px, #F5F5F5 24px)",
     icon: "📋",
     stats: [
-      { value: "ATS", label: "optimized templates" },
-      { value: "1-click", label: "PDF export" },
+      { value: "5", label: "ATS-friendly templates" },
+      { value: "3", label: "optional sections" },
       { value: "0", label: "signups needed" },
     ],
     features: [
       {
-        title: "ATS-optimized templates",
-        desc: "Pass automated resume screening systems used by 98% of Fortune 500 companies. Clean, parseable layouts.",
+        title: "5 ATS-friendly templates",
+        desc: "Classic (serif double-rules), Modern (teal accent bar), Professional (navy header band), Minimal (clean black accents), and Executive (bold banded headers). All single-column and ATS-safe.",
         icon: "check",
       },
       {
         title: "Live side-by-side preview",
-        desc: "See your resume update in real time as you type. What you see is exactly what you get in the PDF.",
+        desc: "See your resume update in real time as you type. Switch templates anytime without losing your content.",
         icon: "eye",
       },
       {
-        title: "One-click PDF export",
-        desc: "Download a pixel-perfect PDF ready to attach to any job application, directly from your browser.",
-        icon: "download",
+        title: "Optional experience, projects & certs",
+        desc: "Skip what you do not have yet. Empty optional sections are omitted from the preview and PDF so you never get blank headings or wasted space.",
+        icon: "optional",
       },
       {
-        title: "Auto-saves to localStorage",
-        desc: "Your progress is automatically saved in your browser. Close the tab and return later, everything is still there.",
-        icon: "save",
+        title: "One-click PDF export",
+        desc: "Download a pixel-perfect PDF ready to attach to any job application, generated entirely in your browser.",
+        icon: "download",
       },
     ],
     howItWorks: [
       {
+        title: "Pick a template",
+        description:
+          "Choose Classic, Modern, Professional, Minimal, or Executive. Switch later anytime — your content stays intact.",
+        icon: "template",
+      },
+      {
         title: "Fill in your details",
         description:
-          "Enter your name, contact info, work experience, education, and skills using our guided step-by-step form.",
+          "Add personal info, summary, skills, and education. Experience, projects, and certifications are optional — leave them blank if you do not need them.",
         icon: "edit",
       },
       {
         title: "Preview in real time",
         description:
-          "Watch your professional resume take shape as you type. Switch between templates with one click.",
+          "Watch the layout update as you type. Only filled sections appear on the page, so optional gaps never leave empty blocks.",
         icon: "eye",
       },
       {
         title: "Export as PDF",
         description:
-          "Click 'Download PDF' to get a polished, ATS-friendly resume file ready to send to employers.",
+          "Click Export PDF to download a polished, ATS-friendly file ready to send to employers.",
         icon: "download",
       },
     ],
@@ -243,53 +249,58 @@ export const toolConfigs: Record<string, ToolConfig> = {
         title: "Fresh graduates",
         scenario: "Recent Graduate",
         description:
-          "Land your first professional job with a clean, structured resume that highlights your education, projects, and internships in the best possible light.",
+          "Lead with education, skills, and projects. Skip experience if you are early-career — optional sections stay off the resume until you add them.",
       },
       {
         title: "Career changers",
         scenario: "Career Switcher",
         description:
-          "Highlight your transferable skills and reframe your experience for a new industry. Our templates are designed to present any background compellingly.",
+          "Highlight transferable skills and reframe your background for a new industry. Pick a template that fits the role, then export without reformatting.",
       },
       {
         title: "Active job seekers",
         scenario: "Job Seeker",
         description:
-          "Pass ATS filters at top companies. Our templates use clean, machine-readable formatting that applicant tracking systems parse correctly.",
+          "Pass ATS filters with single-column, machine-readable layouts. No tables, sidebars, or graphics that confuse applicant tracking systems.",
       },
     ],
     faq: [
       {
         question: "Is this resume builder really free?",
         answer:
-          "Yes, completely free. There are no premium tiers, no watermarks, no hidden fees. Every feature, including PDF export, is available to everyone with no account required.",
+          "Yes, completely free. There are no premium tiers, no watermarks, and no hidden fees. Every feature, including PDF export and all five templates, is available with no account required.",
       },
       {
         question: "Will my resume pass ATS (Applicant Tracking System)?",
         answer:
-          "Our templates are specifically designed for ATS compatibility. We use standard fonts, clear section headings, and avoid tables, columns, or graphics that ATS systems struggle to parse.",
+          "Yes. All five templates are single-column with standard fonts and clear section headings. We avoid tables, multi-column layouts, and graphics that ATS parsers often misread.",
+      },
+      {
+        question: "Are experience, projects, and certifications required?",
+        answer:
+          "No. Those three sections are optional. If you leave them empty, they do not appear in the live preview or the exported PDF — no blank headings or empty space.",
       },
       {
         question: "Can I save my resume and edit it later?",
         answer:
-          "Yes, your resume data is automatically saved to your browser's localStorage. As long as you use the same browser and don't clear site data, you can return and continue editing.",
+          "Yes. Your resume data is auto-saved to your browser's localStorage after every change. Return on the same browser (without clearing site data) to continue editing.",
       },
       {
         question: "What format does it export in?",
         answer:
-          "Resumes are exported as PDF files, which is the universally accepted format for job applications and preserves your formatting perfectly on any device.",
+          "PDF — the standard format for job applications. Formatting stays consistent on any device.",
       },
       {
         question: "How many templates are available?",
         answer:
-          "Currently one clean, professional template optimized for ATS. We're adding more templates regularly, star us on GitHub to stay updated.",
+          "Five: Classic, Modern, Professional, Minimal, and Executive. Each has a distinct layout while staying ATS-safe. You can switch templates without losing your content.",
       },
     ],
     relatedTools: ["word-counter", "pdf-toolkit", "color-palette"],
     metaTitle:
-      "Free Resume Builder Online: ATS-Friendly PDF Export | Ozaar",
+      "Free Resume Builder Online: 5 ATS Templates & PDF Export | Ozaar",
     metaDesc:
-      "Build a professional resume online for free. ATS-optimized templates, live preview, and one-click PDF export. No account required. Saves automatically in your browser.",
+      "Free online resume builder with 5 ATS-friendly templates, live preview, and one-click PDF export. Experience, projects, and certifications are optional. No account required.",
     keywords: [
       "free resume builder",
       "resume maker online",
@@ -297,6 +308,7 @@ export const toolConfigs: Record<string, ToolConfig> = {
       "ats resume template",
       "resume pdf download",
       "professional resume creator",
+      "optional resume sections",
     ],
   },
 
