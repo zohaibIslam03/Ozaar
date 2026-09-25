@@ -8,6 +8,7 @@ import { ToastProvider } from "@/components/Toast";
 import BackToTop from "@/components/BackToTop";
 import LenisProvider from "@/components/ui/LenisProvider";
 import CursorFollower from "@/components/ui/CursorFollower";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { PUBLISHER, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="bg-brand-bg text-brand-text font-sans antialiased min-h-screen flex flex-col">
+        <GoogleAnalytics />
         <LenisProvider>
           <ToastProvider>
             <CursorFollower />
