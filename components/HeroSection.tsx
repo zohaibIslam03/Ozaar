@@ -183,7 +183,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-[15px] sm:text-[17px] text-brand-muted leading-relaxed max-w-[480px]"
             >
-              Ozaar is a free online tools site with browser-based{" "}
+              Ozaar is a free online tools platform by Involiq with browser-based{" "}
               <Link href="/tools/image-compressor" className="text-brand-text underline-offset-2 hover:underline">image</Link>,{" "}
               <Link href="/tools/pdf-toolkit" className="text-brand-text underline-offset-2 hover:underline">PDF</Link>,{" "}
               <Link href="/tools/qr-generator" className="text-brand-text underline-offset-2 hover:underline">QR</Link>,{" "}
