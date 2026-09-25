@@ -22,7 +22,7 @@ const SEO_CONTENT: Record<
     ],
     why: [
       "Browser-based image compression has several significant advantages over traditional cloud tools. First, it is genuinely instantaneous, there is no upload wait time, no queue, and no processing delay. Second, it is completely private, your images never touch an external server, making it safe for confidential business assets or personal photos.",
-      "The tool also has no file size limits, no daily quotas, and no account requirements. You can compress a single hero image or an entire batch of product photos, and the tool will handle them identically. Close the tab and open it again tomorrow, it will work exactly the same, with no saved data and no cookies.",
+      "The tool also has no file size limits, no daily quotas, and no account requirements. You can compress a single hero image or an entire batch of product photos, and the tool will handle them identically. Close the tab and open it again tomorrow—it will work the same, with no tool data saved on our servers.",
     ],
     relatedLinks: [
       { slug: "image-resizer", name: "Image Resizer", phrase: "resize your images" },

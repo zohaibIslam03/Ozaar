@@ -31,6 +31,7 @@ coverage
 .vscode
 .idea
 .cursor
+.cursor-local-worktrees/
 .cursorrules
 .cursorrules.md
 .cursorrules.txt
