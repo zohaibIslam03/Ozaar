@@ -12,8 +12,8 @@ const statements = [
     sub: "Every tool. Every feature. Free. Forever. No 'pro' tier.",
   },
   {
-    headline: "We don't track what you do.",
-    sub: "No cookies. No analytics. No idea what you compressed or converted. That's the point.",
+    headline: "We never see your files.",
+    sub: "Whatever you compress or convert stays in your browser. We have no access to that content.",
   },
 ];
 
