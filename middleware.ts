@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 /**
- * Prefer a single canonical host: https://ozaar.theinnovations.tech
+ * Prefer a single canonical host: https://ozaar.involiq.tech
  * - Force HTTPS when behind a proxy that sends x-forwarded-proto
  * - Redirect www → non-www
  */

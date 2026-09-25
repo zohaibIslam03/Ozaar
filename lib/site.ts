@@ -1,5 +1,5 @@
 /** Canonical production origin (HTTPS, non-www). */
-export const SITE_URL = "https://ozaar.theinnovations.tech";
+export const SITE_URL = "https://ozaar.involiq.tech";
 
 export const SITE_NAME = "Ozaar";
 
