@@ -16,8 +16,8 @@ const FEATURES = [
     ),
   },
   {
-    title: "No tracking, no analytics",
-    desc: "We don't track which tools you use, what files you upload, or how you interact with the site. Zero telemetry.",
+    title: "No file telemetry",
+    desc: "Your files are never uploaded or inspected. Site analytics, if present, measure page traffic only—not the contents of what you process.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <circle cx="11" cy="11" r="8" stroke="#DF0A09" strokeWidth="1.5"/>
@@ -137,7 +137,7 @@ export default function PrivacySection() {
                 Your data stays yours, always
               </h2>
               <p className="text-base text-brand-muted leading-relaxed">
-                We built every tool to run entirely in the browser. No backend, no database, no tracking. Just code that runs where you are.
+                We built every tool to run entirely in the browser. No backend and no database for your files—just code that runs where you are.
               </p>
             </div>
 

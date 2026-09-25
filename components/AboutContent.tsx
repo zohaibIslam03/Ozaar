@@ -18,8 +18,8 @@ const MISSIONS = [
     body: "Every tool is completely free, forever. No trial. No Pro tier. No credit card.",
   },
   {
-    mark: "No tracking.",
-    body: "No analytics, no cookies, no data collection. Your files never leave your device.",
+    mark: "Your files stay private.",
+    body: "Tool processing never uploads your files. They stay on your device; we never see what you open or convert.",
   },
   {
     mark: "No accounts.",
@@ -167,7 +167,17 @@ export default function AboutContent() {
               className="mt-6"
               style={{ fontSize: "clamp(16px, 4vw, 18px)", color: "rgba(255,255,255,0.55)", lineHeight: 1.65, maxWidth: "560px" }}
             >
-              Free. Open source. Built for humans, not enterprise software buyers.
+              Ozaar is a free online tools platform built by{" "}
+              <a
+                href="https://www.involiq.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-white transition-colors"
+                style={{ color: "rgba(255,255,255,0.75)" }}
+              >
+                Involiq
+              </a>
+              . Free. Open source. Built for humans, not enterprise software buyers.
             </p>
           </motion.div>
 

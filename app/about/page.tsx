@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Ozaar",
     description:
-      "12 free, open-source browser tools. No signup, no ads, no tracking. All processing stays in your browser.",
+      "12 free, open-source browser tools. No signup, no ads. All file processing stays in your browser.",
     url: absoluteUrl("/about"),
     siteName: SITE_NAME,
     type: "website",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Ozaar",
-    description: "12 free, open-source browser tools. No signup, no ads, no tracking.",
+    description: "12 free, open-source browser tools. No signup, no ads. Processing stays in your browser.",
     images: ["/twitter-image"],
   },
   robots: { index: true, follow: true },

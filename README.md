@@ -16,7 +16,7 @@
 
 <br />
 
-**[🌐 Live Site](https://tools.theinnovations.tech)**
+**[🌐 Live Site](https://ozaar.involiq.tech)**
 ·
 **[🐛 Report Bug](https://github.com/zohaibIslam03/Ozaar/issues)**
 ·
@@ -32,7 +32,9 @@
 
 **Ozaar** is a collection of **12 free, open-source browser tools** built for everyone . students, freelancers, creators, and professionals.
 
-Every tool runs **100% in your browser**. No uploads to servers. No accounts. No tracking. No paywalls. Just tools that work.
+Every tool runs **100% in your browser**. No uploads to servers. No accounts. No paywalls. Just tools that work.
+
+**Ozaar** is the product. **[Involiq](https://www.involiq.tech/)** is the company that builds and publishes it.
 
 ---
 
@@ -124,8 +126,7 @@ Ozaar/
 Every tool on Ozaar is built with privacy as the default:
 
 - ✅ **No server uploads** . all processing happens in your browser
-- ✅ **No analytics on your files** . we don't know what you process
-- ✅ **No cookies** . we don't track sessions
+- ✅ **No file inspection** . we never see what you open or convert
 - ✅ **No accounts** . open and use immediately
 - ✅ **Works offline** . most tools work after first page load
 
@@ -205,7 +206,7 @@ Built with these amazing open-source projects:
 
 <br />
 
-**Built with ❤️ by [Zohaib Islam](https://github.com/zohaibIslam03)**
+**Built by [Involiq](https://www.involiq.tech/) · Maintained by [Zohaib Islam](https://github.com/zohaibIslam03)**
 
 <br />
 

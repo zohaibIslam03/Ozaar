@@ -22,15 +22,13 @@ import { PUBLISHER, SITE_URL } from "@/lib/site";
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
   name: "Ozaar",
+  alternateName: ["Ozaar Tools", "Ozaar Free Online Tools"],
   url: SITE_URL,
   description:
     "12 free open-source browser tools. PDF, image, QR, resume, currency and more. No signup required.",
-  publisher: {
-    "@type": "Organization",
-    name: PUBLISHER.name,
-    url: PUBLISHER.url,
-  },
+  publisher: { "@id": `${SITE_URL}/#organization` },
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -44,14 +42,22 @@ const websiteSchema = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: PUBLISHER.name,
   url: PUBLISHER.url,
-  description: "Technology company that builds Ozaar and other digital products.",
+  description: "Technology company that builds and publishes Ozaar.",
+  brand: {
+    "@type": "Brand",
+    name: "Ozaar",
+    url: SITE_URL,
+  },
   makesOffer: {
     "@type": "Offer",
     itemOffered: {
       "@type": "SoftwareApplication",
+      "@id": `${SITE_URL}/#software`,
       name: "Ozaar",
+      alternateName: ["Ozaar Tools", "Ozaar Free Online Tools"],
       url: SITE_URL,
       applicationCategory: "UtilitiesApplication",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
