@@ -225,7 +225,7 @@ function CompressorPanel() {
 
 function QrPanel() {
   const [mode, setMode] = useState<"url" | "phone" | "email" | "whatsapp" | "payment">("url");
-  const [url, setUrl] = useState("https://ozaar.theinnovations.tech");
+  const [url, setUrl] = useState("https://ozaar.involiq.tech");
   const [copied, setCopied] = useState(false);
 
   const placeholders: Record<typeof mode, string> = {

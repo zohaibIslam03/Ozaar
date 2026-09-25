@@ -113,7 +113,7 @@ export default function QrGenerator() {
   const [mode, setMode] = useState<QrMode>("url");
 
   // URL / text
-  const [text, setText] = useState("https://ozaar.theinnovations.tech");
+  const [text, setText] = useState("https://ozaar.involiq.tech");
 
   // Phone
   const [phone, setPhone] = useState("");

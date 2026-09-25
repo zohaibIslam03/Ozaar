@@ -116,7 +116,7 @@ export default async function ToolOgImage({
               </div>
             ))}
           </div>
-          <div style={{ color: "#555555", fontSize: "16px" }}>ozaar.theinnovations.tech</div>
+          <div style={{ color: "#555555", fontSize: "16px" }}>ozaar.involiq.tech</div>
         </div>
       </div>
     ),

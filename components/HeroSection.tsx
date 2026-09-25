@@ -240,7 +240,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute left-0 top-8 w-[240px] z-10"
             >
-              <BrowserWindow title="ozaar.theinnovations.tech/tools/image-compressor" delay={0.1}>
+              <BrowserWindow title="ozaar.involiq.tech/tools/image-compressor" delay={0.1}>
                 <ImageCompressorMockup />
               </BrowserWindow>
             </motion.div>
@@ -251,7 +251,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
               className="absolute left-1/2 -translate-x-1/2 top-0 w-[220px] z-20"
             >
-              <BrowserWindow title="ozaar.theinnovations.tech/tools/resume-builder" delay={0.25}>
+              <BrowserWindow title="ozaar.involiq.tech/tools/resume-builder" delay={0.25}>
                 <ResumeBuilderMockup />
               </BrowserWindow>
             </motion.div>
@@ -262,7 +262,7 @@ export default function HeroSection() {
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
               className="absolute right-0 bottom-16 w-[200px] z-10"
             >
-              <BrowserWindow title="ozaar.theinnovations.tech/tools/qr-generator" delay={0.4}>
+              <BrowserWindow title="ozaar.involiq.tech/tools/qr-generator" delay={0.4}>
                 <QrMockup />
               </BrowserWindow>
             </motion.div>
